@@ -20,10 +20,10 @@
 
 	<!--NuGet package properties -->
 	<PropertyGroup>
-		<Authors>TODO</Authors>
-		<PackageProjectUrl>TODO</PackageProjectUrl>
-		<PackageLicenseUrl>TODO</PackageLicenseUrl>
-		<Description>TODO</Description>
+		<Authors>Andreas Gruenwald</Authors>
+		<PackageProjectUrl>https://github.com/ap0llo/gh-badges-sharp</PackageProjectUrl>
+		<PackageLicenseUrl>https://github.com/ap0llo/gh-badges-sharp/blob/master/LICENSE</PackageLicenseUrl>
+		<Description>A C#/.NET port of the gh-badges library.</Description>
 	</PropertyGroup>
 
 </Project>
