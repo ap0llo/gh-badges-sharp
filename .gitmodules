@@ -1,0 +1,3 @@
+[submodule "deps/anafanafo"]
+	path = deps/anafanafo
+	url = https://github.com/metabolize/anafanafo.git

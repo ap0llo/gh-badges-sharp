@@ -22,6 +22,8 @@ library that powers [shields.io](https://shields.io)
 
 ## Building from source
 
+**Note:** This repository use git submodules, clone using `git clone --recursive`
+
 ```bat
   dotnet restore .\src\GhBadgesSharp.sln
 
@@ -39,6 +41,9 @@ library and some of it's dependencies.
   licensed under [Creative Commons Zero v1.0 Universal license](https://github.com/badges/shields/blob/master/LICENSE).
 - Portions of this library were ported from the [is-css-color](https://github.com/princejwesley/is-css-color)
   library, licensed under the [MIT License](https://github.com/princejwesley/is-css-color/blob/master/LICENSE)
+- Portions of this library were ported from the [anafanafo/](https://github.com/metabolize/anafanafo)
+  library, licensed under the [MIT License](https://github.com/metabolize/anafanafo/blob/master/LICENSE)
+
 
 __TODO:__ Add remaining acknoledgements
 
