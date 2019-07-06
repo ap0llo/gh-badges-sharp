@@ -32,11 +32,13 @@ library that powers [shields.io](https://shields.io)
 
 ## Acknowledgments
 
-This libarary is a port of the [gh-badges](https://github.com/badges/shields/tree/master/gh-badges)
-library and some of it's dependenceis.
+This library is a C# port of the [gh-badges](https://github.com/badges/shields/tree/master/gh-badges)
+library and some of it's dependencies.
 
 - [gh-badges](https://github.com/badges/shields/tree/master/gh-badges) is
-  licensed under [Creative Commons Zero v1.0 Universal license](https://github.com/badges/shields/blob/master/LICENSE).  
+  licensed under [Creative Commons Zero v1.0 Universal license](https://github.com/badges/shields/blob/master/LICENSE).
+- Portions of this library were ported from the [is-css-color](https://github.com/princejwesley/is-css-color)
+  library, licensed under the [MIT License](https://github.com/princejwesley/is-css-color/blob/master/LICENSE)
 
 __TODO:__ Add remaining acknoledgements
 
