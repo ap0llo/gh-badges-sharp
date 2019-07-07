@@ -229,13 +229,8 @@ namespace GhBadgesSharp
                 logoPadding = logo != null ? 3 : 0;
             }
 
-            var context = new BadgeData()
-            {
-                TemplateName = template,
-                LeftText = leftText,
-                RightText = rightText,
-                EscapedLeftText = EscapeXml(leftText),
-                EscapedRightText = EscapeXml(rightText),
+            var context = new BadgeData(templateName: template, leftText: leftText, rightText: rightText)
+            {                
                 Widths = new[] { leftWidth + 10 + logoWidth ?? 0 + logoPadding, rightWidth + 10 },
                 Links = links.Select(EscapeXml).ToArray(),
                 Logo = EscapeXml(logo),
@@ -264,13 +259,6 @@ namespace GhBadgesSharp
             return value.Substring(0, 1).ToUpper() + value.Substring(1);
         }
 
-        private static string EscapeXml(string value)
-        {
-            if (value == null)
-                return null;
-
-            return new XText(value).ToString();
-        }
 
         private static XElement RenderBadge(BadgeData data)
         {
@@ -285,6 +273,15 @@ namespace GhBadgesSharp
             var svg = XElement.Parse(rendered);
             return svg;
 
+        }
+
+
+        private static string EscapeXml(string value)
+        {
+            if (value == null)
+                return null;
+
+            return new XText(value).ToString();
         }
     }
 }
