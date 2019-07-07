@@ -5,12 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Templates\flat-template.liquid" />
+    <None Remove="Templates\*.liquid" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="..\..\deps\anafanafo\packages\anafanafo\data\widths.json" Link="Resources\widths.json" />
-    <EmbeddedResource Include="Templates\flat-template.liquid" />
+    <EmbeddedResource Include="Templates\*.liquid" />
   </ItemGroup>
 
   <ItemGroup>

@@ -201,7 +201,7 @@ namespace GhBadgesSharp
             color = Colors.NormalizeColor(color);
             labelColor = Colors.NormalizeColor(labelColor);
 
-            if (s_Templates.ContainsKey(template))
+            if (!s_Templates.ContainsKey(template))
             {
                 template = "flat";
             }

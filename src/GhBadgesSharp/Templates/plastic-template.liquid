@@ -1,0 +1,113 @@
+{% comment %}
+Ported from https://github.com/badges/shields/blob/66c7f13e38c76bfdbdb96107bc92e607b3dd5acc/gh-badges/templates/plastic-template.svg
+{% endcomment %}
+
+{% assign leftTextLength = it.LeftText | size %}
+
+{% assign width1 = it.Widths[0] %}
+{% unless leftTextLength > 0 %}
+	{%if it.Logo %}
+		{% unless it.ColorA %}
+			{% assign width1 = width1 | minus: 7 %}
+		{% endunless %}
+	{% else %}
+		{% assign width1 = width1 | minus: 11 %}
+	{% endif %}
+{% endunless %}
+{% assign width1 = width1 | plus: it.Widths[1] %}
+
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="{{ width1 }}" height="18">
+    <linearGradient id="smooth" x2="0" y2="100%">
+      <stop offset="0"  stop-color="#fff" stop-opacity=".7"/>
+      <stop offset=".1" stop-color="#aaa" stop-opacity=".1"/>
+      <stop offset=".9" stop-color="#000" stop-opacity=".3"/>
+      <stop offset="1"  stop-color="#000" stop-opacity=".5"/>
+    </linearGradient>
+  
+    <clipPath id="round">
+      <rect width="{{ it.Widths[0] | plus: it.Widths[1] }}" height="18" rx="4" fill="#fff"/>
+    </clipPath>
+  
+    {% if leftTextLength > 0 or it.Logo and it.ColorA  %}
+	    {% if it.ColorA %}
+		    {% assign fill1 = it.ColorA %}
+	    {% else %}
+		    {% assign fill1 = "#555" %}
+	    {% endif %}
+    {% else %}
+	    {% if it.ColorB %}
+		    {% assign fill1 = it.ColorB %}
+	    {% else %}
+    		{% assign fill1 = "#4c1" %}
+    	{% endif %}
+    {% endif %}
+
+    {% if it.ColorB %}
+        {% assign fill2 = it.ColorB %}
+    {% else %}
+        {% assign fill2 = "#4c1" %}
+    {% endif %}
+    {% comment %}
+    TODO: escapexml
+    {% endcomment %}
+    <g clip-path="url(#round)">
+      <rect width="{{ it.Widths[0] }}" height="18" fill="{{ fill1 }}"/>
+      <rect x="{{ it.Widths[0] }}" width="{{ it.Widths[1] }}" height="18" fill="{{ fill2 }}"/>
+      <rect width="{{ it.Widths[0] | plus: it.Widths[1] }}" height="18" fill="url(#smooth)"/>
+    </g>
+  
+    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="110">
+        {% if it.Logo %}
+            <image x="5" y="3" width="{{ it.LogoWidth }}" height="14" xlink:href="{{ it.Logo}}"/>
+        {% endif %}
+        {% if leftTextLength > 0 %}
+                {% assign x1 = it.Widths[0] | plus: it.LogoWidth | plus: it.LogoPadding %}
+                {% assign x1 = x1 | divided_by: 2 %}
+                {% assign x1 = x1 | plus: 1 %}
+                {% assign x1 = x1 | times: 10 %}
+                {% assign textLength1 = it.Widths[0] | minus: 10 | minus: it.LogoWidth | minus: it.LogoPadding %}
+                {% assign textLength1 = textLength1 | times: 10 %}
+            <text x="{{ x1 }}" y="140" fill="#010101" fill-opacity=".3" transform="scale(0.1)" textLength="{{ textLength1 }}" lengthAdjust="spacing">{{ it.EscapedLeftText }}</text>
+            <text x="{{ x1 }}" y="130" transform="scale(0.1)" textLength="{{ textLength1 }}" lengthAdjust="spacing">{{ it.EscapedLeftText }}</text>
+        {% endif %}
+        {% assign tmp1 = it.Widths[1] | divided_by: 2 %}
+        {% assign x2 = it.Widths[0] | plus: tmp1 %}
+        {% if leftTextLength > 0 %}
+	        {% assign x2 = x2 | minus: 1 %}
+        {% endif %}
+        {% assign x2 = x2 * 10 %}
+        {% assign textLength2 = it.Widths[1] | minus: 10 %}
+        {% assign textLength2 = textLength2 | times: 10 %}
+        <text x="{{ x2 }}" y="140" fill="#010101" fill-opacity=".3" transform="scale(0.1)" textLength="{{ textLength2 }}" lengthAdjust="spacing">{{ it.EscapedRightText }}</text>
+        <text x="{{ x2 }}" y="130" transform="scale(0.1)" textLength="{{ textLength2 }}" lengthAdjust="spacing">{{ it.EscapedRightText }}</text>
+    </g>
+  
+    {% if it.Links[0] %}
+        {%assign firstLinkLength = it.Links[0] | size %}
+    {% else %}
+        {%assign firstLinkLength = 0 %}
+    {% endif %}
+
+    {% if it.Links[1] %}
+        {%assign secondLinkLength = it.Links[1] | size %}
+    {% else %}
+        {%assign secondLinkLength = 0 %}
+    {% endif %}
+
+    {% if firstLinkLength > 0 %}
+      <a target="_blank" xlink:href="{{ it.Links[0] }}">
+        <rect width="{{ it.Widths[0] }}" height="18" fill="rgba(0,0,0,0)"/>
+      </a>
+    {% endif %}
+    {% if firstLinkLength > 0 or secondLinkLength > 0 %}
+        {% if secondLinkLength > 0 %}
+            {% assign href2 = it.Links[1] %}
+        {% else %}
+            {% assign href2 = it.Links[0] %}
+        {% endif %}
+      <a target="_blank" xlink:href="{{ href2 }}">
+        <rect x="{{ it.Widths[0] }}" width="{{ it.Widths[1] }}" height="18" fill="rgba(0,0,0,0)"/>
+      </a>
+    {% endif %}
+  </svg>
+  

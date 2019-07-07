@@ -1,0 +1,28 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="79.652" height="18">
+  <linearGradient id="smooth" x2="0" y2="100%">
+    <stop offset="0" stop-color="#fff" stop-opacity=".7" />
+    <stop offset=".1" stop-color="#aaa" stop-opacity=".1" />
+    <stop offset=".9" stop-color="#000" stop-opacity=".3" />
+    <stop offset="1" stop-color="#000" stop-opacity=".5" />
+  </linearGradient>
+  <clipPath id="round">
+    <rect width="79.652" height="18" rx="4" fill="#fff" />
+  </clipPath>
+  <g clip-path="url(#round)">
+    <rect width="37.533" height="18" fill="#555" />
+    <rect x="37.533" width="42.119" height="18" fill="#dfb317" />
+    <rect width="79.652" height="18" fill="url(#smooth)" />
+  </g>
+  <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="110">
+    <text x="190" y="140" fill="#010101" fill-opacity=".3" transform="scale(0.1)" textLength="275.33" lengthAdjust="spacing">Hello</text>
+    <text x="190" y="130" transform="scale(0.1)" textLength="275.33" lengthAdjust="spacing">Hello</text>
+    <text x="575.33" y="140" fill="#010101" fill-opacity=".3" transform="scale(0.1)" textLength="321.19" lengthAdjust="spacing">World</text>
+    <text x="575.33" y="130" transform="scale(0.1)" textLength="321.19" lengthAdjust="spacing">World</text>
+  </g>
+  <a target="_blank" xlink:href="http://example.com">
+    <rect width="37.533" height="18" fill="rgba(0,0,0,0)" />
+  </a>
+  <a target="_blank" xlink:href="http://example.com">
+    <rect x="37.533" width="42.119" height="18" fill="rgba(0,0,0,0)" />
+  </a>
+</svg>
