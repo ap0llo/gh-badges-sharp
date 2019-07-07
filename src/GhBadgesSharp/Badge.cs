@@ -146,12 +146,12 @@ namespace GhBadgesSharp
 
             var templateResourceNames = assembly
                 .GetManifestResourceNames()
-                .Where(name => name.StartsWith("GhBadgesSharp.Templates.") && name.EndsWith("-template.liquid"));
+                .Where(name => name.StartsWith("GhBadgesSharp.Resources.Templates.") && name.EndsWith("-template.liquid"));
             
             foreach (var resourceName in templateResourceNames)
             {
                 var templateName = resourceName
-                    .Replace("GhBadgesSharp.Templates.", "")
+                    .Replace("GhBadgesSharp.Resources.Templates.", "")
                     .Replace("-template.liquid", "");
 
                 using (var stream = assembly.GetManifestResourceStream(resourceName))
