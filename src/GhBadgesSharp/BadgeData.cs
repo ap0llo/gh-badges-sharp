@@ -6,10 +6,10 @@ namespace GhBadgesSharp
 {
     public class BadgeData
     {
-        public string TemplateName { get;}
+        public string TemplateName { get; }
 
 
-        public string LeftText { get;  }
+        public string LeftText { get; }
 
         public string RightText { get; }
 
@@ -32,7 +32,7 @@ namespace GhBadgesSharp
 
         public int? LogoWidth { get; }
 
-        public int LogoPadding { get;}
+        public int LogoPadding { get; }
 
 
         public string ColorA { get; }
@@ -56,7 +56,7 @@ namespace GhBadgesSharp
             string templateName,
             string leftText, string rightText,
             double leftWidth, double rightWidth,
-            string leftLink,  string rightLink,
+            string leftLink, string rightLink,
             string logo, int? logoPosition, int? logoWidth, int logoPadding,
             string colorA, string colorB)
         {
@@ -88,7 +88,7 @@ namespace GhBadgesSharp
             ColorB = colorB;
             Colors = new[] { colorA, colorB };
             EscapedColors = new[] { EscapeXml(colorA), EscapeXml(colorB) };
-            
+
         }
 
 

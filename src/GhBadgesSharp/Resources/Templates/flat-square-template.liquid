@@ -1,0 +1,90 @@
+{% comment %}
+Ported from https://github.com/badges/shields/blob/66c7f13e38c76bfdbdb96107bc92e607b3dd5acc/gh-badges/templates/flat-square-template.svg
+{% endcomment %}
+
+{% assign width1 = it.Widths[0] %}
+{% unless it.TextLength[0] > 0 %}
+  {%if it.Logo %}
+    {% unless it.Colors[0] %}
+      {% assign width1 = width1 | minus: 7 %}
+    {% endunless %}
+  {% else %}
+    {% assign width1 = width1 | minus: 11 %}
+  {% endif %}
+{% endunless %}
+{% assign width1 = width1 | plus: it.Widths[1] %}
+
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="{{ width1 }}" height="20">
+  {% if it.TextLength[0] > 0 or it.Logo and it.Colors[0] %}
+    {% if it.Colors[0] %}
+      {% assign fill1 = it.EscapedColors[0] %}
+    {% else %}
+      {% assign fill1 = "#555" %}  
+    {%endif%}
+  {% else %}
+    {%if it.Colors[1] %}
+      {% assign fill1 = it.EscapedColors[1] %}
+    {%else%}
+      {% assign fill1 = "#4c1" %}
+    {%endif%}      
+  {% endif %}
+  
+  {%if it.Colors[1] %}
+    {% assign fill2 = it.EscapedColors[1] %}
+  {%else %}
+    {% assign fill2 = "#4c1" %}
+  {%endif%}
+
+  <g shape-rendering="crispEdges">
+    <rect width="{{ it.Widths[0] }}" height="20" fill="{{ fill1 }}"/>
+    <rect x="{{ it.Widths[0] }}" width="{{ it.Widths[1]}}" height="20" fill="{{ fill2 }}"/>
+  </g>
+  
+  <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="110">
+    {% if it.Logo %}
+      <image x="5" y="3" width="{{ it.LogoWidth}}" height="14" xlink:href="{{ it.Logo }}"/>
+    {% endif %}
+
+    {% if it.TextLength[0] > 0 %}
+      {% assign x1 = it.Widths[0] %}
+      {% assign x1 = x1 | plus: it.LogoWidth %}
+      {% assign x1 = x1 | plus: it.LogoPadding %}
+      {% assign x1 = x1 | divided_by: 2 %}
+      {% assign x1 = x1 | plus: 1 %}
+      {% assign x1 = x1 | times: 10 %}
+
+      {% assign textLength1 = it.Widths[0] %}
+      {% assign textLength1 = textLength1 | minus: 10 %}
+      {% assign textLength1 = textLength1 | minus: it.LogoWidth %}
+      {% assign textLength1 = textLength1 | minus: it.LogoPadding %}
+      {% assign textLength1 = textLength1 | times: 10 %}
+
+      <text x="{{ x1 }}" y="140" transform="scale(0.1)" textLength="{{ textLength1 }}" lengthAdjust="spacing">{{ it.EscapedText[0] }}</text>
+    {% endif %}
+
+    {% assign tmp1 = it.Widths[1] | divided_by: 2 %}
+    {% assign x2 = it.Widths[0] %}
+    {% assign x2 = x2 | plus: tmp1 %}
+    {% if it.TextLength[0] > 0 %}
+    {% assign x2 = x2 | minus: 1 %}
+    {% endif %}
+    {% assign x2 = x2 | times: 10 %}
+
+    {% assign textLength2 = it.Widths[1] | minus: 10 %}
+    {% assign textLength2 = textLength2 | times: 10 %}
+
+    <text x="{{ x2 }}" y="140" transform="scale(0.1)" textLength="{{ textLength2 }}" lengthAdjust="spacing">{{ it.EscapedText[1] }}</text>
+  </g>
+
+  {% if it.LeftLink %}
+    <a target="_blank" xlink:href="{{ it.LeftLink }}">
+      <rect width="{{ it.Widths[0] }}" height="20" fill="rgba(0,0,0,0)"/>
+    </a>
+  {% endif %}
+
+  {% if it.LeftLinkOrRightLink %}    
+    <a target="_blank" xlink:href="{{ it.LeftLinkOrRightLink }}">
+      <rect x="{{ it.Widths[0]}}" width="{{ it.Widths[1] }}" height="20" fill="rgba(0,0,0,0)"/>
+    </a>
+  {% endif %}
+</svg>

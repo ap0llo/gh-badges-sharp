@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace GhBadgesSharp
 {
@@ -10,6 +9,5 @@ namespace GhBadgesSharp
             if (value != null)
                 list.Add(value);
         }
-
     }
 }
