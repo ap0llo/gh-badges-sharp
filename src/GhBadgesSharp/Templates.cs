@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using Fluid;
 
 namespace GhBadgesSharp
 {
     internal static class Templates
     {
-        private static readonly Dictionary<string, FluidTemplate> s_Templates = new Dictionary<string, FluidTemplate>();
+        private const string s_TemplateResourcePrefix = "GhBadgesSharp.Resources.Templates.";
+        private const string s_TemplateResourceSuffix = "-template.liquid";
+        private static readonly Dictionary<string, Lazy<FluidTemplate>> s_Templates = new Dictionary<string, Lazy<FluidTemplate>>();
 
         static Templates()
         {
@@ -18,24 +18,23 @@ namespace GhBadgesSharp
 
             var templateResourceNames = assembly
                 .GetManifestResourceNames()
-                .Where(name => name.StartsWith("GhBadgesSharp.Resources.Templates.") && name.EndsWith("-template.liquid"));
+                .Where(name => name.StartsWith(s_TemplateResourcePrefix) && name.EndsWith(s_TemplateResourceSuffix));
 
             foreach (var resourceName in templateResourceNames)
             {
                 var templateName = resourceName
-                    .Replace("GhBadgesSharp.Resources.Templates.", "")
-                    .Replace("-template.liquid", "");
+                    .Replace(s_TemplateResourcePrefix, "")
+                    .Replace(s_TemplateResourceSuffix, "");
 
-                using (var stream = assembly.GetManifestResourceStream(resourceName))
-                using (var streamReader = new StreamReader(stream))
+
+                s_Templates.Add(templateName, new Lazy<FluidTemplate>(() =>
                 {
-                    var templateSource = streamReader.ReadToEnd();
-                    var template = FluidTemplate.Parse(templateSource);
-                    s_Templates.Add(templateName, template);
-                }
+                    var templateSource = ResourceHelper.LoadEmbeddedResource(resourceName);
+                    return FluidTemplate.Parse(templateSource);                        
+                }));
+
             }
         }
-
 
         public static bool TemplateExists(string name) => s_Templates.ContainsKey(name);
 
@@ -45,9 +44,8 @@ namespace GhBadgesSharp
                 throw new ArgumentNullException(nameof(name));
 
             return s_Templates.TryGetValue(name, out var template)
-                ? template
+                ? template.Value
                 : throw new TemplateNotFoundException(name);
         }
-
     }
 }

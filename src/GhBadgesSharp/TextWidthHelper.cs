@@ -33,8 +33,6 @@
 //
 using System;
 using System.Collections;
-using System.IO;
-using System.Reflection;
 using Newtonsoft.Json;
 
 namespace GhBadgesSharp
@@ -47,15 +45,8 @@ namespace GhBadgesSharp
         private static readonly double s_DefaultWidth;
 
         static TextWidthHelper()
-        {
-            using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(s_ResourceName))
-            using (var streamReader = new StreamReader(stream))
-            using (var jsonReader = new JsonTextReader(streamReader))
-            {
-                var serializer = new JsonSerializer();
-                s_Widths = serializer.Deserialize<object[][]>(jsonReader);
-            }
-
+        {            
+            s_Widths = JsonConvert.DeserializeObject<object[][]>(ResourceHelper.LoadEmbeddedResource(s_ResourceName));
             s_DefaultWidth = GetWidth("m");
         }
 
