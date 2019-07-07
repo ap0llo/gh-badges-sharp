@@ -201,20 +201,20 @@ namespace GhBadgesSharp
                 leftText = leftText.ToUpper();
             }
 
-            var leftWidth = TextWidthHelper.GetWidth(leftText) / 10;
+            var leftTextWidth = TextWidthHelper.GetWidth(leftText) / 10;
 
             // Increase chances of pixel grid alignment.
-            if (leftWidth % 2 == 0)
+            if (leftTextWidth % 2 == 0)
             {
-                leftWidth++;
+                leftTextWidth++;
             }
 
-            var rightWidth = TextWidthHelper.GetWidth(rightText) / 10;
+            var rightTextWidth = TextWidthHelper.GetWidth(rightText) / 10;
 
             // Increase chances of pixel grid alignment.
-            if (rightWidth % 2 == 0)
+            if (rightTextWidth % 2 == 0)
             {
-                rightWidth++;
+                rightTextWidth++;
             }
 
             logoWidth = logoWidth ?? (logo != null ? 14 : 0);
@@ -229,18 +229,21 @@ namespace GhBadgesSharp
                 logoPadding = logo != null ? 3 : 0;
             }
 
-            var context = new BadgeData(templateName: template, leftText: leftText, rightText: rightText)
-            {                
-                Widths = new[] { leftWidth + 10 + logoWidth ?? 0 + logoPadding, rightWidth + 10 },
-                Links = links.Select(EscapeXml).ToArray(),
-                Logo = EscapeXml(logo),
-                LogoPosition = logoPosition,
-                LogoWidth = logoWidth,
-                LogoPadding = logoPadding,
-                ColorA = Colors.ToSvgColor(labelColor),
-                ColorB = Colors.ToSvgColor(color),
-                // escapeXml
-            };
+            var context = new BadgeData(
+                templateName: template,
+                leftText: leftText,
+                rightText: rightText,
+                leftWidth: leftTextWidth + 10 + logoWidth ?? 0 + logoPadding,
+                rightWidth: rightTextWidth + 10,
+                leftLink: links.FirstOrDefault(),
+                rightLink: links.Skip(1).FirstOrDefault(),
+                logo: logo,
+                logoPosition: logoPosition,
+                logoWidth: logoWidth,
+                logoPadding: logoPadding,
+                colorA: Colors.ToSvgColor(labelColor),
+                colorB: Colors.ToSvgColor(color)
+            );
 
             return context;
         }
@@ -273,15 +276,6 @@ namespace GhBadgesSharp
             var svg = XElement.Parse(rendered);
             return svg;
 
-        }
-
-
-        private static string EscapeXml(string value)
-        {
-            if (value == null)
-                return null;
-
-            return new XText(value).ToString();
         }
     }
 }

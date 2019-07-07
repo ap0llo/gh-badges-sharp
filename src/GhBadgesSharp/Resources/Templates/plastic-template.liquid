@@ -5,7 +5,7 @@ Ported from https://github.com/badges/shields/blob/66c7f13e38c76bfdbdb96107bc92e
 {% assign width1 = it.Widths[0] %}
 {% unless it.TextLength[0] > 0 %}
 	{%if it.Logo %}
-		{% unless it.ColorA %}
+		{% unless it.Colors[0] %}
 			{% assign width1 = width1 | minus: 7 %}
 		{% endunless %}
 	{% else %}
@@ -26,22 +26,22 @@ Ported from https://github.com/badges/shields/blob/66c7f13e38c76bfdbdb96107bc92e
       <rect width="{{ it.Widths[0] | plus: it.Widths[1] }}" height="18" rx="4" fill="#fff"/>
     </clipPath>
   
-    {% if it.TextLength[0] > 0 or it.Logo and it.ColorA  %}
-	    {% if it.ColorA %}
-		    {% assign fill1 = it.ColorA %}
+    {% if it.TextLength[0] > 0 or it.Logo and it.Colors[0]  %}
+	    {% if it.Colors[0] %}
+		    {% assign fill1 = it.EscapedColors[0] %}
 	    {% else %}
 		    {% assign fill1 = "#555" %}
 	    {% endif %}
     {% else %}
-	    {% if it.ColorB %}
-		    {% assign fill1 = it.ColorB %}
+	    {% if it.Colors[1] %}
+		    {% assign fill1 = it.EscapedColors[1] %}
 	    {% else %}
     		{% assign fill1 = "#4c1" %}
     	{% endif %}
     {% endif %}
 
-    {% if it.ColorB %}
-        {% assign fill2 = it.ColorB %}
+    {% if it.Colors[1] %}
+        {% assign fill2 = it.EscapedColors[1] %}
     {% else %}
         {% assign fill2 = "#4c1" %}
     {% endif %}

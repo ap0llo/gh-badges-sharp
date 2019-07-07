@@ -8,6 +8,7 @@ namespace GhBadgesSharp
     {
         public string TemplateName { get;}
 
+
         public string LeftText { get;  }
 
         public string RightText { get; }
@@ -19,22 +20,28 @@ namespace GhBadgesSharp
         public IReadOnlyList<string> EscapedText { get; }
 
 
-        public double[] Widths { get; internal set; }
+        public IReadOnlyList<double> Widths { get; }
 
-        public IReadOnlyList<string> Links { get; internal set; }
 
-        public string Logo { get; internal set; }
+        public IReadOnlyList<string> Links { get; }
 
-        public int? LogoPosition { get; internal set; }
 
-        public int? LogoWidth { get; internal set; }
+        public string Logo { get; }
 
-        public int LogoPadding { get; internal set; }
+        public int? LogoPosition { get; }
 
-        public string ColorA { get; internal set; }
+        public int? LogoWidth { get; }
 
-        public string ColorB { get; internal set; }
+        public int LogoPadding { get;}
 
+
+        public string ColorA { get; }
+
+        public string ColorB { get; }
+
+        public IReadOnlyList<string> Colors { get; }
+
+        public IReadOnlyList<string> EscapedColors { get; }
 
         // Computed properties to keep logic out of templates
 
@@ -45,7 +52,13 @@ namespace GhBadgesSharp
 
 
 
-        public BadgeData(string templateName, string leftText, string rightText)
+        public BadgeData(
+            string templateName,
+            string leftText, string rightText,
+            double leftWidth, double rightWidth,
+            string leftLink,  string rightLink,
+            string logo, int? logoPosition, int? logoWidth, int logoPadding,
+            string colorA, string colorB)
         {
             if (String.IsNullOrEmpty(templateName))
                 throw new ArgumentException("Value must not be null or empty", nameof(templateName));
@@ -54,10 +67,28 @@ namespace GhBadgesSharp
 
             LeftText = leftText;
             RightText = rightText;
-
             Text = new[] { leftText, rightText };
             TextLength = new[] { leftText?.Length ?? 0, rightText?.Length ?? 0 };
             EscapedText = new[] { EscapeXml(leftText), EscapeXml(rightText) };
+
+            Widths = new[] { leftWidth, rightWidth };
+
+            var links = new List<string>();
+            links.AddIfNotNull(leftLink);
+            links.AddIfNotNull(rightLink);
+
+            Links = links;
+
+            Logo = EscapeXml(logo);
+            LogoPosition = logoPosition;
+            LogoWidth = logoWidth;
+            LogoPadding = logoPadding;
+
+            ColorA = colorA;
+            ColorB = colorB;
+            Colors = new[] { colorA, colorB };
+            EscapedColors = new[] { EscapeXml(colorA), EscapeXml(colorB) };
+            
         }
 
 
