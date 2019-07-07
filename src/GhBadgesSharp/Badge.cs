@@ -237,7 +237,7 @@ namespace GhBadgesSharp
                 EscapedLeftText = EscapeXml(leftText),
                 EscapedRightText = EscapeXml(rightText),
                 Widths = new[] { leftWidth + 10 + logoWidth ?? 0 + logoPadding, rightWidth + 10 },
-                Links = links.Select(EscapeXml),
+                Links = links.Select(EscapeXml).ToArray(),
                 Logo = EscapeXml(logo),
                 LogoPosition = logoPosition,
                 LogoWidth = logoWidth,

@@ -82,30 +82,13 @@ Ported from https://github.com/badges/shields/blob/66c7f13e38c76bfdbdb96107bc92e
         <text x="{{ x2 }}" y="130" transform="scale(0.1)" textLength="{{ textLength2 }}" lengthAdjust="spacing">{{ it.EscapedRightText }}</text>
     </g>
   
-    {% if it.Links[0] %}
-        {%assign firstLinkLength = it.Links[0] | size %}
-    {% else %}
-        {%assign firstLinkLength = 0 %}
-    {% endif %}
-
-    {% if it.Links[1] %}
-        {%assign secondLinkLength = it.Links[1] | size %}
-    {% else %}
-        {%assign secondLinkLength = 0 %}
-    {% endif %}
-
-    {% if firstLinkLength > 0 %}
-      <a target="_blank" xlink:href="{{ it.Links[0] }}">
+    {% if it.LeftLink %}
+      <a target="_blank" xlink:href="{{ it.LeftLink }}">
         <rect width="{{ it.Widths[0] }}" height="18" fill="rgba(0,0,0,0)"/>
       </a>
     {% endif %}
-    {% if firstLinkLength > 0 or secondLinkLength > 0 %}
-        {% if secondLinkLength > 0 %}
-            {% assign href2 = it.Links[1] %}
-        {% else %}
-            {% assign href2 = it.Links[0] %}
-        {% endif %}
-      <a target="_blank" xlink:href="{{ href2 }}">
+    {% if it.LeftLinkOrRightLink %}        
+      <a target="_blank" xlink:href="{{ it.LeftLinkOrRightLink }}">
         <rect x="{{ it.Widths[0] }}" width="{{ it.Widths[1] }}" height="18" fill="rgba(0,0,0,0)"/>
       </a>
     {% endif %}
