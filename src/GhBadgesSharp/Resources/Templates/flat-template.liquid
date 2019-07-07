@@ -4,13 +4,13 @@ Ported from https://github.com/badges/shields/blob/66c7f13e38c76bfdbdb96107bc92e
 
 {% assign width1 = it.Widths[0] %}
 {% unless it.TextLength[0] > 0 %}
-	{%if it.Logo %}
-		{% unless it.Colors[0] %}
-			{% assign width1 = width1 | minus: 7 %}
-		{% endunless %}
-	{% else %}
-		{% assign width1 = width1 | minus: 11 %}
-	{% endif %}
+  {%if it.Logo %}
+    {% unless it.Colors[0] %}
+      {% assign width1 = width1 | minus: 7 %}
+    {% endunless %}
+  {% else %}
+    {% assign width1 = width1 | minus: 11 %}
+  {% endif %}
 {% endunless %}
 {% assign width1 = width1 | plus: it.Widths[1] %}
 
@@ -53,8 +53,9 @@ Ported from https://github.com/badges/shields/blob/66c7f13e38c76bfdbdb96107bc92e
 
   <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="110">
     {% if it.Logo %}
-    <image x="5" y="3" width="{{ it.LogoWidth}}" height="14" xlink:href="{{ it.Logo }}"/>
+      <image x="5" y="3" width="{{ it.LogoWidth}}" height="14" xlink:href="{{ it.Logo }}"/>
     {% endif %}
+
     {% if it.TextLength[0] > 0 %}
       {% assign x1 = it.Widths[0] %}
       {% assign x1 = x1 | plus: it.LogoWidth %}
