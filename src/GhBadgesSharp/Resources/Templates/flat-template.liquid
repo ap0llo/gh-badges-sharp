@@ -57,8 +57,8 @@ Ported from https://github.com/badges/shields/blob/66c7f13e38c76bfdbdb96107bc92e
     {% endif %}
     {% if it.TextLength[0] > 0 %}
       {% assign x1 = it.Widths[0] %}
-      {% assign x1 = x1 | plus: it.logoWidth %}
-      {% assign x1 = x1 | plus: it.logoPadding %}
+      {% assign x1 = x1 | plus: it.LogoWidth %}
+      {% assign x1 = x1 | plus: it.LogoPadding %}
       {% assign x1 = x1 | divided_by: 2 %}
       {% assign x1 = x1 | plus: 1 %}
       {% assign x1 = x1 | times: 10 %}
