@@ -129,7 +129,7 @@ using Xunit;
 
 namespace GhBadgesSharp.Test
 {
-    public class BadgeTest
+    public partial class BadgeTest
     {
         [Theory]
         // valid hex
@@ -172,7 +172,7 @@ namespace GhBadgesSharp.Test
         public void Color_is_converted_as_expected(string input, string expectedColor)
         {
             var expectedSvgColor = Colors.ToSvgColor(expectedColor);
-            var badgeData = Badge.MakeBadge("flat", "name", "Bob", input);
+            var badgeData = Badge.GetBadgeData("flat", "name", "Bob", input);
 
             Assert.Equal(expectedSvgColor, badgeData.ColorB);
         }

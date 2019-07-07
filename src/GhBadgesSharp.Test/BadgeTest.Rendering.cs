@@ -1,0 +1,45 @@
+﻿using System.Linq;
+using ApprovalTests;
+using ApprovalTests.Namers;
+using ApprovalTests.Reporters;
+using Xunit;
+
+namespace GhBadgesSharp.Test
+{   
+    [UseReporter(typeof(DiffReporter))]
+    public partial class BadgeTest
+    {
+        private class ApprovalNamer : UnitTestFrameworkNamer
+        {
+            private readonly int m_Id;
+
+            public override string Name => $"{base.Name}_{m_Id:000}";
+
+            public ApprovalNamer(int id)
+            {
+                m_Id = id;
+            }
+
+            public override string GetSubdirectory() => "/testdata";
+        }
+
+
+        [Theory]
+        //          id  template  leftText   rightText, color,      labelColor,   logo,   logoPosition,   logoWidth,   link1,                 link2
+        [InlineData(1,  "flat",   "Hello",   "World",   "yellow",   null,         null,   null,           null,        null,                  null)]
+        [InlineData(2,  "flat",   "Hello",   "World",   "yellow",   null,         null,   null,           null,        "http://example.com",  null)]
+        public void MakeBadge_returns_expected_svg(int id, string template, string leftText, string rightText, string color, string labelColor, string logo, int? logoPosition, int? logoWidth, string link1, string link2)
+        {
+            // ARRANGE
+            var links = new[] { link1, link2 }.Where(x => x != null);
+            
+            // ACT
+            var badge = Badge.MakeBadge(template, leftText, rightText, color, labelColor, logo, logoPosition, logoWidth, links);
+            var writer = new ApprovalTextWriter(badge.ToString(), "svg");
+
+            // ASSERT
+            Approvals.Verify(writer, new ApprovalNamer(id), Approvals.GetReporter());            
+        }   
+
+    }
+}

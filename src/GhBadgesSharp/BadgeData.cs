@@ -18,5 +18,6 @@ namespace GhBadgesSharp
         public int LogoPadding { get; internal set; }
         public string ColorA { get; internal set; }
         public string ColorB { get; internal set; }
+        public string TemplateName { get; internal set; }
     }
 }

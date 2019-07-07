@@ -127,20 +127,65 @@
 //
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Xml.Linq;
+using Fluid;
 
 namespace GhBadgesSharp
 {
     public static class Badge
     {
-        private static readonly Dictionary<string, Func<object, XElement>> s_Templates = new Dictionary<string, Func<object, XElement>>();
+        private static readonly Dictionary<string, FluidTemplate> s_Templates = new Dictionary<string, FluidTemplate>();
 
-        public static BadgeData MakeBadge(
+
+        static Badge()
+        {
+            var assembly = Assembly.GetExecutingAssembly();
+
+            var templateResourceNames = assembly
+                .GetManifestResourceNames()
+                .Where(name => name.StartsWith("GhBadgesSharp.Templates.") && name.EndsWith("-template.liquid"));
+            
+            foreach (var resourceName in templateResourceNames)
+            {
+                var templateName = resourceName
+                    .Replace("GhBadgesSharp.Templates.", "")
+                    .Replace("-template.liquid", "");
+
+                using (var stream = assembly.GetManifestResourceStream(resourceName))
+                using (var streamReader = new StreamReader(stream))
+                {
+                    var templateSource = streamReader.ReadToEnd();
+                    var template = FluidTemplate.Parse(templateSource);
+                    s_Templates.Add(templateName, template);
+                }
+            }
+
+        }
+
+        public static XElement MakeBadge(
+            string template,
+            string leftText,
+            string rightText,
+            string color = null,
+            string labelColor = null,
+            string logo = null,
+            int? logoPosition = null,
+            int? logoWidth = null,
+            IEnumerable<string> links = null)
+        {
+            var badgeData = GetBadgeData(template, leftText, rightText, color, labelColor, logo, logoPosition, logoWidth, links);
+            return RenderBadge(badgeData);
+        }
+
+
+        internal static BadgeData GetBadgeData(
                 string template,
                 string leftText,
-                string rightText,                
-                string color = null,                
+                string rightText,
+                string color = null,
                 string labelColor = null,
                 string logo = null,
                 int? logoPosition = null,
@@ -152,7 +197,7 @@ namespace GhBadgesSharp
 
             leftText = leftText.Trim();
             rightText = rightText.Trim();
-            
+
             color = Colors.NormalizeColor(color);
             labelColor = Colors.NormalizeColor(labelColor);
 
@@ -211,14 +256,15 @@ namespace GhBadgesSharp
             {
                 logoPadding = logo != null ? 3 : 0;
             }
-            
+
             var context = new BadgeData()
             {
+                TemplateName = template,
                 LeftText = leftText,
                 RightText = rightText,
                 EscapedLeftText = EscapeXml(leftText),
                 EscapedRightText = EscapeXml(rightText),
-                Widths = new[] { leftWidth + 10 + logoWidth.Value, logoPadding, rightWidth + 10 },
+                Widths = new[] { leftWidth + 10 + logoWidth ?? 0 + logoPadding, rightWidth + 10 },
                 Links = links.Select(EscapeXml),
                 Logo = EscapeXml(logo),
                 LogoPosition = logoPosition,
@@ -254,5 +300,19 @@ namespace GhBadgesSharp
             return new XText(value).ToString();
         }
 
+        private static XElement RenderBadge(BadgeData data)
+        {
+            var template = s_Templates[data.TemplateName];
+
+            var context = new TemplateContext();
+            context.MemberAccessStrategy.Register(data.GetType());
+            context.SetValue("it", data);
+
+            var rendered = template.Render(context).Trim();
+
+            var svg = XElement.Parse(rendered);
+            return svg;
+
+        }
     }
 }
