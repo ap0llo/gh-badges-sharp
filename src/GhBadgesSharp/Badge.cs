@@ -137,34 +137,6 @@ namespace GhBadgesSharp
 {
     public static class Badge
     {
-        private static readonly Dictionary<string, FluidTemplate> s_Templates = new Dictionary<string, FluidTemplate>();
-
-
-        static Badge()
-        {
-            var assembly = Assembly.GetExecutingAssembly();
-
-            var templateResourceNames = assembly
-                .GetManifestResourceNames()
-                .Where(name => name.StartsWith("GhBadgesSharp.Resources.Templates.") && name.EndsWith("-template.liquid"));
-            
-            foreach (var resourceName in templateResourceNames)
-            {
-                var templateName = resourceName
-                    .Replace("GhBadgesSharp.Resources.Templates.", "")
-                    .Replace("-template.liquid", "");
-
-                using (var stream = assembly.GetManifestResourceStream(resourceName))
-                using (var streamReader = new StreamReader(stream))
-                {
-                    var templateSource = streamReader.ReadToEnd();
-                    var template = FluidTemplate.Parse(templateSource);
-                    s_Templates.Add(templateName, template);
-                }
-            }
-
-        }
-
         public static XElement MakeBadge(
             string template,
             string leftText,
@@ -201,7 +173,7 @@ namespace GhBadgesSharp
             color = Colors.NormalizeColor(color);
             labelColor = Colors.NormalizeColor(labelColor);
 
-            if (!s_Templates.ContainsKey(template))
+            if (!Templates.TemplateExists(template))
             {
                 template = "flat";
             }
@@ -302,7 +274,7 @@ namespace GhBadgesSharp
 
         private static XElement RenderBadge(BadgeData data)
         {
-            var template = s_Templates[data.TemplateName];
+            var template = Templates.GetTemplate(data.TemplateName);
 
             var context = new TemplateContext();
             context.MemberAccessStrategy.Register(data.GetType());
