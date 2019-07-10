@@ -8,17 +8,6 @@ namespace GhBadgesSharp
     {
         public string TemplateName { get; }
 
-
-        public string LeftText { get; }
-
-        public string RightText { get; }
-
-        public IReadOnlyList<string> Text { get; }
-
-        public IReadOnlyList<int> TextLength { get; }
-
-        public IReadOnlyList<string> EscapedText { get; }
-
         public IReadOnlyList<string> Links { get; }
 
 
@@ -35,13 +24,6 @@ namespace GhBadgesSharp
 
         public string ColorB { get; }
 
-        public IReadOnlyList<string> Colors { get; }
-
-        public IReadOnlyList<string> EscapedColors { get; }
-
-        // Computed properties to keep logic out of templates
-
-
         public string LeftLink => Links.Count > 0 ? NullIfEmptyString(Links[0]) : null;
 
         public string LeftLinkOrRightLink => Links.Count > 1 ? NullIfEmptyString(Links[1]) : LeftLink;
@@ -50,7 +32,6 @@ namespace GhBadgesSharp
 
         public BadgeData(
             string templateName,
-            string leftText, string rightText,
             string leftLink, string rightLink,
             string logo, int? logoPosition, int? logoWidth, int logoPadding,
             string colorA, string colorB)
@@ -61,16 +42,12 @@ namespace GhBadgesSharp
             }
 
             TemplateName = templateName;
-
-            LeftText = leftText;
-            RightText = rightText;
-            Text = new[] { leftText, rightText };
-            TextLength = new[] { leftText?.Length ?? 0, rightText?.Length ?? 0 };
-            EscapedText = new[] { EscapeXml(leftText), EscapeXml(rightText) };
+       
 
             var links = new List<string>();
             links.AddIfNotNull(leftLink);
             links.AddIfNotNull(rightLink);
+
 
             Links = links;
 
@@ -81,9 +58,6 @@ namespace GhBadgesSharp
 
             ColorA = colorA;
             ColorB = colorB;
-            Colors = new[] { colorA, colorB };
-            EscapedColors = new[] { EscapeXml(colorA), EscapeXml(colorB) };
-
         }
 
 

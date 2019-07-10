@@ -6,6 +6,8 @@ namespace GhBadgesSharp.ViewModels
 {
     internal abstract class ViewModelBase
     {
+        private readonly string m_LeftText;
+        private readonly string m_RightText;
         private readonly BadgeData m_BadgeData;
         protected readonly double m_LeftTextWidth;
         protected readonly double m_RightTextWidth;
@@ -47,13 +49,15 @@ namespace GhBadgesSharp.ViewModels
 
         protected ViewModelBase(string leftText, string rightText, BadgeData badgeData)
         {
+            m_LeftText = NullIfEmptyString(leftText);
+            m_RightText = NullIfEmptyString(rightText);
             m_BadgeData = badgeData ?? throw new ArgumentNullException(nameof(badgeData));
 
             m_LeftTextWidth = GetTextWidth(leftText);
             m_RightTextWidth = GetTextWidth(rightText);
 
-            TextLength = new[] { m_BadgeData.LeftText?.Length ?? 0, badgeData.RightText?.Length ?? 0 };
-            Text = new[] { EscapeXml(NullIfEmptyString(m_BadgeData.LeftText)), EscapeXml(NullIfEmptyString(badgeData.RightText)) };
+            TextLength = new[] { m_LeftText?.Length ?? 0, m_RightText?.Length ?? 0 };
+            Text = new[] { EscapeXml(m_LeftText), EscapeXml(m_RightText) };
 
             Links = new[] { NullIfEmptyString(badgeData.LeftLink), NullIfEmptyString(badgeData.LeftLinkOrRightLink) };
             Colors = new[] { NullIfEmptyString(badgeData.ColorA), NullIfEmptyString(badgeData.ColorB) };
@@ -75,7 +79,7 @@ namespace GhBadgesSharp.ViewModels
             return new XText(value).ToString();
         }
 
-        protected static string NullIfEmptyString(string str) => String.IsNullOrEmpty(str) ? null : str;
+        protected static string NullIfEmptyString(string str) => str == null ? null : (String.IsNullOrEmpty(str) ? null : str);
 
 
         protected static double GetTextWidth(string text)

@@ -214,8 +214,6 @@ namespace GhBadgesSharp
 
             var badgeData = new BadgeData(
                 templateName: template,
-                leftText: leftText,
-                rightText: rightText,                
                 leftLink: links.FirstOrDefault(),
                 rightLink: links.Skip(1).FirstOrDefault(),
                 logo: logo,
