@@ -6,8 +6,6 @@ namespace GhBadgesSharp
 {
     public class BadgeData
     {
-        public string TemplateName { get; }
-
         public IReadOnlyList<string> Links { get; }
 
 
@@ -31,19 +29,10 @@ namespace GhBadgesSharp
 
 
         public BadgeData(
-            string templateName,
             string leftLink, string rightLink,
             string logo, int? logoPosition, int? logoWidth, int logoPadding,
             string colorA, string colorB)
-        {
-            if (String.IsNullOrEmpty(templateName))
-            {
-                throw new ArgumentException("Value must not be null or empty", nameof(templateName));
-            }
-
-            TemplateName = templateName;
-       
-
+        {          
             var links = new List<string>();
             links.AddIfNotNull(leftLink);
             links.AddIfNotNull(rightLink);

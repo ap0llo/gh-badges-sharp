@@ -147,12 +147,12 @@ namespace GhBadgesSharp
             int? logoWidth = null,
             IEnumerable<string> links = null)
         {
-            var badgeData = GetBadgeData(template, leftText, rightText, color, labelColor, logo, logoPosition, logoWidth, links);
+            var badgeData = GetBadgeViewModel(template, leftText, rightText, color, labelColor, logo, logoPosition, logoWidth, links);
             return RenderBadge(badgeData);
         }
 
 
-        internal static object GetBadgeData(
+        internal static ViewModelBase GetBadgeViewModel(
                 string template,
                 string leftText,
                 string rightText,
@@ -213,7 +213,6 @@ namespace GhBadgesSharp
             }
 
             var badgeData = new BadgeData(
-                templateName: template,
                 leftLink: links.FirstOrDefault(),
                 rightLink: links.Skip(1).FirstOrDefault(),
                 logo: logo,
@@ -226,14 +225,11 @@ namespace GhBadgesSharp
 
             if (template == "flat")
                 return new FlatViewModel(leftText, rightText, badgeData);
-
-            if (template == "flat-square")
+            else if (template == "flat-square")
                 return new FlatSquareViewModel(leftText, rightText, badgeData);
-
-            if (template == "plastic")
+            else if (template == "plastic")
                 return new PlasticViewModel(leftText, rightText, badgeData);
-
-            return badgeData;
+            else throw new NotImplementedException();
         }
 
         private static string Capitalize(string value)
@@ -251,12 +247,12 @@ namespace GhBadgesSharp
         }
 
 
-        private static XElement RenderBadge(object data)
+        private static XElement RenderBadge(ViewModelBase viewModel)
         {
-            //TODO
+            //TODO: Move template name to ViewModelBase
             string templateName;
 
-            switch(data)
+            switch(viewModel)
             {
                 case FlatSquareViewModel _:
                     templateName = "flat-square";
@@ -268,16 +264,15 @@ namespace GhBadgesSharp
                     templateName = "plastic";
                     break;
                 default:
-                    templateName = ((BadgeData)data).TemplateName;
-                    break;
+                    throw new NotImplementedException();
             }
 
             var template = Templates.GetTemplate(templateName);
 
             var context = new TemplateContext();
-            context.MemberAccessStrategy.Register(data.GetType());
+            context.MemberAccessStrategy.Register(viewModel.GetType());
             context.MemberAccessStrategy.Register(typeof(Point));
-            context.SetValue("it", data);
+            context.SetValue("it", viewModel);
 
             var rendered = template.Render(context).Trim();
 
