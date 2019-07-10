@@ -130,6 +130,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 using Fluid;
+using GhBadgesSharp.ViewModels;
 
 namespace GhBadgesSharp
 {
@@ -151,7 +152,7 @@ namespace GhBadgesSharp
         }
 
 
-        internal static BadgeData GetBadgeData(
+        internal static object GetBadgeData(
                 string template,
                 string leftText,
                 string rightText,
@@ -227,7 +228,7 @@ namespace GhBadgesSharp
                 logoPadding = logo != null ? 3 : 0;
             }
 
-            var context = new BadgeData(
+            var badgeData = new BadgeData(
                 templateName: template,
                 leftText: leftText,
                 rightText: rightText,
@@ -243,7 +244,14 @@ namespace GhBadgesSharp
                 colorB: Colors.ToSvgColor(color)
             );
 
-            return context;
+            if (template == "flat")
+                return new FlatViewModel(badgeData);
+
+            if (template == "flat-square")
+                return new FlatSquareViewModel(badgeData);
+
+
+            return badgeData;
         }
 
         private static string Capitalize(string value)
@@ -261,12 +269,29 @@ namespace GhBadgesSharp
         }
 
 
-        private static XElement RenderBadge(BadgeData data)
+        private static XElement RenderBadge(object data)
         {
-            var template = Templates.GetTemplate(data.TemplateName);
+            //TODO
+            string templateName = default;
+
+            switch(data)
+            {
+                case FlatSquareViewModel _:
+                    templateName = "flat-square";
+                    break;
+                case FlatViewModel _:
+                    templateName = "flat";
+                    break;
+                default:
+                    templateName = ((BadgeData)data).TemplateName;
+                    break;
+            }
+
+            var template = Templates.GetTemplate(templateName);
 
             var context = new TemplateContext();
             context.MemberAccessStrategy.Register(data.GetType());
+            context.MemberAccessStrategy.Register(typeof(Point));
             context.SetValue("it", data);
 
             var rendered = template.Render(context).Trim();

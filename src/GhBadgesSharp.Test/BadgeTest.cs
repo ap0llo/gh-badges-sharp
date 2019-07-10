@@ -125,6 +125,7 @@
 // Link to original source code:
 // https://github.com/badges/shields/blob/c6ef885b7508d342963d0600d27282950d1e646b/gh-badges/lib/make-badge.spec.js
 //
+using GhBadgesSharp.ViewModels;
 using Xunit;
 
 namespace GhBadgesSharp.Test
@@ -174,7 +175,8 @@ namespace GhBadgesSharp.Test
             var expectedSvgColor = Colors.ToSvgColor(expectedColor);
             var badgeData = Badge.GetBadgeData("flat", "name", "Bob", input);
 
-            Assert.Equal(expectedSvgColor, badgeData.ColorB);
+            // TODO: Remove cast
+            Assert.Equal(expectedSvgColor, ((ViewModelBase)badgeData).Colors[1]);
         }
 
     }
