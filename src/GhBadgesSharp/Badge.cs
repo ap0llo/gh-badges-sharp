@@ -197,23 +197,7 @@ namespace GhBadgesSharp
             else if (template == "for-the-badge")
             {
                 leftText = leftText.ToUpper();
-                leftText = leftText.ToUpper();
-            }
-
-            var leftTextWidth = TextWidthHelper.GetWidth(leftText) / 10;
-
-            // Increase chances of pixel grid alignment.
-            if (leftTextWidth % 2 == 0)
-            {
-                leftTextWidth++;
-            }
-
-            var rightTextWidth = TextWidthHelper.GetWidth(rightText) / 10;
-
-            // Increase chances of pixel grid alignment.
-            if (rightTextWidth % 2 == 0)
-            {
-                rightTextWidth++;
+                rightText = rightText.ToUpper();
             }
 
             logoWidth = logoWidth ?? (logo != null ? 14 : 0);
@@ -231,9 +215,7 @@ namespace GhBadgesSharp
             var badgeData = new BadgeData(
                 templateName: template,
                 leftText: leftText,
-                rightText: rightText,
-                leftWidth: leftTextWidth + 10 + logoWidth ?? 0 + logoPadding,
-                rightWidth: rightTextWidth + 10,
+                rightText: rightText,                
                 leftLink: links.FirstOrDefault(),
                 rightLink: links.Skip(1).FirstOrDefault(),
                 logo: logo,
@@ -245,13 +227,13 @@ namespace GhBadgesSharp
             );
 
             if (template == "flat")
-                return new FlatViewModel(badgeData);
+                return new FlatViewModel(leftText, rightText, badgeData);
 
             if (template == "flat-square")
-                return new FlatSquareViewModel(badgeData);
+                return new FlatSquareViewModel(leftText, rightText, badgeData);
 
             if (template == "plastic")
-                return new PlasticViewModel(badgeData);
+                return new PlasticViewModel(leftText, rightText, badgeData);
 
             return badgeData;
         }
@@ -305,5 +287,8 @@ namespace GhBadgesSharp
             return svg;
 
         }
+
+
+       
     }
 }

@@ -19,10 +19,6 @@ namespace GhBadgesSharp
 
         public IReadOnlyList<string> EscapedText { get; }
 
-
-        public IReadOnlyList<double> Widths { get; }
-
-
         public IReadOnlyList<string> Links { get; }
 
 
@@ -55,13 +51,14 @@ namespace GhBadgesSharp
         public BadgeData(
             string templateName,
             string leftText, string rightText,
-            double leftWidth, double rightWidth,
             string leftLink, string rightLink,
             string logo, int? logoPosition, int? logoWidth, int logoPadding,
             string colorA, string colorB)
         {
             if (String.IsNullOrEmpty(templateName))
+            {
                 throw new ArgumentException("Value must not be null or empty", nameof(templateName));
+            }
 
             TemplateName = templateName;
 
@@ -70,8 +67,6 @@ namespace GhBadgesSharp
             Text = new[] { leftText, rightText };
             TextLength = new[] { leftText?.Length ?? 0, rightText?.Length ?? 0 };
             EscapedText = new[] { EscapeXml(leftText), EscapeXml(rightText) };
-
-            Widths = new[] { leftWidth, rightWidth };
 
             var links = new List<string>();
             links.AddIfNotNull(leftLink);
@@ -97,7 +92,9 @@ namespace GhBadgesSharp
         private static string EscapeXml(string value)
         {
             if (value == null)
+            {
                 return null;
+            }
 
             return new XText(value).ToString();
         }

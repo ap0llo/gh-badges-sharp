@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace GhBadgesSharp.ViewModels
+﻿namespace GhBadgesSharp.ViewModels
 {
 
     /// <summary>
@@ -10,7 +6,7 @@ namespace GhBadgesSharp.ViewModels
     /// </summary>
     internal class FlatSquareViewModel : FlatViewModel
     {
-        public FlatSquareViewModel(BadgeData badgeData) : base(badgeData)
+        public FlatSquareViewModel(string leftText, string rightText, BadgeData badgeData) : base(leftText, rightText, badgeData)
         {
         }
     }

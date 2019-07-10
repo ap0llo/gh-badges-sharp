@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 
 namespace GhBadgesSharp.ViewModels
 {
@@ -33,15 +32,18 @@ namespace GhBadgesSharp.ViewModels
         /// </summary>
         public IReadOnlyList<double> TextWidth { get; }
 
-        public override IReadOnlyList<double> Widths => m_Widths;
+        public IReadOnlyList<double> Widths => m_Widths;
 
 
-        public FlatViewModel(BadgeData badgeData) : base(badgeData)
+        public FlatViewModel(string leftText, string rightText, BadgeData badgeData) : base(leftText, rightText, badgeData)
         {
-            m_Widths = base.Widths.ToArray();
+            m_Widths = new double[2];
 
-            // value in original template: {{(it.widths[0] -= it.text[0].length ? 0 : (it.logo ? (it.colorA ? 0 : 7) : 11))+it.widths[1]}}
-            m_Widths[0] -= (Text[0].Length > 0 ? 0 : (Logo != null ? (Colors[0] != null ? 0 : 7) : 11));            
+            // original template:
+            //  ImageWidth: { {(it.widths[0] -= it.text[0].length ? 0 : (it.logo ? (it.colorA ? 0 : 7) : 11))+it.widths[1]}}
+            //  widths: [leftWidth + 10 + logoWidth + logoPadding, rightWidth + 10]
+            m_Widths[0] = (m_LeftTextWidth + 10 + LogoWidth + LogoPadding) - (Text[0].Length > 0 ? 0 : (Logo != null ? (Colors[0] != null ? 0 : 7) : 11));
+            m_Widths[1] = m_RightTextWidth + 10;
             ImageWidth = m_Widths[0] + m_Widths[1];
 
             // value in original template: {{=it.escapeXml(it.text[0].length || it.logo && it.colorA ? (it.colorA||"#555") : (it.colorB||"#4c1"))}}
