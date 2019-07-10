@@ -250,6 +250,8 @@ namespace GhBadgesSharp
             if (template == "flat-square")
                 return new FlatSquareViewModel(badgeData);
 
+            if (template == "plastic")
+                return new PlasticViewModel(badgeData);
 
             return badgeData;
         }
@@ -272,7 +274,7 @@ namespace GhBadgesSharp
         private static XElement RenderBadge(object data)
         {
             //TODO
-            string templateName = default;
+            string templateName;
 
             switch(data)
             {
@@ -281,6 +283,9 @@ namespace GhBadgesSharp
                     break;
                 case FlatViewModel _:
                     templateName = "flat";
+                    break;
+                case PlasticViewModel _:
+                    templateName = "plastic";
                     break;
                 default:
                     templateName = ((BadgeData)data).TemplateName;

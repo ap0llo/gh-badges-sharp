@@ -14,9 +14,9 @@
     <rect width="79.652" height="18" fill="url(#smooth)" />
   </g>
   <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="110">
-    <text x="190" y="140" fill="#010101" fill-opacity=".3" transform="scale(0.1)" textLength="275.33" lengthAdjust="spacing">Hello</text>
-    <text x="190" y="130" transform="scale(0.1)" textLength="275.33" lengthAdjust="spacing">Hello</text>
-    <text x="575.33" y="140" fill="#010101" fill-opacity=".3" transform="scale(0.1)" textLength="321.19" lengthAdjust="spacing">World</text>
-    <text x="575.33" y="130" transform="scale(0.1)" textLength="321.19" lengthAdjust="spacing">World</text>
+    <text x="197.665" y="140" fill="#010101" fill-opacity=".3" transform="scale(0.1)" textLength="275.33" lengthAdjust="spacing">Hello</text>
+    <text x="197.665" y="130" transform="scale(0.1)" textLength="275.33" lengthAdjust="spacing">Hello</text>
+    <text x="575.925" y="140" fill="#010101" fill-opacity=".3" transform="scale(0.1)" textLength="321.19" lengthAdjust="spacing">World</text>
+    <text x="575.925" y="130" transform="scale(0.1)" textLength="321.19" lengthAdjust="spacing">World</text>
   </g>
 </svg>
