@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace GhBadgesSharp.ViewModels
@@ -12,6 +13,7 @@ namespace GhBadgesSharp.ViewModels
     /// </remarks>
     internal class PlasticViewModel : ViewModelBase
     {
+        private readonly double[] m_Widths;
 
         /// <summary>
         /// Gets the width of the image (the value for 'width' attribute of the root 'svg' element)
@@ -28,18 +30,21 @@ namespace GhBadgesSharp.ViewModels
         /// </summary>
         public IReadOnlyList<Point> TextPosition { get; }
 
-
         /// <summary>
         /// Gets the width of the text in the svg (to be used as value for the 'textLength' attribute in the svg)
         /// </summary>
         public IReadOnlyList<double> TextWidth { get; }
 
+
+        public override IReadOnlyList<double> Widths => m_Widths;
+
         public PlasticViewModel(BadgeData badgeData) : base(badgeData)
         {
-            // TODO: -=
+            m_Widths = base.Widths.ToArray();
+
             // value in original template: {{=(it.widths[0] -= it.text[0].length ? 0 : (it.logo ? (it.colorA ? 0 : 7) : 11))+it.widths[1]}}
-            ImageWidth = (Widths[0] - ((TextLength[0] > 0) ? 0 : (Logo != null ? (Colors[0] != null ? 0 : 7) : 11)));
-            ImageWidth += Widths[1];
+            m_Widths[0] -= ((TextLength[0] > 0) ? 0 : (Logo != null ? (Colors[0] != null ? 0 : 7) : 11));            
+            ImageWidth += m_Widths[0] + m_Widths[1];
 
             // value in original template: {{=it.escapeXml(it.text[0].length || it.logo && it.colorA ? (it.colorA||"#555") : (it.colorB||"#4c1"))}}
             var fill1 = TextLength[0] > 0 || Logo != null && Colors[0] != null ? (Colors[0] ?? "#555") : (Colors[1] ?? "#4c1");
