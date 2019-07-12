@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Fluid;
 
 namespace GhBadgesSharp.ViewModels
 {
@@ -71,5 +72,8 @@ namespace GhBadgesSharp.ViewModels
 
             TextWidth = new[] { textWidth1, textWidth2 };
         }
+
+
+        internal override FluidTemplate GetTemplate() => Templates.GetTemplate("flat");
     }
 }

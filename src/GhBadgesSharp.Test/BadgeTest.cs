@@ -173,7 +173,7 @@ namespace GhBadgesSharp.Test
         public void Color_is_converted_as_expected(string input, string expectedColor)
         {
             var expectedSvgColor = Colors.ToSvgColor(expectedColor);
-            var badgeData = Badge.GetBadgeViewModel("flat", "name", "Bob", input);
+            var badgeData = Badge.GetViewModel(BadgeStyle.Flat, "name", "Bob", input);
 
             // TODO: Remove cast
             Assert.Equal(expectedSvgColor, ((ViewModelBase)badgeData).Colors[1]);

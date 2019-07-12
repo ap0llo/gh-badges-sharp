@@ -126,8 +126,6 @@
 // https://github.com/badges/shields/blob/c6ef885b7508d342963d0600d27282950d1e646b/gh-badges/lib/make-badge.js
 //
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Xml.Linq;
 using Fluid;
 using GhBadgesSharp.ViewModels;
@@ -136,8 +134,9 @@ namespace GhBadgesSharp
 {
     public static class Badge
     {
+
         public static XElement MakeBadge(
-            string template,
+            BadgeStyle style,
             string leftText,
             string rightText,
             string color = null,
@@ -148,13 +147,13 @@ namespace GhBadgesSharp
             string leftLink = null,
             string rightLink = null)
         {
-            var badgeData = GetBadgeViewModel(template, leftText, rightText, color, labelColor, logo, logoPosition, logoWidth, leftLink, rightLink);
+            var badgeData = GetViewModel(style, leftText, rightText, color, labelColor, logo, logoPosition, logoWidth, leftLink, rightLink);
             return RenderBadge(badgeData);
         }
 
 
-        internal static ViewModelBase GetBadgeViewModel(
-                string template,
+        internal static ViewModelBase GetViewModel(
+                BadgeStyle style,
                 string leftText,
                 string rightText,
                 string color = null,
@@ -172,33 +171,29 @@ namespace GhBadgesSharp
             color = Colors.NormalizeColor(color);
             labelColor = Colors.NormalizeColor(labelColor);
 
-            if (!Templates.TemplateExists(template))
-            {
-                template = "flat";
-            }
 
-            if (template.StartsWith("popout"))
-            {
-                if (!String.IsNullOrEmpty(logo))
-                {
-                    logoPosition = logoPosition <= 10 && logoPosition >= -10 ? logoPosition : 0;
-                    logoWidth = logoWidth ?? 32;
-                }
-                else
-                {
-                    template = template.Replace("popout", "flat");
-                }
-            }
+            //if (style.StartsWith("popout"))
+            //{
+            //    if (!String.IsNullOrEmpty(logo))
+            //    {
+            //        logoPosition = logoPosition <= 10 && logoPosition >= -10 ? logoPosition : 0;
+            //        logoWidth = logoWidth ?? 32;
+            //    }
+            //    else
+            //    {
+            //        style = style.Replace("popout", "flat");
+            //    }
+            //}
 
-            if (template == "social")
-            {
-                leftText = Capitalize(leftText);
-            }
-            else if (template == "for-the-badge")
-            {
-                leftText = leftText.ToUpper();
-                rightText = rightText.ToUpper();
-            }
+            //if (style == "social")
+            //{
+            //    leftText = Capitalize(leftText);
+            //}
+            //else if (style == "for-the-badge")
+            //{
+            //    leftText = leftText.ToUpper();
+            //    rightText = rightText.ToUpper();
+            //}
 
             logoWidth = logoWidth ?? (logo != null ? 14 : 0);
 
@@ -225,13 +220,7 @@ namespace GhBadgesSharp
                 colorB: Colors.ToSvgColor(color)
             );
 
-            if (template == "flat")
-                return new FlatViewModel(badgeData);
-            else if (template == "flat-square")
-                return new FlatSquareViewModel(badgeData);
-            else if (template == "plastic")
-                return new PlasticViewModel(badgeData);
-            else throw new NotImplementedException();
+            return GetViewModel(style, badgeData);
         }
 
         private static string Capitalize(string value)
@@ -250,26 +239,8 @@ namespace GhBadgesSharp
 
 
         private static XElement RenderBadge(ViewModelBase viewModel)
-        {
-            //TODO: Move template name to ViewModelBase
-            string templateName;
-
-            switch(viewModel)
-            {
-                case FlatSquareViewModel _:
-                    templateName = "flat-square";
-                    break;
-                case FlatViewModel _:
-                    templateName = "flat";
-                    break;
-                case PlasticViewModel _:
-                    templateName = "plastic";
-                    break;
-                default:
-                    throw new NotImplementedException();
-            }
-
-            var template = Templates.GetTemplate(templateName);
+        {           
+            var template = viewModel.GetTemplate();
 
             var context = new TemplateContext();
             context.MemberAccessStrategy.Register(viewModel.GetType());
@@ -284,6 +255,25 @@ namespace GhBadgesSharp
         }
 
 
+
+        private static ViewModelBase GetViewModel(BadgeStyle style, BadgeData data)
+        {
+            switch (style)
+            {
+                case BadgeStyle.Flat:
+                    return new FlatViewModel(data);
+                    
+                case BadgeStyle.FlatSquare:
+                    return new FlatSquareViewModel(data);
+
+                case BadgeStyle.Plastic:
+                    return new PlasticViewModel(data);
+
+                default:
+                    throw new ArgumentException($"Unknown {nameof(BadgeStyle)} '{style}'");
+            }
+
+        }
        
     }
 }

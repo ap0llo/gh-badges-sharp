@@ -25,25 +25,25 @@ namespace GhBadgesSharp.Test
 
 
         [Theory]
-        //          id  template        leftText   rightText  color       labelColor    logo    logoPosition    logoWidth    link1                  link2
-        [InlineData(1,  "flat",         "Hello",   "World",   "yellow",   null,         null,   null,           null,        null,                  null)]
-        [InlineData(2,  "flat",         "Hello",   "World",   "yellow",   null,         null,   null,           null,        "http://example.com",  null)]
-        [InlineData(3,  "plastic",      "Hello",   "World",   "yellow",   null,         null,   null,           null,        null,                  null)]
-        [InlineData(4,  "plastic",      "Hello",   "World",   "yellow",   null,         null,   null,           null,        "http://example.com",  null)]
-        [InlineData(5,  "flat",         "Hello",   "World",   "yellow",   null,         null,   null,           null,        "http://example.com",  "https://www.github.com")]
-        [InlineData(6,  "plastic",      "Hello",   "World",   "yellow",   null,         null,   null,           null,        "http://example.com",  "https://www.github.com")]
-        [InlineData(7,  "plastic",      "Hello",   "World",   "yellow",   null,         null,   null,           null,        "",                    null)]
-        [InlineData(8,  "flat",         "Hello",   "World",   "yellow",   null,         null,   null,           null,        "",                    null)]
-        [InlineData(9,  "flat",         "Hello",   "World",   "red",      "blue",       null,   null,           null,        null,                  null)]
-        [InlineData(10, "plastic",      "Hello",   "World",   "red",      "blue",       null,   null,           null,        null,                  null)]
-        [InlineData(11,  "flat-square", "Hello",   "World",   "yellow",   null,         null,   null,           null,        null,                  null)]
-        [InlineData(12,  "flat-square", "Hello",   "World",   "yellow",   null,         null,   null,           null,        "http://example.com",  null)]
-        [InlineData(13,  "flat-square", "Hello",   "World",   "yellow",   null,         null,   null,           null,        "http://example.com",  "https://www.github.com")]
-        [InlineData(14,  "flat-square", "Hello",   "World",   "yellow",   null,         null,   null,           null,        "",                    null)]
-        [InlineData(15,  "flat-square", "Hello",   "World",   "red",      "blue",       null,   null,           null,        null,                  null)]
-        public void MakeBadge_returns_expected_svg(int id, string template, string leftText, string rightText, string color, string labelColor, string logo, int? logoPosition, int? logoWidth, string link1, string link2)
+        //          id  template               leftText   rightText  color       labelColor    logo    logoPosition    logoWidth    link1                  link2
+        [InlineData(1,  BadgeStyle.Flat,       "Hello",   "World",   "yellow",   null,         null,   null,           null,        null,                  null)]
+        [InlineData(2,  BadgeStyle.Flat,       "Hello",   "World",   "yellow",   null,         null,   null,           null,        "http://example.com",  null)]
+        [InlineData(3,  BadgeStyle.Plastic,    "Hello",   "World",   "yellow",   null,         null,   null,           null,        null,                  null)]
+        [InlineData(4,  BadgeStyle.Plastic,    "Hello",   "World",   "yellow",   null,         null,   null,           null,        "http://example.com",  null)]
+        [InlineData(5,  BadgeStyle.Flat,       "Hello",   "World",   "yellow",   null,         null,   null,           null,        "http://example.com",  "https://www.github.com")]
+        [InlineData(6,  BadgeStyle.Plastic,    "Hello",   "World",   "yellow",   null,         null,   null,           null,        "http://example.com",  "https://www.github.com")]
+        [InlineData(7,  BadgeStyle.Plastic,    "Hello",   "World",   "yellow",   null,         null,   null,           null,        "",                    null)]
+        [InlineData(8,  BadgeStyle.Flat,       "Hello",   "World",   "yellow",   null,         null,   null,           null,        "",                    null)]
+        [InlineData(9,  BadgeStyle.Flat,       "Hello",   "World",   "red",      "blue",       null,   null,           null,        null,                  null)]
+        [InlineData(10, BadgeStyle.Plastic,    "Hello",   "World",   "red",      "blue",       null,   null,           null,        null,                  null)]
+        [InlineData(11, BadgeStyle.FlatSquare, "Hello",   "World",   "yellow",   null,         null,   null,           null,        null,                  null)]
+        [InlineData(12, BadgeStyle.FlatSquare, "Hello",   "World",   "yellow",   null,         null,   null,           null,        "http://example.com",  null)]
+        [InlineData(13, BadgeStyle.FlatSquare, "Hello",   "World",   "yellow",   null,         null,   null,           null,        "http://example.com",  "https://www.github.com")]
+        [InlineData(14, BadgeStyle.FlatSquare, "Hello",   "World",   "yellow",   null,         null,   null,           null,        "",                    null)]
+        [InlineData(15, BadgeStyle.FlatSquare, "Hello",   "World",   "red",      "blue",       null,   null,           null,        null,                  null)]
+        public void MakeBadge_returns_expected_svg(int id, BadgeStyle style, string leftText, string rightText, string color, string labelColor, string logo, int? logoPosition, int? logoWidth, string link1, string link2)
         {
-            var badge = Badge.MakeBadge(template, leftText, rightText, color, labelColor, logo, logoPosition, logoWidth, link1, link2);
+            var badge = Badge.MakeBadge(style, leftText, rightText, color, labelColor, logo, logoPosition, logoWidth, link1, link2);
             var writer = new ApprovalTextWriter(badge.ToString(), "svg");
 
             Approvals.Verify(writer, new ApprovalNamer(id), Approvals.GetReporter());            

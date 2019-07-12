@@ -1,4 +1,6 @@
-﻿namespace GhBadgesSharp.ViewModels
+﻿using Fluid;
+
+namespace GhBadgesSharp.ViewModels
 {
     /// <summary>
     /// View model for the "flat-square" template
@@ -7,5 +9,8 @@
     {
         public FlatSquareViewModel(BadgeData badgeData) : base(badgeData)
         { }
+
+
+        internal override FluidTemplate GetTemplate() => Templates.GetTemplate("flat-square");
     }
 }

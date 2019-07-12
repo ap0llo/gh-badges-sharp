@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Xml.Linq;
+using Fluid;
 
 namespace GhBadgesSharp.ViewModels
 {
@@ -69,6 +70,8 @@ namespace GhBadgesSharp.ViewModels
         }
 
 
+        internal abstract FluidTemplate GetTemplate();
+
 
         protected static string EscapeXml(string value)
         {
@@ -81,7 +84,6 @@ namespace GhBadgesSharp.ViewModels
         }
 
         protected static string NullIfEmptyString(string str) => str == null ? null : (String.IsNullOrEmpty(str) ? null : str);
-
 
         protected static double GetTextWidth(string text)
         {
