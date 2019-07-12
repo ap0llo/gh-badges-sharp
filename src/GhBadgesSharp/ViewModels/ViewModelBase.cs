@@ -60,7 +60,7 @@ namespace GhBadgesSharp.ViewModels
             TextLength = new[] { m_LeftText?.Length ?? 0, m_RightText?.Length ?? 0 };
             Text = new[] { EscapeXml(m_LeftText), EscapeXml(m_RightText) };
 
-            Links = new[] { NullIfEmptyString(badgeData.LeftLink), NullIfEmptyString(badgeData.LeftLinkOrRightLink) };
+            Links = new[] { NullIfEmptyString(badgeData.LeftLink), NullIfEmptyString(badgeData.RightLink) ?? NullIfEmptyString(badgeData.LeftLink) };
             Colors = new[] { NullIfEmptyString(badgeData.ColorA), NullIfEmptyString(badgeData.ColorB) };
 
             Logo = NullIfEmptyString(m_BadgeData.Logo);

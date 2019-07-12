@@ -145,9 +145,10 @@ namespace GhBadgesSharp
             string logo = null,
             int? logoPosition = null,
             int? logoWidth = null,
-            IEnumerable<string> links = null)
+            string leftLink = null,
+            string rightLink = null)
         {
-            var badgeData = GetBadgeViewModel(template, leftText, rightText, color, labelColor, logo, logoPosition, logoWidth, links);
+            var badgeData = GetBadgeViewModel(template, leftText, rightText, color, labelColor, logo, logoPosition, logoWidth, leftLink, rightLink);
             return RenderBadge(badgeData);
         }
 
@@ -161,11 +162,10 @@ namespace GhBadgesSharp
                 string logo = null,
                 int? logoPosition = null,
                 int? logoWidth = null,
-                IEnumerable<string> links = null)
+                string leftLink = null,
+                string rightLink = null)
         {
-
-            links = links ?? Enumerable.Empty<string>();
-
+            
             leftText = leftText.Trim();
             rightText = rightText.Trim();
 
@@ -213,9 +213,10 @@ namespace GhBadgesSharp
             }
 
             var badgeData = new BadgeData(
-                leftText, rightText,
-                leftLink: links.FirstOrDefault(),
-                rightLink: links.Skip(1).FirstOrDefault(),
+                leftText: leftText,
+                rightText: rightText,
+                leftLink: leftLink,
+                rightLink: rightLink,
                 logo: logo,
                 logoPosition: logoPosition,
                 logoWidth: logoWidth,

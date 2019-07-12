@@ -6,9 +6,6 @@ namespace GhBadgesSharp
 {
     public class BadgeData
     {
-        public IReadOnlyList<string> Links { get; }
-
-
         public string Logo { get; }
 
         public string LeftText { get; }
@@ -26,9 +23,9 @@ namespace GhBadgesSharp
 
         public string ColorB { get; }
 
-        public string LeftLink => Links.Count > 0 ? NullIfEmptyString(Links[0]) : null;
+        public string LeftLink { get; }
 
-        public string LeftLinkOrRightLink => Links.Count > 1 ? NullIfEmptyString(Links[1]) : LeftLink;
+        public string RightLink { get; }
 
 
 
@@ -38,12 +35,7 @@ namespace GhBadgesSharp
             string logo, int? logoPosition, int? logoWidth, int logoPadding,
             string colorA, string colorB)
         {          
-            var links = new List<string>();
-            links.AddIfNotNull(leftLink);
-            links.AddIfNotNull(rightLink);
-
-
-            Links = links;
+            
 
             Logo = EscapeXml(logo);
             LeftText = leftText;
@@ -51,6 +43,9 @@ namespace GhBadgesSharp
             LogoPosition = logoPosition;
             LogoWidth = logoWidth;
             LogoPadding = logoPadding;
+
+            LeftLink = leftLink;
+            RightLink = rightLink;
 
             ColorA = colorA;
             ColorB = colorB;

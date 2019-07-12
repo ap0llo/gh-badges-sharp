@@ -43,14 +43,9 @@ namespace GhBadgesSharp.Test
         [InlineData(15,  "flat-square", "Hello",   "World",   "red",      "blue",       null,   null,           null,        null,                  null)]
         public void MakeBadge_returns_expected_svg(int id, string template, string leftText, string rightText, string color, string labelColor, string logo, int? logoPosition, int? logoWidth, string link1, string link2)
         {
-            // ARRANGE
-            var links = new[] { link1, link2 }.Where(x => x != null);
-            
-            // ACT
-            var badge = Badge.MakeBadge(template, leftText, rightText, color, labelColor, logo, logoPosition, logoWidth, links);
+            var badge = Badge.MakeBadge(template, leftText, rightText, color, labelColor, logo, logoPosition, logoWidth, link1, link2);
             var writer = new ApprovalTextWriter(badge.ToString(), "svg");
 
-            // ASSERT
             Approvals.Verify(writer, new ApprovalNamer(id), Approvals.GetReporter());            
         }   
 
