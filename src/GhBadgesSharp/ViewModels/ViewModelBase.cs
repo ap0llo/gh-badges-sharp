@@ -7,9 +7,7 @@ namespace GhBadgesSharp.ViewModels
 {
     internal abstract class ViewModelBase
     {
-        private readonly string m_LeftText;
-        private readonly string m_RightText;
-        private readonly BadgeData m_BadgeData;
+        protected readonly BadgeData m_BadgeData;
         protected readonly double m_LeftTextWidth;
         protected readonly double m_RightTextWidth;
 
@@ -40,25 +38,18 @@ namespace GhBadgesSharp.ViewModels
 
         public int? LogoPosition => m_BadgeData.LogoPosition;
 
-        /// <summary>
-        /// Gets the left/right colors for the badge
-        /// </summary>
-        public IReadOnlyList<Color> Colors { get; }
 
 
         protected ViewModelBase(BadgeData badgeData)
         {
-            m_LeftText = NullIfEmptyString(badgeData.LeftText);
-            m_RightText = NullIfEmptyString(badgeData.RightText);
             m_BadgeData = badgeData ?? throw new ArgumentNullException(nameof(badgeData));
 
-            m_LeftTextWidth = GetTextWidth(m_LeftText);
-            m_RightTextWidth = GetTextWidth(m_RightText);
+            m_LeftTextWidth = GetTextWidth(m_BadgeData.LeftText);
+            m_RightTextWidth = GetTextWidth(m_BadgeData.RightText);
 
-            Text = new[] { EscapeXml(m_LeftText), EscapeXml(m_RightText) };
+            Text = new[] { EscapeXml(m_BadgeData.LeftText), EscapeXml(m_BadgeData.RightText) };
 
             Links = new[] { NullIfEmptyString(badgeData.LeftLink), NullIfEmptyString(badgeData.RightLink) ?? NullIfEmptyString(badgeData.LeftLink) };
-            Colors = new[] { badgeData.ColorA, badgeData.ColorB };
         }
 
 

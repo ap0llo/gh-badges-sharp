@@ -124,6 +124,7 @@
 // -----------------------------------------------------------------------------------
 // Link to original source code:
 // https://github.com/badges/shields/blob/c6ef885b7508d342963d0600d27282950d1e646b/gh-badges/lib/color.spec.js
+// https://github.com/badges/shields/blob/c6ef885b7508d342963d0600d27282950d1e646b/gh-badges/lib/make-badge.spec.js
 //
 using Xunit;
 
@@ -154,7 +155,11 @@ namespace GhBadgesSharp.Test
         [InlineData("purple", "purple")]
         [InlineData("", null)]
         [InlineData("not-a-color", null)]
-        [InlineData(null, null)]        
+        [InlineData(null, null)]
+        [InlineData("red", "red")]
+        [InlineData("green", "green")]
+        [InlineData("blue", "blue")]
+        [InlineData("yellow", "yellow")]
         public void Get_returns_expected_result(string color, string expectedResult)
         {
             Assert.Equal(expectedResult, Color.Get(color)?.Name);
@@ -174,6 +179,33 @@ namespace GhBadgesSharp.Test
         [InlineData("not-a-color", null)]
         [InlineData("lightgray", "#9f9f9f")]
         [InlineData("informational", "#007ec6")]
+        // valid hex
+        [InlineData("#4c1", "#4c1")]
+        [InlineData("#4C1", "#4c1")]
+        [InlineData("4C1", "#4c1")]
+        [InlineData("#abc123", "#abc123")]
+        [InlineData("abc123", "#abc123")]
+        // valid rgb(a)
+        [InlineData("rgb(0,128,255)", "rgb(0,128,255)")]
+        [InlineData("rgba(0,128,255,0)", "rgba(0,128,255,0)")]
+        // valid hsl(a)
+        [InlineData("hsl(100, 56%, 10%)", "hsl(100, 56%, 10%)")]
+        [InlineData("hsla(25,20%,0%,0.1)", "hsla(25,20%,0%,0.1)")]
+        // invalid hex
+        [InlineData("#123red", null)] // contains letter above F
+        [InlineData("#red", null)] // contains letter above F
+        // invalid rgb(a)]
+        [InlineData("rgb(220,128,255,0.5)", null)] // has alpha
+        [InlineData("rgba(0,0,255)", null)] // no alpha
+        // invalid hsl(a)]
+        [InlineData("hsl(360,50%,50%,0.5)", null)] // has alpha
+        [InlineData("hsla(0,50%,101%)", null)] // no alpha
+        // neither a css named color nor colorscheme
+        [InlineData("notacolor", null)]
+        [InlineData("bluish", null)]
+        [InlineData("almostred", null)]
+        [InlineData("brightmaroon", null)]
+        [InlineData("cactus", null)]
         public void SvgName_returns_expected_result(string color, string expectedResult)
         {
             Assert.Equal(expectedResult, Color.Get(color)?.SvgName);
