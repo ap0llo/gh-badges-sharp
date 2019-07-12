@@ -29,7 +29,7 @@ namespace GhBadgesSharp
 
                 s_Templates.Add(templateName, new Lazy<FluidTemplate>(() =>
                 {
-                    var templateSource = ResourceHelper.LoadEmbeddedResource(resourceName);
+                    var templateSource = EmbeddedResource.Load(resourceName);
                     return FluidTemplate.Parse(templateSource);                        
                 }));
 
