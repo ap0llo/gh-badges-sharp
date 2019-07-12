@@ -213,6 +213,7 @@ namespace GhBadgesSharp
             }
 
             var badgeData = new BadgeData(
+                leftText, rightText,
                 leftLink: links.FirstOrDefault(),
                 rightLink: links.Skip(1).FirstOrDefault(),
                 logo: logo,
@@ -224,11 +225,11 @@ namespace GhBadgesSharp
             );
 
             if (template == "flat")
-                return new FlatViewModel(leftText, rightText, badgeData);
+                return new FlatViewModel(badgeData);
             else if (template == "flat-square")
-                return new FlatSquareViewModel(leftText, rightText, badgeData);
+                return new FlatSquareViewModel(badgeData);
             else if (template == "plastic")
-                return new PlasticViewModel(leftText, rightText, badgeData);
+                return new PlasticViewModel(badgeData);
             else throw new NotImplementedException();
         }
 

@@ -11,6 +11,10 @@ namespace GhBadgesSharp
 
         public string Logo { get; }
 
+        public string LeftText { get; }
+
+        public string RightText { get; }
+
         public int? LogoPosition { get; }
 
         public int? LogoWidth { get; }
@@ -29,6 +33,7 @@ namespace GhBadgesSharp
 
 
         public BadgeData(
+            string leftText, string rightText,
             string leftLink, string rightLink,
             string logo, int? logoPosition, int? logoWidth, int logoPadding,
             string colorA, string colorB)
@@ -41,6 +46,8 @@ namespace GhBadgesSharp
             Links = links;
 
             Logo = EscapeXml(logo);
+            LeftText = leftText;
+            RightText = rightText;
             LogoPosition = logoPosition;
             LogoWidth = logoWidth;
             LogoPadding = logoPadding;

@@ -47,14 +47,15 @@ namespace GhBadgesSharp.ViewModels
         /// </summary>
         public IReadOnlyList<string> Colors { get; }
 
-        protected ViewModelBase(string leftText, string rightText, BadgeData badgeData)
+
+        protected ViewModelBase(BadgeData badgeData)
         {
-            m_LeftText = NullIfEmptyString(leftText);
-            m_RightText = NullIfEmptyString(rightText);
+            m_LeftText = NullIfEmptyString(badgeData.LeftText);
+            m_RightText = NullIfEmptyString(badgeData.RightText);
             m_BadgeData = badgeData ?? throw new ArgumentNullException(nameof(badgeData));
 
-            m_LeftTextWidth = GetTextWidth(leftText);
-            m_RightTextWidth = GetTextWidth(rightText);
+            m_LeftTextWidth = GetTextWidth(m_LeftText);
+            m_RightTextWidth = GetTextWidth(m_RightText);
 
             TextLength = new[] { m_LeftText?.Length ?? 0, m_RightText?.Length ?? 0 };
             Text = new[] { EscapeXml(m_LeftText), EscapeXml(m_RightText) };
@@ -84,6 +85,9 @@ namespace GhBadgesSharp.ViewModels
 
         protected static double GetTextWidth(string text)
         {
+            if (text == null)
+                return 0d;
+
             var width = TextWidthHelper.GetWidth(text) / 10;
 
             // Increase chances of pixel grid alignment.

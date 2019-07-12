@@ -35,7 +35,7 @@ namespace GhBadgesSharp.ViewModels
         public IReadOnlyList<double> Widths => m_Widths;
 
 
-        public FlatViewModel(string leftText, string rightText, BadgeData badgeData) : base(leftText, rightText, badgeData)
+        public FlatViewModel(BadgeData badgeData) : base(badgeData)
         {
             m_Widths = new double[2];
 

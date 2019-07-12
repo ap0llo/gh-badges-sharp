@@ -35,7 +35,7 @@ namespace GhBadgesSharp.ViewModels
 
         public IReadOnlyList<double> Widths => m_Widths;
 
-        public PlasticViewModel(string leftText, string rightText, BadgeData badgeData) : base(leftText, rightText, badgeData)
+        public PlasticViewModel(BadgeData badgeData) : base(badgeData)
         {
             m_Widths = new double[2];
 
