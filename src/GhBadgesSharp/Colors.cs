@@ -173,7 +173,7 @@ namespace GhBadgesSharp
             if (IsHexColor(color))
                 return $"#{color.ToLower()}";
 
-            if (CssColorHelper.IsCssColor(color))
+            if (CssColor.IsCssColor(color))
                 return color.ToLower();
 
             return null;

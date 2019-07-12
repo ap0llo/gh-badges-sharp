@@ -36,7 +36,7 @@ using System.Text.RegularExpressions;
 
 namespace GhBadgesSharp
 {
-    internal static class CssColorHelper
+    internal static class CssColor
     {
         private static readonly Regex s_HexPattern = new Regex("^#(?:[a-f0-9]{3})?(?:[a-f0-9]{3})$");
 

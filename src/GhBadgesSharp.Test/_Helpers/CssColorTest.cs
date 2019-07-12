@@ -70,7 +70,7 @@ namespace GhBadgesSharp.Test
         [InlineData("hsla(122, 200%, 222%, 1)", true)]
         public void IsCssColor_returns_expected_result(string value, bool expectedResult)
         {
-            Assert.Equal(expectedResult, CssColorHelper.IsCssColor(value));
+            Assert.Equal(expectedResult, CssColor.IsCssColor(value));
         }
     }
 }
