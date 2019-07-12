@@ -18,16 +18,16 @@
 
         public int LogoPadding { get; }
 
-        public string ColorA { get; }
+        public Color ColorA { get; }
 
-        public string ColorB { get; }
+        public Color ColorB { get; }
 
 
         public BadgeData(
             string leftText, string rightText,
             string leftLink, string rightLink,
             string logo, int? logoPosition, int? logoWidth, int logoPadding,
-            string colorA, string colorB)
+            Color colorA, Color colorB)
         {
             LeftText = leftText;
             RightText = rightText;

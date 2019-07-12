@@ -167,10 +167,7 @@ namespace GhBadgesSharp
             leftText = leftText.Trim();
             rightText = rightText.Trim();
 
-            color = Colors.NormalizeColor(color);
-            labelColor = Colors.NormalizeColor(labelColor);
-
-
+            
             //if (style.StartsWith("popout"))
             //{
             //    if (!String.IsNullOrEmpty(logo))
@@ -215,8 +212,8 @@ namespace GhBadgesSharp
                 logoPosition: logoPosition,
                 logoWidth: logoWidth,
                 logoPadding: logoPadding,
-                colorA: Colors.ToSvgColor(labelColor),
-                colorB: Colors.ToSvgColor(color)
+                colorA: Color.Get(labelColor),
+                colorB: Color.Get(color)
             );
 
             return GetViewModel(style, badgeData);
@@ -243,6 +240,7 @@ namespace GhBadgesSharp
             var context = new TemplateContext();
             context.MemberAccessStrategy.Register(viewModel.GetType());
             context.MemberAccessStrategy.Register(typeof(Point));
+            context.MemberAccessStrategy.Register(typeof(Color));
             context.SetValue("it", viewModel);
 
             var rendered = template.Render(context).Trim();

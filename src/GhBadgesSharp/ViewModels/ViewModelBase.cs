@@ -43,7 +43,7 @@ namespace GhBadgesSharp.ViewModels
         /// <summary>
         /// Gets the left/right colors for the badge
         /// </summary>
-        public IReadOnlyList<string> Colors { get; }
+        public IReadOnlyList<Color> Colors { get; }
 
 
         protected ViewModelBase(BadgeData badgeData)
@@ -58,7 +58,7 @@ namespace GhBadgesSharp.ViewModels
             Text = new[] { EscapeXml(m_LeftText), EscapeXml(m_RightText) };
 
             Links = new[] { NullIfEmptyString(badgeData.LeftLink), NullIfEmptyString(badgeData.RightLink) ?? NullIfEmptyString(badgeData.LeftLink) };
-            Colors = new[] { NullIfEmptyString(badgeData.ColorA), NullIfEmptyString(badgeData.ColorB) };
+            Colors = new[] { badgeData.ColorA, badgeData.ColorB };
         }
 
 

@@ -48,10 +48,10 @@ namespace GhBadgesSharp.ViewModels
             ImageWidth = m_Widths[0] + m_Widths[1];
 
             // value in original template: {{=it.escapeXml(it.text[0].length || it.logo && it.colorA ? (it.colorA||"#555") : (it.colorB||"#4c1"))}}
-            var fill1 = Text[0].Length > 0 || Logo != null && Colors[0] != null ? (Colors[0] ?? "#555") : (Colors[1] ?? "#4c1");
+            var fill1 = Text[0].Length > 0 || Logo != null && Colors[0] != null ? (Colors[0]?.SvgName ?? "#555") : (Colors[1]?.SvgName ?? "#4c1");
 
             // value in original template: {{=it.escapeXml(it.colorB||"#4c1")}}
-            var fill2 = Colors[1] ?? "#4c1";
+            var fill2 = Colors[1]?.SvgName ?? "#4c1";
             Fill = new[] { EscapeXml(fill1), EscapeXml(fill2) };
 
 

@@ -125,14 +125,11 @@
 // Link to original source code:
 // https://github.com/badges/shields/blob/c6ef885b7508d342963d0600d27282950d1e646b/gh-badges/lib/color.spec.js
 //
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Xunit;
 
 namespace GhBadgesSharp.Test
 {
-    public class ColorsTest
+    public class ColorTest
     {
         [Theory]
         [InlineData("f00bae", true)]
@@ -143,7 +140,7 @@ namespace GhBadgesSharp.Test
         [InlineData(null, false)]
         public void IsHexColor_returns_expected_result(string color, bool expectedResult)
         {
-            Assert.Equal(expectedResult, Colors.IsHexColor(color));
+            Assert.Equal(expectedResult, Color.IsHexColor(color));
         }
 
         [Theory]
@@ -158,9 +155,9 @@ namespace GhBadgesSharp.Test
         [InlineData("", null)]
         [InlineData("not-a-color", null)]
         [InlineData(null, null)]        
-        public void NormalizeColor_returns_expected_result(string color, string expectedResult)
+        public void Get_returns_expected_result(string color, string expectedResult)
         {
-            Assert.Equal(expectedResult, Colors.NormalizeColor(color));
+            Assert.Equal(expectedResult, Color.Get(color)?.Name);
         }
 
         [Theory]
@@ -177,9 +174,9 @@ namespace GhBadgesSharp.Test
         [InlineData("not-a-color", null)]
         [InlineData("lightgray", "#9f9f9f")]
         [InlineData("informational", "#007ec6")]
-        public void ToSvgColor_returns_expected_result(string color, string expectedResult)
+        public void SvgName_returns_expected_result(string color, string expectedResult)
         {
-            Assert.Equal(expectedResult, Colors.ToSvgColor(color));
+            Assert.Equal(expectedResult, Color.Get(color)?.SvgName);
         }
     }
 }

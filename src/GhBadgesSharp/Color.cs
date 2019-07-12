@@ -125,15 +125,15 @@
 // Link to original source code:
 // https://github.com/badges/shields/blob/c6ef885b7508d342963d0600d27282950d1e646b/gh-badges/lib/color.js
 //
+using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 namespace GhBadgesSharp
 {
-    internal static class Colors
+    internal sealed class Color
     {
         private static readonly Regex s_HexColorRegex = new Regex(@"(^([A-Fa-f0-9]{6})$)|(^[A-Fa-f0-9]{3}$)");
-
         private static readonly IReadOnlyDictionary<string, string> s_NamedColors = new Dictionary<string, string>()
         {
             { "brightgreen", "#4c1" },
@@ -146,7 +146,6 @@ namespace GhBadgesSharp
             { "grey", "#555" },
             { "lightgrey", "#9f9f9f" },
         };
-
         private static readonly IReadOnlyDictionary<string, string> s_Aliases = new Dictionary<string, string>()
         {
             { "gray", "grey" },
@@ -158,45 +157,55 @@ namespace GhBadgesSharp
             { "inactive", "lightgrey" },
         };
 
+        private readonly string m_NormalizedName;
 
-        public static string NormalizeColor(string color)
+        public string Name => m_NormalizedName;
+
+        public string SvgName => ToSvgColor(m_NormalizedName);
+
+
+        private Color(string normalizedName)
+        {
+            if (String.IsNullOrEmpty(normalizedName))
+                throw new System.ArgumentException("Value must not be null or empty", nameof(normalizedName));
+
+            m_NormalizedName = normalizedName;
+        }
+
+
+        public static Color Get(string color)
         {
             if (color == null)
                 return null;
 
             if (s_NamedColors.ContainsKey(color))
-                return color;
+                return new Color(color);
 
             if (s_Aliases.ContainsKey(color))
-                return s_Aliases[color];
+                return new Color(s_Aliases[color]);
 
             if (IsHexColor(color))
-                return $"#{color.ToLower()}";
+                return new Color($"#{color.ToLower()}");
 
             if (CssColor.IsCssColor(color))
-                return color.ToLower();
+                return new Color(color.ToLower());
 
             return null;
         }
 
-        public static string ToSvgColor(string value)
+        internal static string ToSvgColor(string value)
         {
-            var normalized = NormalizeColor(value);
-
-            if (normalized == null)
-                return null;
-
-            if (s_NamedColors.ContainsKey(normalized))
+            if (s_NamedColors.ContainsKey(value))
             {
-                return s_NamedColors[normalized];
+                return s_NamedColors[value];
             }
-            else if (s_Aliases.ContainsKey(normalized))
+            else if (s_Aliases.ContainsKey(value))
             {
-                return s_NamedColors[s_Aliases[normalized]];
+                return s_NamedColors[s_Aliases[value]];
             }
             else
             {
-                return normalized;
+                return value;
             }
         }
 
