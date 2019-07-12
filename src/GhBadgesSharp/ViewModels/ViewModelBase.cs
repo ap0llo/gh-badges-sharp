@@ -82,7 +82,7 @@ namespace GhBadgesSharp.ViewModels
             if (text == null)
                 return 0d;
 
-            var width = TextWidthHelper.GetWidth(text) / 10;
+            var width = TextWidth.Get(text) / 10;
 
             // Increase chances of pixel grid alignment.
             if (width % 2 == 0)

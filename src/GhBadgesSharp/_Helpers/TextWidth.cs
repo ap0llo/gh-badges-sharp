@@ -37,17 +37,17 @@ using Newtonsoft.Json;
 
 namespace GhBadgesSharp
 {
-    internal static class TextWidthHelper
+    internal static class TextWidth
     {
         private const string s_ResourceName = "GhBadgesSharp.Resources.widths.json";
 
         private static readonly object[][] s_Widths;
         private static readonly double s_DefaultWidth;
 
-        static TextWidthHelper()
+        static TextWidth()
         {            
             s_Widths = JsonConvert.DeserializeObject<object[][]>(ResourceHelper.LoadEmbeddedResource(s_ResourceName));
-            s_DefaultWidth = GetWidth("m");
+            s_DefaultWidth = Get("m");
         }
 
         private class BinarySearchComparer : IComparer
@@ -75,7 +75,7 @@ namespace GhBadgesSharp
             }
         }
 
-        public static double GetWidth(string text, bool guess = true)
+        public static double Get(string text, bool guess = true)
         {
             var width = 0.0;
             foreach (var c in text)

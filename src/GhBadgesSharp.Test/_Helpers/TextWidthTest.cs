@@ -37,14 +37,14 @@ using Xunit;
 
 namespace GhBadgesSharp.Test
 {
-    public class TextWidthHelperTest
+    public class TextWidthTest
     {
         [Theory]
         [InlineData("m", 106.99)]
         [InlineData("v1.2.511", 494.77)]
         public void BasicTest_1(string text, double expectedWidth)
         {
-            var actualWidth = TextWidthHelper.GetWidth(text);
+            var actualWidth = TextWidth.Get(text);
             Assert.InRange(actualWidth, expectedWidth - 0.1, expectedWidth + 0.1);
         }
 
@@ -54,7 +54,7 @@ namespace GhBadgesSharp.Test
         [InlineData(1014, 44.53)]
         public void BasicTest_2(int character, double expectedWidth)
         {
-            var actualWidth = TextWidthHelper.GetWidth($"{(char)character}");
+            var actualWidth = TextWidth.Get($"{(char)character}");
             Assert.Equal(actualWidth, expectedWidth);
         }
     }
