@@ -134,7 +134,6 @@ namespace GhBadgesSharp
 {
     public static class Badge
     {
-
         public static XElement MakeBadge(
             BadgeStyle style,
             string leftText,
@@ -237,7 +236,6 @@ namespace GhBadgesSharp
             return value.Substring(0, 1).ToUpper() + value.Substring(1);
         }
 
-
         private static XElement RenderBadge(ViewModelBase viewModel)
         {           
             var template = viewModel.GetTemplate();
@@ -253,8 +251,6 @@ namespace GhBadgesSharp
             return svg;
 
         }
-
-
 
         private static ViewModelBase GetViewModel(BadgeStyle style, BadgeData data)
         {
@@ -272,8 +268,6 @@ namespace GhBadgesSharp
                 default:
                     throw new ArgumentException($"Unknown {nameof(BadgeStyle)} '{style}'");
             }
-
         }
-       
     }
 }

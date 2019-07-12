@@ -1,6 +1,6 @@
 ﻿namespace GhBadgesSharp
 {
-    public class BadgeData
+    internal class BadgeData
     {
         public string LeftText { get; }
 
