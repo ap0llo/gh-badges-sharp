@@ -36,8 +36,6 @@ namespace GhBadgesSharp
             }
         }
 
-        public static bool TemplateExists(string name) => s_Templates.ContainsKey(name);
-
         public static FluidTemplate GetTemplate(string name)
         {
             if (name == null)

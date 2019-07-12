@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace GhBadgesSharp
+﻿namespace GhBadgesSharp
 {
     public enum BadgeStyle
     {

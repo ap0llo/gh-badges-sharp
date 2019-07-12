@@ -31,17 +31,19 @@ namespace GhBadgesSharp.ViewModels
         /// <summary>
         /// Gets the badge's logo
         /// </summary>
-        public string Logo { get; }
+        public string Logo => EscapeXml(NullIfEmptyString(m_BadgeData.Logo));
 
         /// <summary>
         /// Gets the width of the badge's logo
         /// </summary>
-        public int LogoWidth { get; }
+        public int LogoWidth => m_BadgeData.LogoWidth ?? 0;
 
         /// <summary>
         /// Gets the padding of the badge's logo
         /// </summary>
-        public int LogoPadding { get; }
+        public int LogoPadding => m_BadgeData.LogoPadding;
+
+        public int? LogoPosition => m_BadgeData.LogoPosition;
 
         /// <summary>
         /// Gets the left/right colors for the badge
@@ -63,10 +65,6 @@ namespace GhBadgesSharp.ViewModels
 
             Links = new[] { NullIfEmptyString(badgeData.LeftLink), NullIfEmptyString(badgeData.RightLink) ?? NullIfEmptyString(badgeData.LeftLink) };
             Colors = new[] { NullIfEmptyString(badgeData.ColorA), NullIfEmptyString(badgeData.ColorB) };
-
-            Logo = NullIfEmptyString(m_BadgeData.Logo);
-            LogoWidth = m_BadgeData.LogoWidth ?? 0;
-            LogoPadding = m_BadgeData.LogoPadding;
         }
 
 
