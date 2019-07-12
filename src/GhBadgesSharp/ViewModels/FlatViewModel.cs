@@ -59,7 +59,7 @@ namespace GhBadgesSharp.ViewModels
             var x1 = (((Widths[0] + LogoWidth + LogoPadding) / 2) + 1) * 10;
 
             // value in original template: {{=(it.widths[0]+it.widths[1]/2-(it.text[0].length ? 1 : 0 ))*10}}
-            var x2 = (Widths[0] + (Widths[1] / 2) - (TextLength[0] > 0 ? 1 : 0)) * 10;
+            var x2 = (Widths[0] + (Widths[1] / 2) - (Text[0] != null ? 1 : 0)) * 10;
 
             TextPosition = new[] { new Point(x1, 0), new Point(x2, 0) };
 

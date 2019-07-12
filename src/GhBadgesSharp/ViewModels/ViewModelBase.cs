@@ -19,11 +19,6 @@ namespace GhBadgesSharp.ViewModels
         public IReadOnlyList<string> Text { get; }
 
         /// <summary>
-        /// Gets the length (number of characters) of the left/right text elements
-        /// </summary>
-        public IReadOnlyList<int> TextLength { get; }
-
-        /// <summary>
         /// Gets the left/right link
         /// </summary>
         public IReadOnlyList<string> Links { get; }
@@ -60,7 +55,6 @@ namespace GhBadgesSharp.ViewModels
             m_LeftTextWidth = GetTextWidth(m_LeftText);
             m_RightTextWidth = GetTextWidth(m_RightText);
 
-            TextLength = new[] { m_LeftText?.Length ?? 0, m_RightText?.Length ?? 0 };
             Text = new[] { EscapeXml(m_LeftText), EscapeXml(m_RightText) };
 
             Links = new[] { NullIfEmptyString(badgeData.LeftLink), NullIfEmptyString(badgeData.RightLink) ?? NullIfEmptyString(badgeData.LeftLink) };

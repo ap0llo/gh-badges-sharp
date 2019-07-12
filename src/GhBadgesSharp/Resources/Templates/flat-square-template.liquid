@@ -13,7 +13,7 @@ Ported from https://github.com/badges/shields/blob/66c7f13e38c76bfdbdb96107bc92e
       <image x="5" y="3" width="{{ it.LogoWidth}}" height="14" xlink:href="{{ it.Logo }}"/>
     {% endif %}
 
-    {% if it.TextLength[0] > 0 %}
+    {% if it.Text[0] %}
       <text x="{{ it.TextPosition[0].X }}" y="140" transform="scale(0.1)" textLength="{{ it.TextWidth[0] }}" lengthAdjust="spacing">{{ it.Text[0] }}</text>
     {% endif %}
 

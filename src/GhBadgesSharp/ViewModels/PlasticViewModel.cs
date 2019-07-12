@@ -43,12 +43,12 @@ namespace GhBadgesSharp.ViewModels
             // original template:
             //  ImageWidth { {=(it.widths[0] -= it.text[0].length ? 0 : (it.logo ? (it.colorA ? 0 : 7) : 11))+it.widths[1]}}
             //  widths: [leftWidth + 10 + logoWidth + logoPadding, rightWidth + 10]
-            m_Widths[0] = (m_LeftTextWidth + 10 + LogoWidth + LogoPadding) - ((TextLength[0] > 0) ? 0 : (Logo != null ? (Colors[0] != null ? 0 : 7) : 11));
+            m_Widths[0] = (m_LeftTextWidth + 10 + LogoWidth + LogoPadding) - ((Text[0] != null) ? 0 : (Logo != null ? (Colors[0] != null ? 0 : 7) : 11));
             m_Widths[1] = m_RightTextWidth + 10;
             ImageWidth = m_Widths[0] + m_Widths[1];
 
             // value in original template: {{=it.escapeXml(it.text[0].length || it.logo && it.colorA ? (it.colorA||"#555") : (it.colorB||"#4c1"))}}
-            var fill1 = TextLength[0] > 0 || Logo != null && Colors[0] != null ? (Colors[0] ?? "#555") : (Colors[1] ?? "#4c1");
+            var fill1 = Text[0] != null || Logo != null && Colors[0] != null ? (Colors[0] ?? "#555") : (Colors[1] ?? "#4c1");
 
             // value in original template: {{=it.escapeXml(it.colorB||"#4c1")}}
             var fill2 = Colors[1] ?? "#4c1";
@@ -60,7 +60,7 @@ namespace GhBadgesSharp.ViewModels
             var x1 = (((Widths[0] + LogoWidth + LogoPadding) / 2) + 1) * 10;
 
             // value in original template. {{=(it.widths[0]+it.widths[1]/2-(it.text[0].length ? 1 : 0))*10}}
-            var x2 = (Widths[0] + (Widths[1] / 2) - (TextLength[0] > 0 ? 1 : 0)) * 10;
+            var x2 = (Widths[0] + (Widths[1] / 2) - (Text[0] != null ? 1 : 0)) * 10;
 
             TextPosition = new[] { new Point(x1, 0), new Point(x2, 0) };
 
