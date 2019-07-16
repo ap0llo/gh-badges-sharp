@@ -37,8 +37,9 @@ namespace GhBadgesSharp.ViewModels
         public IReadOnlyList<double> TextWidth { get; }
 
 
-        public ForTheBadgeViewModel(BadgeData badgeData) : base(badgeData)
+        public ForTheBadgeViewModel(BadgeData badgeData) : base(badgeData, badgeData.LeftText?.ToUpper(), badgeData.RightText?.ToUpper())
         {
+        
             m_Widths = new double[2];
 
             // ImageWidth (it.widths[0] -= it.text[0].length ? -(10+(it.text[0].length*1.5)) : (it.logo ? (it.colorA ? -7 : 7) : 11))+(it.widths[1]+=(10+(it.text[1].length*2)))

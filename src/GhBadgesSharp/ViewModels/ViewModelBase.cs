@@ -40,14 +40,17 @@ namespace GhBadgesSharp.ViewModels
 
 
 
-        protected ViewModelBase(BadgeData badgeData)
+        protected ViewModelBase(BadgeData badgeData, string leftTextOverride = null, string rightTextOverride = null)
         {
             m_BadgeData = badgeData ?? throw new ArgumentNullException(nameof(badgeData));
 
-            m_LeftTextWidth = GetTextWidth(m_BadgeData.LeftText);
-            m_RightTextWidth = GetTextWidth(m_BadgeData.RightText);
+            var leftText = leftTextOverride ?? badgeData.LeftText;
+            var rightText = rightTextOverride ?? badgeData.RightText;
 
-            Text = new[] { EscapeXml(m_BadgeData.LeftText), EscapeXml(m_BadgeData.RightText) };
+            m_LeftTextWidth = GetTextWidth(leftText);
+            m_RightTextWidth = GetTextWidth(rightText);
+
+            Text = new[] { EscapeXml(leftText), EscapeXml(rightText) };
 
             Links = new[] { NullIfEmptyString(badgeData.LeftLink), NullIfEmptyString(badgeData.RightLink) ?? NullIfEmptyString(badgeData.LeftLink) };
         }

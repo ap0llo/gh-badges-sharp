@@ -188,12 +188,6 @@ namespace GhBadgesSharp
             //{
             //    leftText = Capitalize(leftText);
             //}
-            // TODO: Move to ViewModel
-            if (style == BadgeStyle.ForTheBadge)
-            {
-                leftText = leftText.ToUpper();
-                rightText = rightText.ToUpper();
-            }
 
             logoWidth = logoWidth ?? (logo != null ? 14 : 0);
 
