@@ -1,0 +1,29 @@
+﻿{% comment %}
+Ported from https://github.com/badges/shields/blob/66c7f13e38c76bfdbdb96107bc92e607b3dd5acc/gh-badges/templates/for-the-badge-template.svg
+{% endcomment %}
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="{{ it.ImageWidth }}" height="28">
+    <g shape-rendering="crispEdges">
+      <rect width="{{ it.Widths[0] }}" height="28" fill="{{ it.Fill[0] }}"/>
+      <rect x="{{ it.Widths[0]}}" width="{{ it.Widths[1] }}" height="28" fill="{{ it.Fill[1] }}"/>
+    </g>
+    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="100">
+      {% if it.Logo %}
+        <image x="9" y="7" width="{{ it.LogoWidth }}" height="14" xlink:href="{{ it.Logo}}"/>
+      {% endif %}
+      {% if it.Text[0] %}
+        <text x="{{ it.TextPosition[0].X }}" y="175" transform="scale(0.1)" textLength="{{ it.TextWidth[0] }}" lengthAdjust="spacing">{{ it.Text[0] }}</text>
+      {% endif %}
+      <text x="{{ it.TextPosition[1].X }}" y="175" font-weight="bold" transform="scale(0.1)" textLength="{{ it.TextWidth[1] }}" lengthAdjust="spacing">{{ it.Text[1] }}</text>
+    </g>
+    {% if it.Text[0] and it.Links[0] %}
+      <a target="_blank" xlink:href="{{ it.Links[0] }}">
+        <rect width="{{ it.Widths[0] }}" height="28" fill="rgba(0,0,0,0)"/>
+      </a>
+    {% endif %}
+    {% if it.Links[1] %}
+      <a target="_blank" xlink:href="{{ it.Links[1]  }}">
+        <rect x="{{ it.Widths[0] }}" width="{{ it.Widths[1] }}" height="28" fill="rgba(0,0,0,0)"/>
+      </a>
+    {% endif %}
+  </svg>
+  

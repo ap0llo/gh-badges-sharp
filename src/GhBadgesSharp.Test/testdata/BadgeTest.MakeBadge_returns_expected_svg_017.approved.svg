@@ -1,0 +1,16 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="135.407" height="28">
+  <g shape-rendering="crispEdges">
+    <rect width="63.626" height="28" fill="#555" />
+    <rect x="63.626" width="71.781" height="28" fill="#dfb317" />
+  </g>
+  <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="100">
+    <text x="318.13" y="175" transform="scale(0.1)" textLength="396.26" lengthAdjust="spacing">HELLO</text>
+    <text x="995.165" y="175" font-weight="bold" transform="scale(0.1)" textLength="477.81" lengthAdjust="spacing">WORLD</text>
+  </g>
+  <a target="_blank" xlink:href="http://example.com">
+    <rect width="63.626" height="28" fill="rgba(0,0,0,0)" />
+  </a>
+  <a target="_blank" xlink:href="http://example.com">
+    <rect x="63.626" width="71.781" height="28" fill="rgba(0,0,0,0)" />
+  </a>
+</svg>

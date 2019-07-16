@@ -4,6 +4,7 @@
     {
         Flat,
         FlatSquare,
-        Plastic
+        Plastic,
+        ForTheBadge
     }
 }

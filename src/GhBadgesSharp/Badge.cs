@@ -163,11 +163,14 @@ namespace GhBadgesSharp
                 string leftLink = null,
                 string rightLink = null)
         {
-            
+
+            leftText = leftText ?? "";
+            rightText = rightText ?? "";
+
             leftText = leftText.Trim();
             rightText = rightText.Trim();
 
-            
+
             //if (style.StartsWith("popout"))
             //{
             //    if (!String.IsNullOrEmpty(logo))
@@ -185,11 +188,12 @@ namespace GhBadgesSharp
             //{
             //    leftText = Capitalize(leftText);
             //}
-            //else if (style == "for-the-badge")
-            //{
-            //    leftText = leftText.ToUpper();
-            //    rightText = rightText.ToUpper();
-            //}
+            // TODO: Move to ViewModel
+            if (style == BadgeStyle.ForTheBadge)
+            {
+                leftText = leftText.ToUpper();
+                rightText = rightText.ToUpper();
+            }
 
             logoWidth = logoWidth ?? (logo != null ? 14 : 0);
 
@@ -262,6 +266,9 @@ namespace GhBadgesSharp
 
                 case BadgeStyle.Plastic:
                     return new PlasticViewModel(data);
+
+                case BadgeStyle.ForTheBadge:
+                    return new ForTheBadgeViewModel(data);
 
                 default:
                     throw new ArgumentException($"Unknown {nameof(BadgeStyle)} '{style}'");
