@@ -170,7 +170,7 @@ jobs:
   dependsOn: 
   - Build_and_Test
   - Publish_to_NuGet_org
-  condition: succeeded('Publish_to_NuGet_org')
+  condition: succeeded('Publish_to_GitHubPackageRegistry')
   steps:
 
   # Install .NET Core SDK (version specified in the variables section)
@@ -202,12 +202,12 @@ jobs:
     inputs:
       gitHubConnection: $(github_ServiceConnectionName)
       repositoryName: $(github_repositoryName)
-      action: 'create'
+      action: edit
       target: '$(Build.SourceVersion)'
       tagSource: manual
       tag: v$(Build.BuildNumber)
       releaseNotesSource: input
-      releaseNotes: 'Automatic release by Azure DevOps. Package available on [NuGet.org](https://www.nuget.org/packages/$(nuget_org_PackageName)/$(Build.BuildNumber))'
+      releaseNotes: 'Automatic release by Azure DevOps.'
       assets: $(Build.ArtifactStagingDirectory)/$(artifactsName)/*.nupkg
       addChangeLog: true
       
