@@ -151,7 +151,7 @@ jobs:
       releaseNotesSource: input
       releaseNotes: 'Automatic release by Azure DevOps.'
       addChangeLog: true
-      isPreRelease: contains('$(Build.BuildNumber)', '-')    
+      isPreRelease: contains(variables['Build.BuildNumber'], '-')    
 
 # Job to push package to NuGet.org after build (only for builds of release branches)
 - job: Publish_to_NuGet_org
