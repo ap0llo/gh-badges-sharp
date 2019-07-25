@@ -119,8 +119,16 @@ jobs:
       command: custom
       custom: tool
       arguments: install --tool-path . nbgv
+
   - script: nbgv cloud
     displayName: Set Version
+
+  - powershell: |
+      $buildNumber = $env:BUILD_BUILDNUMBER
+      $isPrerelease = $buildNumber.Contains("-")
+      echo "isPrerelease = $isPrerelease"
+      echo "##vso[task.setvariable variable=isPrerelease]$isPrerelease"
+    name: setVars
 
   # Get artifacts
   - task: DownloadBuildArtifacts@0
@@ -144,7 +152,7 @@ jobs:
       releaseNotesSource: input
       releaseNotes: 'Automatic release by Azure DevOps.'
       addChangeLog: true
-      isPreRelease: contains(variables['Build.BuildNumber'], '-')    
+      isPreRelease: $(setVars.isPrerelease)
 
   # Upload to GitHub Package registry
   - task: NuGetCommand@2
