@@ -3,10 +3,10 @@
 #   - Builds the project
 #   - Runs all the tests
 #   - creates a NuGet package
-# - Publish_to_MyGet: 
-#   - Pushes the NuGet package to MyGet 
-#   - Assumes a Service Connection for MyGet was set up in the Team project running the pipeline
-#   - The name of the service connection is stored in the variable myget_ServiceConnectionName (defined below)
+# - Publish_to_GitHubPackageRegistry: 
+#   - Pushes the NuGet package to the GitHub package registry 
+#   - Assumes a Service Connection was set up in the Team project running the pipeline
+#   - The name of the service connection is stored in the variable gitHubPackageRegistry_ServiceConnectionName (defined below)
 #   - Only runs when building a release branch or the master branch
 # -Publish_to_NuGet_org
 #   - Pushes the NuGet package to NuGet.org 
@@ -31,16 +31,16 @@ variables:
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE : true    # do not populate NuGet caches on build agents (VM will be deleted afterwards anyways)
   configuration: Release                      # the configuration (Debug/Release) to build
   dotNetSdk_Version: 2.1.505                  # the version of the .NET SDK to use
-  solutionPath : src/PROJECTNAME.sln          # The path of the solution to be buildt
+  solutionPath : src/GhBadgesSharp.sln        # The path of the solution to be buildt
   artifactsName: drop
-  # MyGet.org settings   
-  myget_ServiceConnectionName: 'TODO'                       # the name of the Azure DevOps service connection to use for MyGet.org
+  # GitHub package registry settings   
+  gitHubPackageRegistry_ServiceConnectionName: 'GitHub Package Registry - gh-badges-sharp'  # the name of the Azure DevOps service connection to use for GitHub Package registry
   # NuGet.org settings
-  nuget_org_ServiceConnectionName: 'TODO'                   # the name of the Azure DevOps service connection to use for NuGet.org
-  nuget_org_PackageName: 'TODO'                             # the name of the package being published
+  nuget_org_ServiceConnectionName: 'TODO'                                                   # the name of the Azure DevOps service connection to use for NuGet.org
+  nuget_org_PackageName: 'TODO'                                                             # the name of the package being published
   # GitHub settings
-  github_ServiceConnectionName: 'TODO'                      # the name of the Azure DevOps service connection to use for creating GitHub releases
-  github_repositoryName: 'TODO'                             # the name of the github repo to create the release in
+  github_ServiceConnectionName: 'GitHub: ap0llo'                                            # the name of the Azure DevOps service connection to use for creating GitHub releases
+  github_repositoryName: 'ap0llo/gh-badges-sharp'                                           # the name of the github repo to create the release in
 
 jobs:
 
@@ -95,8 +95,8 @@ jobs:
     inputs:
       artifactName: $(artifactsName)
 
-# Job to push package to MyGet.org after build
-- job: Publish_to_MyGet
+# Job to push package to GitHub package registry after build
+- job: Publish_to_GitHubPackageRegistry
   pool: Hosted VS2017
   # Only run after main build job and only if the current branch is master or a release branch
   dependsOn: Build_and_Test
@@ -110,13 +110,13 @@ jobs:
       downloadType: single
       artifactName: $(artifactsName)
       downloadPath: $(Build.ArtifactStagingDirectory)
-  # Upload to MyGet.org
+  # Upload to GitHub Package registry
   - task: NuGetCommand@2
     displayName: "Upload package"
     inputs:
       command: push
       nugetFeedType: external
-      publishFeedCredentials: $(myget_ServiceConnectionName)
+      publishFeedCredentials: $(gitHubPackageRegistry_ServiceConnectionName)
 
 # Job to push package to NuGet.org after build (only for builds of release branches)
 - job: Publish_to_NuGet_org
@@ -205,5 +205,4 @@ jobs:
       releaseNotes: 'Automatic release by Azure DevOps. Package available on [NuGet.org](https://www.nuget.org/packages/$(nuget_org_PackageName)/$(Build.BuildNumber))'
       assets: $(Build.ArtifactStagingDirectory)/$(artifactsName)/*.nupkg
       addChangeLog: true
-
       
