@@ -112,7 +112,7 @@ jobs:
       version: $(dotNetSdk_Version)
 
   # Set the build number (utilizes Nerdbank.GitVersioning). 
-  # This step is necessary as $(Build.BuildNumber) is used as name of the GitHub release
+  # This step is necessary as the version is requried for creating teh GitHub release
   - task: DotNetCoreCLI@2
     displayName: Install NBGV tool    
     inputs:
@@ -124,10 +124,15 @@ jobs:
     displayName: Set Version
 
   - powershell: |
-      $buildNumber = $env:BUILD_BUILDNUMBER
-      $isPrerelease = $buildNumber.Contains("-")
-      echo "isPrerelease = $isPrerelease"
-      echo "##vso[task.setvariable variable=isPrerelease]$isPrerelease"
+      function Set-Var($name, $value) {
+        echo "Setting variable '$name' to '$value'"
+        echo "##vso[task.setvariable variable=$name]$value"
+      }
+
+      $json = Invoke-Expression ".\nbgv get-version --format json" | Out-String
+      $versionInfo = ConvertFrom-Json $json
+      Set-Var "VersionInfo.IsPrerelease" (![String]::IsNullOrEmpty($versionInfo.PrereleaseVersion))
+      Set-Var "VersionInfo.Version" ($versionInfo.NuGetPackageVersion)
     displayName: 'Set Version variables'
 
   # Get artifacts
@@ -145,14 +150,14 @@ jobs:
       gitHubConnection: $(github_ServiceConnectionName)
       repositoryName: $(github_repositoryName)
       action: create
-      target: '$(Build.SourceVersion)'
+      target: $(Build.SourceVersion)
       tagSource: manual
-      title: '$(Build.BuildNumber)'
-      tag: $(Build.BuildNumber)
+      title: $(VersionInfo.Version)
+      tag: $(VersionInfo.Version)
       releaseNotesSource: input
       releaseNotes: 'Automatic release by Azure DevOps.'
       addChangeLog: true
-      isPreRelease: $(isPrerelease) 
+      isPreRelease: $(VersionInfo.IsPrerelease) 
 
   # Upload to GitHub Package registry
   - task: NuGetCommand@2
