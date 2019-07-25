@@ -36,8 +36,8 @@ variables:
   # GitHub package registry settings   
   gitHubPackageRegistry_ServiceConnectionName: 'GitHub Package Registry - gh-badges-sharp'  # the name of the Azure DevOps service connection to use for GitHub Package registry
   # NuGet.org settings
-  nuget_org_ServiceConnectionName: 'TODO'                                                   # the name of the Azure DevOps service connection to use for NuGet.org
-  nuget_org_PackageName: 'TODO'                                                             # the name of the package being published
+  nuget_org_ServiceConnectionName: 'NuGet.org - gh-badges-sharp'                            # the name of the Azure DevOps service connection to use for NuGet.org
+  nuget_org_PackageName: 'Grynwald.GhBadgesSharp'                                           # the name of the package being published
   # GitHub settings
   github_ServiceConnectionName: 'GitHub: ap0llo'                                            # the name of the Azure DevOps service connection to use for creating GitHub releases
   github_repositoryName: 'ap0llo/gh-badges-sharp'                                           # the name of the github repo to create the release in
