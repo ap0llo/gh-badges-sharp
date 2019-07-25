@@ -128,7 +128,7 @@ jobs:
       $isPrerelease = $buildNumber.Contains("-")
       echo "isPrerelease = $isPrerelease"
       echo "##vso[task.setvariable variable=isPrerelease]$isPrerelease"
-    name: setVars
+    displayName: 'Set Version variables'
 
   # Get artifacts
   - task: DownloadBuildArtifacts@0
@@ -139,12 +139,8 @@ jobs:
       artifactName: $(artifactsName)
       downloadPath: $(Build.ArtifactStagingDirectory)
 
-  - script: echo isPrerelease = $(isPrerelease)
-    name: echoVars
-
-  # Update the implicitly created release
+  # Create a GitHub release for the build
   - task: GithubRelease@0
-    condition: eq(variables['isPrerelease'], True)
     inputs:
       gitHubConnection: $(github_ServiceConnectionName)
       repositoryName: $(github_repositoryName)
@@ -156,22 +152,7 @@ jobs:
       releaseNotesSource: input
       releaseNotes: 'Automatic release by Azure DevOps.'
       addChangeLog: true
-      isPreRelease: true    
-
-  - task: GithubRelease@0
-    condition: eq(variables['isPrerelease'], False)
-    inputs:
-      gitHubConnection: $(github_ServiceConnectionName)
-      repositoryName: $(github_repositoryName)
-      action: create
-      target: '$(Build.SourceVersion)'
-      tagSource: manual
-      title: '$(Build.BuildNumber)'
-      tag: $(Build.BuildNumber)
-      releaseNotesSource: input
-      releaseNotes: 'Automatic release by Azure DevOps.'
-      addChangeLog: true
-      isPreRelease: false  
+      isPreRelease: $(isPrerelease) 
 
   # Upload to GitHub Package registry
   - task: NuGetCommand@2
