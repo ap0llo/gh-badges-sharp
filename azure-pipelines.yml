@@ -17,9 +17,6 @@
 #     - 'auto' or empty: Run when building a release branch
 #     - 'false': Do not run
 #     - 'true': Rn regardless of the current branch
-# - Create_GitHub_Release
-#   - Creates a GitHub release for the build
-#   - Only runs if the build was published to NuGet.org
 
 trigger:
 - master
@@ -101,12 +98,30 @@ jobs:
       artifactName: $(artifactsName)
 
 # Job to push package to GitHub package registry after build
-- job: Publish_to_GitHubPackageRegistry
+- job: Publish_to_GitHub
   pool: Hosted VS2017
   # Only run after main build job and only if the current branch is master or a release branch
   dependsOn: Build_and_Test
   condition: and(succeeded('Build_and_Test'), or(eq(variables['build.sourceBranch'], 'refs/heads/master'), startsWith(variables['Build.SourceBranch'], 'refs/heads/release/') ))
   steps:
+
+  # Install .NET Core SDK (version specified in the variables section)
+  - task: DotNetCoreInstaller@0
+    displayName: Install .NET Core SDK
+    inputs:
+      version: $(dotNetSdk_Version)
+
+  # Set the build number (utilizes Nerdbank.GitVersioning). 
+  # This step is necessary as $(Build.BuildNumber) is used as name of the GitHub release
+  - task: DotNetCoreCLI@2
+    displayName: Install NBGV tool    
+    inputs:
+      command: custom
+      custom: tool
+      arguments: install --tool-path . nbgv
+  - script: nbgv cloud
+    displayName: Set Version
+
   # Get artifacts
   - task: DownloadBuildArtifacts@0
     displayName: 'Download Build Artifacts'
@@ -115,6 +130,7 @@ jobs:
       downloadType: single
       artifactName: $(artifactsName)
       downloadPath: $(Build.ArtifactStagingDirectory)
+
   # Upload to GitHub Package registry
   - task: NuGetCommand@2
     displayName: "Upload package"
@@ -122,6 +138,20 @@ jobs:
       command: push
       nugetFeedType: external
       publishFeedCredentials: $(gitHubPackageRegistry_ServiceConnectionName)
+
+  # Update the implicitly created release
+  - task: GithubRelease@0
+    inputs:
+      gitHubConnection: $(github_ServiceConnectionName)
+      repositoryName: $(github_repositoryName)
+      action: edit
+      target: '$(Build.SourceVersion)'
+      tagSource: manual
+      tag: $(Build.BuildNumber)
+      releaseNotesSource: input
+      releaseNotes: 'Automatic release by Azure DevOps.'
+      addChangeLog: true
+      isPreRelease: contains('$(Build.BuildNumber)', '-')    
 
 # Job to push package to NuGet.org after build (only for builds of release branches)
 - job: Publish_to_NuGet_org
@@ -162,52 +192,3 @@ jobs:
       command: push
       nugetFeedType: external
       publishFeedCredentials: $(nuget_org_ServiceConnectionName)
-
-# Job to create a GitHub release (only if a package was uploaded to NuGet.org)
-- job: Create_GitHub_Release
-  pool: Hosted VS2017
-  # Only run if build was successful and a package was uploaded to nuget.org
-  dependsOn: 
-  - Build_and_Test
-  - Publish_to_GitHubPackageRegistry
-  condition: succeeded('Publish_to_GitHubPackageRegistry')
-  steps:
-
-  # Install .NET Core SDK (version specified in the variables section)
-  - task: DotNetCoreInstaller@0
-    displayName: Install .NET Core SDK
-    inputs:
-      version: $(dotNetSdk_Version)
-
-  # Set the build number (utilizes Nerdbank.GitVersioning). 
-  # This step is necessary as $(Build.BuildNumber) is used as name of the GitHub release
-  - task: DotNetCoreCLI@2
-    displayName: Install NBGV tool    
-    inputs:
-      command: custom
-      custom: tool
-      arguments: install --tool-path . nbgv
-  - script: nbgv cloud
-    displayName: Set Version
-
-  # Get build artifacts and create a GitHub release
-  - task: DownloadBuildArtifacts@0
-    displayName: 'Download Build Artifacts'
-    inputs: 
-      buildType: current
-      downloadType: single
-      artifactName: $(artifactsName)
-      downloadPath: $(Build.ArtifactStagingDirectory)
-  - task: GithubRelease@0
-    inputs:
-      gitHubConnection: $(github_ServiceConnectionName)
-      repositoryName: $(github_repositoryName)
-      action: edit
-      target: '$(Build.SourceVersion)'
-      tagSource: manual
-      tag: $(Build.BuildNumber)
-      releaseNotesSource: input
-      releaseNotes: 'Automatic release by Azure DevOps.'
-      addChangeLog: true
-      isPreRelease: contains('$(Build.BuildNumber)', '-')
-      
