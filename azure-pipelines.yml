@@ -101,7 +101,9 @@ jobs:
 - job: Publish_to_GitHub
   pool: Hosted VS2017
   # Only run after main build job and only if the current branch is master or a release branch
-  dependsOn: Build_and_Test
+  dependsOn: 
+    - Build_and_Test
+    - Publish_to_NuGet_org
   condition: and(succeeded('Build_and_Test'), or(eq(variables['build.sourceBranch'], 'refs/heads/master'), startsWith(variables['Build.SourceBranch'], 'refs/heads/release/') ))
   steps:
 
@@ -144,6 +146,29 @@ jobs:
       artifactName: $(artifactsName)
       downloadPath: $(Build.ArtifactStagingDirectory)
 
+  - powershell: |
+      function Set-Var($name, $value) {
+        echo "Setting variable '$name' to '$value'"
+        echo "##vso[task.setvariable variable=$name]$value"
+      }      
+
+      Set-Var "GitHub.ReleaseNotes" "Automatic release created by Azure DevOps."
+    displayName: 'Set Release Notes'
+
+  - powershell: |
+      function Set-Var($name, $value) {
+        echo "Setting variable '$name' to '$value'"
+        echo "##vso[task.setvariable variable=$name]$value"
+      } 
+
+      $releaseNotes = $env:GITHUB_RELEASENOTES
+      $releaseNotes += "`r`n"
+      $releaseNotes += "`r`n"
+      $releaseNotes += "Package is also available on [NuGet.org](https://www.nuget.org/packages/$(nuget_org_PackageName)/$(VersionInfo.Version))"
+      Set-Var "GitHub.ReleaseNotes" $releaseNotes
+    displayName: 'Add NuGet.org link to Release notes'
+    condition: succeeded('Publish_to_NuGet_org')
+
   # Create a GitHub release for the build
   - task: GithubRelease@0
     inputs:
@@ -155,7 +180,7 @@ jobs:
       title: $(VersionInfo.Version)
       tag: $(VersionInfo.Version)
       releaseNotesSource: input
-      releaseNotes: 'Automatic release by Azure DevOps.'
+      releaseNotes: $(GitHub.ReleaseNotes)
       addChangeLog: true
       isPreRelease: $(VersionInfo.IsPrerelease) 
 
