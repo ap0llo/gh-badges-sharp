@@ -49,6 +49,11 @@ jobs:
   pool: Hosted VS2017
   steps:
 
+  # Check out git submodules
+  - checkout: self
+    clean: all
+    submodules: 'true'
+
   # Install .NET Core SDK (version specified in the variables section)
   - task: DotNetCoreInstaller@0
     displayName: Install .NET Core SDK
