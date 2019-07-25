@@ -141,7 +141,7 @@ jobs:
 
   # Update the implicitly created release
   - task: GithubRelease@0
-    condition: $(setVars.isPrerelease)
+    condition: variables['setVars.isPrerelease']
     inputs:
       gitHubConnection: $(github_ServiceConnectionName)
       repositoryName: $(github_repositoryName)
@@ -156,7 +156,7 @@ jobs:
       isPreRelease: true    
 
   - task: GithubRelease@0
-    condition: not($(setVars.isPrerelease))
+    condition: not(variables['setVars.isPrerelease'])
     inputs:
       gitHubConnection: $(github_ServiceConnectionName)
       repositoryName: $(github_repositoryName)
