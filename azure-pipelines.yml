@@ -104,6 +104,8 @@ jobs:
   dependsOn: 
     - Build_and_Test
     - Publish_to_NuGet_org
+  variables:
+      UploadedToNuGetOrg: $[dependencies.Publish_to_NuGet_org.outputs['setVars.Uploaded']]
   condition: and(succeeded('Build_and_Test'), or(eq(variables['build.sourceBranch'], 'refs/heads/master'), startsWith(variables['Build.SourceBranch'], 'refs/heads/release/') ))
   steps:
 
@@ -114,7 +116,7 @@ jobs:
       version: $(dotNetSdk_Version)
 
   # Set the build number (utilizes Nerdbank.GitVersioning). 
-  # This step is necessary as the version is requried for creating teh GitHub release
+  # This step is necessary as the version is requried for creating the GitHub release
   - task: DotNetCoreCLI@2
     displayName: Install NBGV tool    
     inputs:
@@ -152,22 +154,19 @@ jobs:
         echo "##vso[task.setvariable variable=$name]$value"
       }      
 
-      Set-Var "GitHub.ReleaseNotes" "Automatic release created by Azure DevOps."
+      $releaseNotes = "Automatic release created by Azure DevOps."
+
+      $uploadedToNuGetOrg = [bool]$env:UploadedToNuGetOrg
+
+      if($uploadedToNuGetOrg) {
+        $releaseNotes += "`r`n"
+        $releaseNotes += "`r`n"
+        $releaseNotes += "Package is also available on [NuGet.org](https://www.nuget.org/packages/$(nuget_org_PackageName)/$(VersionInfo.Version))"
+        $releaseNotes += "`r`n"
+      }
+
+      Set-Var "GitHub.ReleaseNotes" $releaseNotes 
     displayName: 'Set Release Notes'
-
-  - powershell: |
-      function Set-Var($name, $value) {
-        echo "Setting variable '$name' to '$value'"
-        echo "##vso[task.setvariable variable=$name]$value"
-      } 
-
-      $releaseNotes = $env:GITHUB_RELEASENOTES
-      $releaseNotes += "`r`n"
-      $releaseNotes += "`r`n"
-      $releaseNotes += "Package is also available on [NuGet.org](https://www.nuget.org/packages/$(nuget_org_PackageName)/$(VersionInfo.Version))"
-      Set-Var "GitHub.ReleaseNotes" $releaseNotes
-    displayName: 'Add NuGet.org link to Release notes'
-    condition: succeeded('Publish_to_NuGet_org')
 
   # Create a GitHub release for the build
   - task: GithubRelease@0
@@ -231,3 +230,7 @@ jobs:
       command: push
       nugetFeedType: external
       publishFeedCredentials: $(nuget_org_ServiceConnectionName)
+
+  - powershell: echo "##vso[task.setvariable variable=Uploaded;isOutput=true]True"
+    name: setVars
+    
