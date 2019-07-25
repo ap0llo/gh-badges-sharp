@@ -139,6 +139,7 @@ jobs:
       action: create
       target: '$(Build.SourceVersion)'
       tagSource: manual
+      title: '$(Build.BuildNumber)'
       tag: $(Build.BuildNumber)
       releaseNotesSource: input
       releaseNotes: 'Automatic release by Azure DevOps.'
