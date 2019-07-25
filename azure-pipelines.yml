@@ -169,7 +169,7 @@ jobs:
   # Only run if build was successful and a package was uploaded to nuget.org
   dependsOn: 
   - Build_and_Test
-  - Publish_to_NuGet_org
+  - Publish_to_GitHubPackageRegistry
   condition: succeeded('Publish_to_GitHubPackageRegistry')
   steps:
 
