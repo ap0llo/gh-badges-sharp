@@ -131,20 +131,12 @@ jobs:
       artifactName: $(artifactsName)
       downloadPath: $(Build.ArtifactStagingDirectory)
 
-  # Upload to GitHub Package registry
-  - task: NuGetCommand@2
-    displayName: "Upload package"
-    inputs:
-      command: push
-      nugetFeedType: external
-      publishFeedCredentials: $(gitHubPackageRegistry_ServiceConnectionName)
-
   # Update the implicitly created release
   - task: GithubRelease@0
     inputs:
       gitHubConnection: $(github_ServiceConnectionName)
       repositoryName: $(github_repositoryName)
-      action: edit
+      action: create
       target: '$(Build.SourceVersion)'
       tagSource: manual
       tag: $(Build.BuildNumber)
@@ -152,6 +144,14 @@ jobs:
       releaseNotes: 'Automatic release by Azure DevOps.'
       addChangeLog: true
       isPreRelease: contains(variables['Build.BuildNumber'], '-')    
+
+  # Upload to GitHub Package registry
+  - task: NuGetCommand@2
+    displayName: "Upload package"
+    inputs:
+      command: push
+      nugetFeedType: external
+      publishFeedCredentials: $(gitHubPackageRegistry_ServiceConnectionName)
 
 # Job to push package to NuGet.org after build (only for builds of release branches)
 - job: Publish_to_NuGet_org
