@@ -208,7 +208,6 @@ jobs:
       tag: $(Build.BuildNumber)
       releaseNotesSource: input
       releaseNotes: 'Automatic release by Azure DevOps.'
-      assets: $(Build.ArtifactStagingDirectory)/$(artifactsName)/*.nupkg
       addChangeLog: true
       isPreRelease: contains('$(Build.BuildNumber)', '-')
       
