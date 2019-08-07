@@ -10,7 +10,7 @@
   </clipPath>
   <g clip-path="url(#round)">
     <rect width="37.533" height="18" fill="#555" />
-    <rect x="37.533" width="42.119" height="18" fill="#dfb317" />
+    <rect x="37.533" width="42.119" height="18" fill="#e05d44" />
     <rect width="79.652" height="18" fill="url(#smooth)" />
   </g>
   <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="110">
@@ -22,7 +22,7 @@
   <a target="_blank" xlink:href="http://example.com">
     <rect width="37.533" height="18" fill="rgba(0,0,0,0)" />
   </a>
-  <a target="_blank" xlink:href="http://example.com">
+  <a target="_blank" xlink:href="http://github.com">
     <rect x="37.533" width="42.119" height="18" fill="rgba(0,0,0,0)" />
   </a>
 </svg>
