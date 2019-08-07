@@ -44,8 +44,12 @@ namespace GhBadgesSharp.ViewModels
         {
             m_BadgeData = badgeData ?? throw new ArgumentNullException(nameof(badgeData));
 
-            var leftText = leftTextOverride ?? badgeData.LeftText;
-            var rightText = rightTextOverride ?? badgeData.RightText;
+            // if left or right text is empty, replace it with null.
+            // This makes checking the value in the liquid templates easier
+            // as they do not need to check for null *or* empty
+            // Both cases are treated the same anyways
+            var leftText = NullIfEmptyString(leftTextOverride ?? badgeData.LeftText);
+            var rightText = NullIfEmptyString(rightTextOverride ?? badgeData.RightText);
 
             m_LeftTextWidth = GetTextWidth(leftText);
             m_RightTextWidth = GetTextWidth(rightText);

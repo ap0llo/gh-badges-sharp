@@ -184,11 +184,6 @@ namespace GhBadgesSharp
             //    }
             //}
 
-            //if (style == "social")
-            //{
-            //    leftText = Capitalize(leftText);
-            //}
-
             logoWidth = logoWidth ?? (logo != null ? 14 : 0);
 
             int logoPadding;
@@ -217,19 +212,7 @@ namespace GhBadgesSharp
             return GetViewModel(style, badgeData);
         }
 
-        private static string Capitalize(string value)
-        {
-            if (value == null)
-                return null;
 
-            if (value.Length == 0)
-                return value;
-
-            if (value.Length == 1)
-                return value.ToUpper();
-
-            return value.Substring(0, 1).ToUpper() + value.Substring(1);
-        }
 
         private static XElement RenderBadge(ViewModelBase viewModel)
         {           
@@ -263,6 +246,9 @@ namespace GhBadgesSharp
 
                 case BadgeStyle.ForTheBadge:
                     return new ForTheBadgeViewModel(data);
+
+                case BadgeStyle.Social:
+                    return new SocialViewModel(data);
 
                 default:
                     throw new ArgumentException($"Unknown {nameof(BadgeStyle)} '{style}'");

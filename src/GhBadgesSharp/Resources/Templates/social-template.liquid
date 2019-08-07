@@ -1,0 +1,50 @@
+{% comment %}
+Ported from https://github.com/badges/shields/blob/66c7f13e38c76bfdbdb96107bc92e607b3dd5acc/gh-badges/templates/social-template.svg
+{% endcomment %}
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="{{ it.ImageWidth }}" height="20">
+    <style type="text/css"><![CDATA[
+      a #llink:hover { fill:url(#b); stroke:#ccc; }
+      a #rlink:hover { fill:#4183C4; }
+    ]]></style>
+    <linearGradient id="a" x2="0" y2="100%">
+      <stop offset="0" stop-color="#fcfcfc" stop-opacity="0"/>
+      <stop offset="1" stop-opacity=".1"/>
+    </linearGradient>
+    <linearGradient id="b" x2="0" y2="100%">
+      <stop offset="0" stop-color="#ccc" stop-opacity=".1"/>
+      <stop offset="1" stop-opacity=".1"/>
+    </linearGradient>
+    <g stroke="#d5d5d5">
+      <rect stroke="none" fill="#fcfcfc" x="0.5" y="0.5" width="{{ it.Widths[0] }}" height="19" rx="2"/>
+      {% if it.Text[1] %}
+      <rect y="0.5" x="{{ it.Widths[0] | plus: 6.5 }}" width="{{ it.Widths[1] }}" height="19" rx="2" fill="#fafafa"/>
+      <rect x="{{ it.Widths[0]| plus: 6}}" y="7.5" width="0.5" height="5" stroke="#fafafa"/>
+      <path d="M{{ it.Widths[0] | plus: 6.5 }} 6.5 l-3 3v1 l3 3" stroke="d5d5d5" fill="#fafafa"/>
+      {% endif %}
+    </g>
+    {%if it.Logo %}
+      <image x="5" y="3" width="{{ it.LogoWidth }}" height="14" xlink:href="{{ it.Logo }}"/>
+    {% endif %}    
+    <g fill="#333" text-anchor="middle" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-weight="700" font-size="110px" line-height="14px">
+      <text x="{{ it.TextPosition[0].X }}" y="150" fill="#fff" transform="scale(0.1)" textLength="{{ it.TextWidth[0] }}" lengthAdjust="spacing">{{ it.Text[0] }}</text>
+      <text x="{{ it.TextPosition[0].X }}" y="140" transform="scale(0.1)" textLength="{{ it.TextWidth[0]  }}" lengthAdjust="spacing">{{ it.Text[0] }}</text>
+      {% if it.Text[1] %}
+        <text x="{{ it.TextPosition[1].X }}" y="150" fill="#fff" transform="scale(0.1)" textLength="{{ it.TextWidth[1] }}" lengthAdjust="spacing">{{ it.Text[1] }}</text>
+        {% if it.Links[1] %}
+            <a target="_blank" xlink:href="{{ it.Links[1] }}">
+        {% endif %}
+          <text id="rlink" x="{{ it.TextPosition[1].X }}" y="140" transform="scale(0.1)" textLength="{{ it.TextWidth[1]  }}" lengthAdjust="spacing">{{ it.Text[1] }}</text>
+        {% if it.Links[1] %}
+            </a>
+        {% endif %}
+      {% endif %}
+    </g>
+    {% if it.Links[0] %}
+        <a target="_blank" xlink:href="{{ it.Links[0] }}">
+    {% endif %}
+        <rect id="llink" stroke="#d5d5d5" fill="url(#a)" x="0.5" y="0.5" width="{{ it.Widths[0] }}" height="19" rx="2"/>
+    {% if it.Links[0] %}
+        </a>
+    {% endif %}        
+  </svg>
+  

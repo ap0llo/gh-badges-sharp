@@ -5,6 +5,7 @@
         Flat,
         FlatSquare,
         Plastic,
-        ForTheBadge
+        ForTheBadge,
+        Social
     }
 }
