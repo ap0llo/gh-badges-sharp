@@ -3,22 +3,18 @@
 A C#/.NET port of the [gh-badges](https://github.com/badges/shields/tree/master/gh-badges)
 library that powers [shields.io](https://shields.io)
 
-**TODO**:
-
-- *Adjust settings for CI builds in `azure-pipelines.yml`*
-- *Adjust the following sections in this README file*
-- *Remove this section from this README file*
-
 ## Overview
 
-*__TODO:__ Add status badges for package(s) on NuGet.org (and MyGet), build status badge for Azure Pipeline*
+[![Build Status](https://dev.azure.com/ap0llo/OSS/_apis/build/status/gh-badges-sharp?branchName=master)](https://dev.azure.com/ap0llo/OSS/_build/latest?definitionId=13&branchName=master)
+
+GhBadgesSharp is a C#/.NET port of the [gh-badges](https://github.com/badges/shields/tree/master/gh-badges)
+library that powers [shields.io](https://shields.io).
 
 ## Installation
 
-*__TODO:__ PACKAGENAME* is distributed as NuGet package.
+GhBadgesSharp is distributed as NuGet package.
 
-- Prerelease builds are available on [MyGet](https://example.com) **TODO:** Provide package urls
-- Release versions are available on [NuGet.org](https://example.com) **TODO:** Provide package urls
+- Prerelease builds are available in the [GitHub Package Registry](https://github.com/ap0llo/gh-badges-sharp/packages/13795)
 
 ## Building from source
 
@@ -75,3 +71,11 @@ To create a new release branch use the [`nbgv` tool](https://www.nuget.org/packa
 dotnet tool install --global nbgv --version 3.0.4-beta
 nbgv prepare-release
 ```
+
+## CI Builds
+
+- Continuous integration builds using [Azure Pipelines](https://dev.azure.com/ap0llo/OSS/_build?definitionId=13) run for every
+  commit on the `master`branch as well as release- (`release/*`) and feature- (`features/*`) branches.
+- Builds of the `master` branch and release branches are published to the [GitHub package registry](https://github.com/ap0llo/gh-badges-sharp/packages/13795).
+- Builds of any release branch are also published to NuGet.org (no packages has been published there yet).
+- To prevent a commit from triggering a CI build, include `[Skip CI]` in the commit message.
