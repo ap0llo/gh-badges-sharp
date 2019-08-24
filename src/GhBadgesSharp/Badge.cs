@@ -128,7 +128,8 @@
 using System;
 using System.Xml.Linq;
 using Fluid;
-using GhBadgesSharp.ViewModels;
+using GhBadgesSharp.Internal;
+using GhBadgesSharp.Internal.ViewModels;
 
 namespace GhBadgesSharp
 {

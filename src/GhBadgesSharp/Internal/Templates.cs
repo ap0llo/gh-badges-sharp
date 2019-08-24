@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reflection;
 using Fluid;
 
-namespace GhBadgesSharp
+namespace GhBadgesSharp.Internal
 {
     internal static class Templates
     {

@@ -35,7 +35,7 @@ using System;
 using System.Collections;
 using Newtonsoft.Json;
 
-namespace GhBadgesSharp
+namespace GhBadgesSharp.Internal
 {
     internal static class TextWidth
     {

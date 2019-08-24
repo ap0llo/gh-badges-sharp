@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using GhBadgesSharp.Internal;
 using Xunit;
 
-namespace GhBadgesSharp.Test
+namespace GhBadgesSharp.Test.Internal
 {
     public class TemplatesTest
     {

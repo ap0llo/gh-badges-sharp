@@ -1,15 +1,15 @@
 ﻿using System.Collections.Generic;
 using Fluid;
 
-namespace GhBadgesSharp.ViewModels
+namespace GhBadgesSharp.Internal.ViewModels
 {
     /// <summary>
-    /// View model for the "flat" template
+    /// View model for the "plastic" template
     /// </summary>
     /// <remarks>
-    /// Template ported from https://github.com/badges/shields/blob/66c7f13e38c76bfdbdb96107bc92e607b3dd5acc/gh-badges/templates/flat-template.svg
+    /// Template ported from https://github.com/badges/shields/blob/66c7f13e38c76bfdbdb96107bc92e607b3dd5acc/gh-badges/templates/plastic-template.svg
     /// </remarks>
-    internal class FlatViewModel : ViewModelBase
+    internal class PlasticViewModel : ViewModelBase
     {
         private readonly double[] m_Widths;
 
@@ -33,36 +33,36 @@ namespace GhBadgesSharp.ViewModels
         /// </summary>
         public IReadOnlyList<double> TextWidth { get; }
 
+
         public IReadOnlyList<double> Widths => m_Widths;
 
-
-        public FlatViewModel(BadgeData badgeData) : base(badgeData)
+        public PlasticViewModel(BadgeData badgeData) : base(badgeData)
         {
             m_Widths = new double[2];
 
             // original template:
-            //  ImageWidth: { {(it.widths[0] -= it.text[0].length ? 0 : (it.logo ? (it.colorA ? 0 : 7) : 11))+it.widths[1]}}
+            //  ImageWidth { {=(it.widths[0] -= it.text[0].length ? 0 : (it.logo ? (it.colorA ? 0 : 7) : 11))+it.widths[1]}}
             //  widths: [leftWidth + 10 + logoWidth + logoPadding, rightWidth + 10]
-            m_Widths[0] = (m_LeftTextWidth + 10 + 0 + 0) - (Text[0].Length > 0 ? 0 : 11);
+            m_Widths[0] = (m_LeftTextWidth + 10) - ((Text[0] != null) ? 0 : 11);
             m_Widths[1] = m_RightTextWidth + 10;
             ImageWidth = m_Widths[0] + m_Widths[1];
 
             // value in original template: {{=it.escapeXml(it.text[0].length || it.logo && it.colorA ? (it.colorA||"#555") : (it.colorB||"#4c1"))}}
-            var fill1 = Text[0].Length > 0 ? (m_BadgeData.ColorA?.SvgName ?? "#555") : (m_BadgeData.ColorB?.SvgName ?? "#4c1");
+            var fill1 = Text[0] != null ? (m_BadgeData.ColorA?.SvgName ?? "#555") : (m_BadgeData.ColorB?.SvgName ?? "#4c1");
 
             // value in original template: {{=it.escapeXml(it.colorB||"#4c1")}}
             var fill2 = m_BadgeData.ColorB?.SvgName ?? "#4c1";
+
             Fill = new[] { EscapeXml(fill1), EscapeXml(fill2) };
 
 
             // value in original template: {{=(((it.widths[0]+it.logoWidth+it.logoPadding)/2)+1)*10}}
             var x1 = ((Widths[0] / 2) + 1) * 10;
 
-            // value in original template: {{=(it.widths[0]+it.widths[1]/2-(it.text[0].length ? 1 : 0 ))*10}}
+            // value in original template. {{=(it.widths[0]+it.widths[1]/2-(it.text[0].length ? 1 : 0))*10}}
             var x2 = (Widths[0] + (Widths[1] / 2) - (Text[0] != null ? 1 : 0)) * 10;
 
             TextPosition = new[] { new Point(x1, 0), new Point(x2, 0) };
-
 
             // value in original template: {{=(it.widths[0]-(10+it.logoWidth+it.logoPadding))*10}}
             var textWidth1 = (Widths[0] - 10) * 10;
@@ -74,6 +74,6 @@ namespace GhBadgesSharp.ViewModels
         }
 
 
-        internal override FluidTemplate GetTemplate() => Templates.GetTemplate("flat");
+        internal override FluidTemplate GetTemplate() => Templates.GetTemplate("plastic");
     }
 }

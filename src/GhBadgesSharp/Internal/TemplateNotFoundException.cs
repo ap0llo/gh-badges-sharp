@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GhBadgesSharp
+namespace GhBadgesSharp.Internal
 {
     internal sealed class TemplateNotFoundException : Exception
     {

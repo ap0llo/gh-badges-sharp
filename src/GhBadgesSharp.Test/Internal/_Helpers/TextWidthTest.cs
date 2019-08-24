@@ -30,12 +30,10 @@
 // Link to original source code:
 // https://github.com/metabolize/anafanafo/blob/989fa7f0dc709b726d78f3ea0ecfe7c6546b1aa6/packages/anafanafo/test.js
 //
-using System;
-using System.Collections.Generic;
-using System.Text;
+using GhBadgesSharp.Internal;
 using Xunit;
 
-namespace GhBadgesSharp.Test
+namespace GhBadgesSharp.Test.Internal
 {
     public class TextWidthTest
     {

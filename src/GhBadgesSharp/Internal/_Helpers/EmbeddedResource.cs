@@ -2,7 +2,7 @@
 using System.IO;
 using System.Reflection;
 
-namespace GhBadgesSharp
+namespace GhBadgesSharp.Internal
 {
     internal static class EmbeddedResource
     {

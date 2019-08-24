@@ -1,6 +1,6 @@
 ﻿using Fluid;
 
-namespace GhBadgesSharp.ViewModels
+namespace GhBadgesSharp.Internal.ViewModels
 {
     /// <summary>
     /// View model for the "flat-square" template
