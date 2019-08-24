@@ -143,6 +143,9 @@ namespace GhBadgesSharp
             string leftLink = null,
             string rightLink = null)
         {
+            if (!Enum.IsDefined(typeof(BadgeStyle), style))
+                throw new ArgumentException("Undefined badge style", nameof(style));
+
             var badgeData = GetViewModel(style, leftText, rightText, color, labelColor, leftLink, rightLink);
             return RenderBadge(badgeData);
         }
