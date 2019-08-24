@@ -125,9 +125,7 @@
 // Link to original source code:
 // https://github.com/badges/shields/blob/c6ef885b7508d342963d0600d27282950d1e646b/gh-badges/lib/color.js
 //
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Grynwald.GhBadgesSharp
 {
@@ -136,6 +134,8 @@ namespace Grynwald.GhBadgesSharp
     /// </summary>
     public static class NamedColor
     {
+#pragma warning disable 1591
+
         public const string BrightGreen = "brightgreen";
         public const string Green = "green";
         public const string Yellow = "yellow";
@@ -153,6 +153,8 @@ namespace Grynwald.GhBadgesSharp
         public const string Success = "success";
         public const string Informational = "informational";
         public const string Inactive = "inactive";
+
+#pragma warning restore 1591
 
         private static readonly IReadOnlyDictionary<string, string> s_NamedColors = new Dictionary<string, string>()
         {
