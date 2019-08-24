@@ -301,3 +301,4 @@ __pycache__/
 
 
 [Bb]uild/
+/src/GhBadgesSharp.Test/PublicApiApproval.Assembly_must_not_have_unapproved_API_changes.received.txt

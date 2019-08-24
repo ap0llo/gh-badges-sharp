@@ -14,8 +14,4 @@ namespace GhBadgesSharp
         ForTheBadge = 3,
         Social = 4,
     }
-    public sealed class TemplateNotFoundException : System.Exception
-    {
-        public TemplateNotFoundException(string templateName) { }
-    }
 }
