@@ -123,130 +123,62 @@
 //
 // -----------------------------------------------------------------------------------
 // Link to original source code:
-// https://github.com/badges/shields/blob/c6ef885b7508d342963d0600d27282950d1e646b/gh-badges/lib/make-badge.js
+// https://github.com/badges/shields/blob/c6ef885b7508d342963d0600d27282950d1e646b/gh-badges/lib/color.js
 //
 using System;
-using System.Xml.Linq;
-using Fluid;
-using GhBadgesSharp.ViewModels;
+using System.Collections.Generic;
+using System.Text;
 
 namespace GhBadgesSharp
 {
     /// <summary>
-    /// Provides methods for generating badges
+    /// Provides constants for named colors to be used in <see cref="Badge.MakeBadge"/>.
     /// </summary>
-    public static class Badge
+    public static class NamedColor
     {
-        /// <summary>
-        /// Creates a new badge using the specified settings.
-        /// </summary>
-        /// <param name="style">The style of badge to create.</param>
-        /// <param name="leftText">The text to show in the left part of the badge.</param>
-        /// <param name="rightText">The text to show in the right part of the badge.</param>
-        /// <param name="color">
-        /// If set, specifies the primary color of the badge, usually shown in the right part of the badge.
-        /// <para>
-        /// Valid values are either a named color (see <see cref="NamedColor"/>), a Hex color code or a CSS color name.
-        /// </para>
-        /// </param>
-        /// <param name="labelColor">
-        /// If set, specifies the badge's secondary color, usually shown in the left part of the badge.
-        /// <para>
-        /// Valid values are either a named color (see <see cref="NamedColor"/>), a Hex color code or a CSS color name.
-        /// </para>
-        /// </param>
-        /// <param name="leftLink">If set, makes the badge a link to the specified target.</param>
-        /// <param name="rightLink">
-        /// If set specifies a link target for the right part of the badge.
-        /// By default, the right part uses the same link set by <paramref name="leftLink"/>.
-        /// </param>
-        /// <returns>Returns the generated badge as SVG image.</returns>
-        public static XElement MakeBadge(
-            BadgeStyle style,
-            string leftText,
-            string rightText,
-            string color = null,
-            string labelColor = null,
-            string leftLink = null,
-            string rightLink = null)
+        public const string BrightGreen = "brightgreen";
+        public const string Green = "green";
+        public const string Yellow = "yellow";
+        public const string YellowGreen = "yellowgreen";
+        public const string Orange = "orange";
+        public const string Red = "red";
+        public const string Blue = "blue";
+        public const string Grey = "grey";
+        public const string LightGrey = "lightgrey";
+        public const string Gray = "gray";
+        public const string LightGray = "lightgray";
+
+        public const string Critical = "critical";
+        public const string Important = "important";
+        public const string Success = "success";
+        public const string Informational = "informational";
+        public const string Inactive = "inactive";
+
+        private static readonly IReadOnlyDictionary<string, string> s_NamedColors = new Dictionary<string, string>()
         {
-            if (!Enum.IsDefined(typeof(BadgeStyle), style))
-                throw new ArgumentException("Undefined badge style", nameof(style));
+            // Named colors
+            { BrightGreen, "#4c1" },
+            { Green, "#97ca00" },
+            { Yellow, "#dfb317" },
+            { YellowGreen, "#a4a61d" },
+            { Orange, "#fe7d37" },
+            { Red, "#e05d44" },
+            { Blue, "#007ec6" },
+            { Grey, "#555" },
+            { LightGrey, "#9f9f9f" },
 
-            var badgeData = GetViewModel(style, leftText, rightText, color, labelColor, leftLink, rightLink);
-            return RenderBadge(badgeData);
-        }
+            // Aliases
+            { Gray, "#555" },
+            { LightGray, "#9f9f9f" },
+            { Critical, "#e05d44" },
+            { Important, "#fe7d37" },
+            { Success, "#4c1" },
+            { Informational, "#007ec6" },
+            { Inactive, "#9f9f9f" },
+        };
 
+        internal static bool Exists(string name) => s_NamedColors.ContainsKey(name);
 
-        internal static ViewModelBase GetViewModel(
-                BadgeStyle style,
-                string leftText,
-                string rightText,
-                string color = null,
-                string labelColor = null,
-                string leftLink = null,
-                string rightLink = null)
-        {
-
-            leftText = leftText ?? "";
-            rightText = rightText ?? "";
-
-            leftText = leftText.Trim();
-            rightText = rightText.Trim();
-
-            var badgeData = new BadgeData(
-                leftText: leftText,
-                rightText: rightText,
-                leftLink: leftLink,
-                rightLink: rightLink,
-                colorA: Color.Get(labelColor),
-                colorB: Color.Get(color)
-            );
-
-            return GetViewModel(style, badgeData);
-        }
-
-
-
-        private static XElement RenderBadge(ViewModelBase viewModel)
-        {
-            var template = viewModel.GetTemplate();
-
-            var context = new TemplateContext();
-            context.MemberAccessStrategy.Register(viewModel.GetType());
-            context.MemberAccessStrategy.Register(typeof(Point));
-            context.MemberAccessStrategy.Register(typeof(Color));
-            context.SetValue("it", viewModel);
-
-            var rendered = template.Render(context).Trim();
-
-            var svg = XElement.Parse(rendered);
-            return svg;
-
-        }
-
-        private static ViewModelBase GetViewModel(BadgeStyle style, BadgeData data)
-        {
-            switch (style)
-            {
-                case BadgeStyle.Flat:
-                    return new FlatViewModel(data);
-
-                case BadgeStyle.FlatSquare:
-                    return new FlatSquareViewModel(data);
-
-                case BadgeStyle.Plastic:
-                    return new PlasticViewModel(data);
-
-                case BadgeStyle.ForTheBadge:
-                    return new ForTheBadgeViewModel(data);
-
-                case BadgeStyle.Social:
-                    return new SocialViewModel(data);
-
-                default:
-                    throw new ArgumentException($"Unknown {nameof(BadgeStyle)} '{style}'");
-            }
-        }
+        internal static string GetColor(string name) => s_NamedColors[name];
     }
 }

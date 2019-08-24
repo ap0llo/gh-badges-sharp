@@ -14,4 +14,23 @@ namespace GhBadgesSharp
         ForTheBadge = 3,
         Social = 4,
     }
+    public class static NamedColor
+    {
+        public const string Blue = "blue";
+        public const string BrightGreen = "brightgreen";
+        public const string Critical = "critical";
+        public const string Gray = "gray";
+        public const string Green = "green";
+        public const string Grey = "grey";
+        public const string Important = "important";
+        public const string Inactive = "inactive";
+        public const string Informational = "informational";
+        public const string LightGray = "lightgray";
+        public const string LightGrey = "lightgrey";
+        public const string Orange = "orange";
+        public const string Red = "red";
+        public const string Success = "success";
+        public const string Yellow = "yellow";
+        public const string YellowGreen = "yellowgreen";
+    }
 }

@@ -134,34 +134,10 @@ namespace GhBadgesSharp
     internal sealed class Color
     {
         private static readonly Regex s_HexColorRegex = new Regex(@"(^([A-Fa-f0-9]{6})$)|(^[A-Fa-f0-9]{3}$)");
-        private static readonly IReadOnlyDictionary<string, string> s_NamedColors = new Dictionary<string, string>()
-        {
-            { "brightgreen", "#4c1" },
-            { "green", "#97ca00" },
-            { "yellow", "#dfb317" },
-            { "yellowgreen", "#a4a61d" },
-            { "orange", "#fe7d37" },
-            { "red", "#e05d44" },
-            { "blue", "#007ec6" },
-            { "grey", "#555" },
-            { "lightgrey", "#9f9f9f" },
-        };
-        private static readonly IReadOnlyDictionary<string, string> s_Aliases = new Dictionary<string, string>()
-        {
-            { "gray", "grey" },
-            { "lightgray", "lightgrey" },
-            { "critical", "red" },
-            { "important", "orange" },
-            { "success", "brightgreen" },
-            { "informational", "blue" },
-            { "inactive", "lightgrey" },
-        };
 
-        private readonly string m_NormalizedName;
+        public string Name { get; }
 
-        public string Name => m_NormalizedName;
-
-        public string SvgName => ToSvgColor(m_NormalizedName);
+        public string SvgName => ToSvgColor(Name);
 
 
         private Color(string normalizedName)
@@ -169,7 +145,7 @@ namespace GhBadgesSharp
             if (String.IsNullOrEmpty(normalizedName))
                 throw new System.ArgumentException("Value must not be null or empty", nameof(normalizedName));
 
-            m_NormalizedName = normalizedName;
+            Name = normalizedName;
         }
 
 
@@ -178,11 +154,8 @@ namespace GhBadgesSharp
             if (color == null)
                 return null;
 
-            if (s_NamedColors.ContainsKey(color))
+            if (NamedColor.Exists(color))
                 return new Color(color);
-
-            if (s_Aliases.ContainsKey(color))
-                return new Color(s_Aliases[color]);
 
             if (IsHexColor(color))
                 return new Color($"#{color.ToLower()}");
@@ -195,14 +168,10 @@ namespace GhBadgesSharp
 
         internal static string ToSvgColor(string value)
         {
-            if (s_NamedColors.ContainsKey(value))
+            if (NamedColor.Exists(value))
             {
-                return s_NamedColors[value];
-            }
-            else if (s_Aliases.ContainsKey(value))
-            {
-                return s_NamedColors[s_Aliases[value]];
-            }
+                return NamedColor.GetColor(value);
+            }           
             else
             {
                 return value;
