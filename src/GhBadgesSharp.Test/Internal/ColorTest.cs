@@ -126,10 +126,10 @@
 // https://github.com/badges/shields/blob/c6ef885b7508d342963d0600d27282950d1e646b/gh-badges/lib/color.spec.js
 // https://github.com/badges/shields/blob/c6ef885b7508d342963d0600d27282950d1e646b/gh-badges/lib/make-badge.spec.js
 //
-using GhBadgesSharp.Internal;
+using Grynwald.GhBadgesSharp.Internal;
 using Xunit;
 
-namespace GhBadgesSharp.Test.Internal
+namespace Grynwald.GhBadgesSharp.Test.Internal
 {
     public class ColorTest
     {

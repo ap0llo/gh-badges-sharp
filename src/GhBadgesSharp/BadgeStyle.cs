@@ -1,4 +1,4 @@
-﻿namespace GhBadgesSharp
+﻿namespace Grynwald.GhBadgesSharp
 {
     public enum BadgeStyle
     {

@@ -34,7 +34,7 @@ using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
-namespace GhBadgesSharp.Internal
+namespace Grynwald.GhBadgesSharp.Internal
 {
     internal static class CssColor
     {

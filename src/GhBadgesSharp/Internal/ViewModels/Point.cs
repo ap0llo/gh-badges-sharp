@@ -1,4 +1,4 @@
-﻿namespace GhBadgesSharp.Internal.ViewModels
+﻿namespace Grynwald.GhBadgesSharp.Internal.ViewModels
 {
     internal class Point
     {

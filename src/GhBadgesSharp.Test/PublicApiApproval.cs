@@ -4,7 +4,7 @@ using ApprovalTests.Reporters;
 using PublicApiGenerator;
 using Xunit;
 
-namespace GhBadgesSharp.Test
+namespace Grynwald.GhBadgesSharp.Test
 {
     [UseReporter(typeof(DiffReporter))]
     public class PublicApiApproval

@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using GhBadgesSharp.Internal;
+﻿using Grynwald.GhBadgesSharp.Internal;
 using Xunit;
 
-namespace GhBadgesSharp.Test.Internal
+namespace Grynwald.GhBadgesSharp.Test.Internal
 {
     public class TemplatesTest
     {

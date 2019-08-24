@@ -2,7 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
-    <PreserveCompilationContext>true</PreserveCompilationContext>
+    <AssemblyName>Grynwald.GhBadgesSharp.Test</AssemblyName>
+    <RootNamespace>Grynwald.GhBadgesSharp.Test</RootNamespace>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 

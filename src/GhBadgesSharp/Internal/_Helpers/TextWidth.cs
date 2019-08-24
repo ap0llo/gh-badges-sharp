@@ -35,11 +35,11 @@ using System;
 using System.Collections;
 using Newtonsoft.Json;
 
-namespace GhBadgesSharp.Internal
+namespace Grynwald.GhBadgesSharp.Internal
 {
     internal static class TextWidth
     {
-        private const string s_ResourceName = "GhBadgesSharp.Resources.widths.json";
+        private const string s_ResourceName = "Grynwald.GhBadgesSharp.Resources.widths.json";
 
         private static readonly object[][] s_Widths;
         private static readonly double s_DefaultWidth;

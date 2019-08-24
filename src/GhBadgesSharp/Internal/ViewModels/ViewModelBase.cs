@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Xml.Linq;
 using Fluid;
 
-namespace GhBadgesSharp.Internal.ViewModels
+namespace Grynwald.GhBadgesSharp.Internal.ViewModels
 {
     internal abstract class ViewModelBase
     {

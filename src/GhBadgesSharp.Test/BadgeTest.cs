@@ -7,7 +7,7 @@ using ApprovalTests.Namers;
 using ApprovalTests.Reporters;
 using Xunit;
 
-namespace GhBadgesSharp.Test
+namespace Grynwald.GhBadgesSharp.Test
 {
     [UseReporter(typeof(DiffReporter))]
     public partial class BadgeTest

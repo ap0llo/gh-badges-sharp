@@ -1,10 +1,10 @@
-﻿[assembly: System.Runtime.CompilerServices.InternalsVisibleToAttribute("GhBadgesSharp.Test")]
+﻿[assembly: System.Runtime.CompilerServices.InternalsVisibleToAttribute("Grynwald.GhBadgesSharp.Test")]
 [assembly: System.Runtime.Versioning.TargetFrameworkAttribute(".NETStandard,Version=v2.0", FrameworkDisplayName="")]
-namespace GhBadgesSharp
+namespace Grynwald.GhBadgesSharp
 {
     public class static Badge
     {
-        public static System.Xml.Linq.XElement MakeBadge(GhBadgesSharp.BadgeStyle style, string leftText, string rightText, string color = null, string labelColor = null, System.Uri leftLink = null, System.Uri rightLink = null) { }
+        public static System.Xml.Linq.XElement MakeBadge(Grynwald.GhBadgesSharp.BadgeStyle style, string leftText, string rightText, string color = null, string labelColor = null, System.Uri leftLink = null, System.Uri rightLink = null) { }
     }
     public enum BadgeStyle
     {

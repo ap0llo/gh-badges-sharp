@@ -2,7 +2,7 @@
 using System.IO;
 using System.Reflection;
 
-namespace GhBadgesSharp.Internal
+namespace Grynwald.GhBadgesSharp.Internal
 {
     internal static class EmbeddedResource
     {

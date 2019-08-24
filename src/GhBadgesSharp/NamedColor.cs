@@ -129,7 +129,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace GhBadgesSharp
+namespace Grynwald.GhBadgesSharp
 {
     /// <summary>
     /// Provides constants for named colors to be used in <see cref="Badge.MakeBadge"/>.

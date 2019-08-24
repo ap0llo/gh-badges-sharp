@@ -4,11 +4,11 @@ using System.Linq;
 using System.Reflection;
 using Fluid;
 
-namespace GhBadgesSharp.Internal
+namespace Grynwald.GhBadgesSharp.Internal
 {
     internal static class Templates
     {
-        private const string s_TemplateResourcePrefix = "GhBadgesSharp.Resources.Templates.";
+        private const string s_TemplateResourcePrefix = "Grynwald.GhBadgesSharp.Resources.Templates.";
         private const string s_TemplateResourceSuffix = "-template.liquid";
         private static readonly Dictionary<string, Lazy<FluidTemplate>> s_Templates = new Dictionary<string, Lazy<FluidTemplate>>();
 

@@ -1,3 +1,3 @@
 ﻿using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo("GhBadgesSharp.Test")]
+[assembly: InternalsVisibleTo("Grynwald.GhBadgesSharp.Test")]

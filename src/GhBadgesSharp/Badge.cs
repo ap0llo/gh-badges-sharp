@@ -128,10 +128,10 @@
 using System;
 using System.Xml.Linq;
 using Fluid;
-using GhBadgesSharp.Internal;
-using GhBadgesSharp.Internal.ViewModels;
+using Grynwald.GhBadgesSharp.Internal;
+using Grynwald.GhBadgesSharp.Internal.ViewModels;
 
-namespace GhBadgesSharp
+namespace Grynwald.GhBadgesSharp
 {
     /// <summary>
     /// Provides methods for generating badges

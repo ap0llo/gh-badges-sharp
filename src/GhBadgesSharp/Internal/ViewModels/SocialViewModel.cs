@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Fluid;
 
-namespace GhBadgesSharp.Internal.ViewModels
+namespace Grynwald.GhBadgesSharp.Internal.ViewModels
 {
     /// <summary>
     /// View model for the "social" template

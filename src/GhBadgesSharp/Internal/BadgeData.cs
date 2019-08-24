@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GhBadgesSharp.Internal
+namespace Grynwald.GhBadgesSharp.Internal
 {
     internal class BadgeData
     {

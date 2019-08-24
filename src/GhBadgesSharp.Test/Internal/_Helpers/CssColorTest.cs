@@ -30,10 +30,10 @@
 // Link to original source code:
 // https://github.com/princejwesley/is-css-color/blob/f0614f76718866f4e93ee1443af4efe449200475/test.js
 //
-using GhBadgesSharp.Internal;
+using Grynwald.GhBadgesSharp.Internal;
 using Xunit;
 
-namespace GhBadgesSharp.Test.Internal
+namespace Grynwald.GhBadgesSharp.Test.Internal
 {
     public class CssColorHelperTest
     {
