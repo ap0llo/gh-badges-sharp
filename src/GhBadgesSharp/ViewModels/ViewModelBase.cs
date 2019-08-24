@@ -21,24 +21,6 @@ namespace GhBadgesSharp.ViewModels
         /// </summary>
         public IReadOnlyList<string> Links { get; }
 
-        /// <summary>
-        /// Gets the badge's logo
-        /// </summary>
-        public string Logo => EscapeXml(NullIfEmptyString(m_BadgeData.Logo));
-
-        /// <summary>
-        /// Gets the width of the badge's logo
-        /// </summary>
-        public int LogoWidth => m_BadgeData.LogoWidth ?? 0;
-
-        /// <summary>
-        /// Gets the padding of the badge's logo
-        /// </summary>
-        public int LogoPadding => m_BadgeData.LogoPadding;
-
-        public int? LogoPosition => m_BadgeData.LogoPosition;
-
-
 
         protected ViewModelBase(BadgeData badgeData, string leftTextOverride = null, string rightTextOverride = null)
         {

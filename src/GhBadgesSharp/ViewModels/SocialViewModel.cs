@@ -37,7 +37,7 @@ namespace GhBadgesSharp.ViewModels
             //  ImageWidth:  it.widths[0] + 1 + (it.text[1] && it.text[1].length > 0 ? it.widths[1]+2 : 0)
             //  widths: [leftWidth + 10 + logoWidth + logoPadding, rightWidth + 10]
 
-            m_Widths[0] = (m_LeftTextWidth + 10 + LogoWidth + LogoPadding);
+            m_Widths[0] = m_LeftTextWidth + 10;
             m_Widths[1] = m_RightTextWidth + 10;
 
             ImageWidth = m_Widths[0] + 1 + (Text[1] != null && Text[1].Length > 0 ? m_Widths[1] + 2 : 0);
@@ -48,7 +48,7 @@ namespace GhBadgesSharp.ViewModels
 
             {
                 // value in original template: {{=((it.widths[0]+it.logoWidth+it.logoPadding)/2)*10}}
-                var x1 = ((m_Widths[0] + LogoWidth + LogoPadding) / 2) * 10;
+                var x1 = (m_Widths[0] / 2) * 10;
 
                 // value in original template: {{=(it.widths[0]+it.widths[1]/2+6)*10}}
                 var x2 = (m_Widths[0] + m_Widths[1] / 2 + 6) * 10;
@@ -57,7 +57,7 @@ namespace GhBadgesSharp.ViewModels
             }
             {
                 // value in original template: {{=(it.widths[0]-(10+it.logoWidth+it.logoPadding))*10}}
-                var textWidth1 = (Widths[0] - (10 + LogoWidth + LogoPadding)) * 10;
+                var textWidth1 = (Widths[0] - 10) * 10;
 
                 // value in original template: {{=(it.widths[1]-8)*10}}
                 var textWidth2 = (Widths[1] - 8) * 10;

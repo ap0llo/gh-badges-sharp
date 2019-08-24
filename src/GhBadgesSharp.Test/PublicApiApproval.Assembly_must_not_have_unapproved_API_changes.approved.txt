@@ -4,7 +4,7 @@ namespace GhBadgesSharp
 {
     public class static Badge
     {
-        public static System.Xml.Linq.XElement MakeBadge(GhBadgesSharp.BadgeStyle style, string leftText, string rightText, string color = null, string labelColor = null, string logo = null, System.Nullable<int> logoPosition = null, System.Nullable<int> logoWidth = null, string leftLink = null, string rightLink = null) { }
+        public static System.Xml.Linq.XElement MakeBadge(GhBadgesSharp.BadgeStyle style, string leftText, string rightText, string color = null, string labelColor = null, string leftLink = null, string rightLink = null) { }
     }
     public enum BadgeStyle
     {

@@ -43,12 +43,12 @@ namespace GhBadgesSharp.ViewModels
             // original template:
             //  ImageWidth { {=(it.widths[0] -= it.text[0].length ? 0 : (it.logo ? (it.colorA ? 0 : 7) : 11))+it.widths[1]}}
             //  widths: [leftWidth + 10 + logoWidth + logoPadding, rightWidth + 10]
-            m_Widths[0] = (m_LeftTextWidth + 10 + LogoWidth + LogoPadding) - ((Text[0] != null) ? 0 : (Logo != null ? (m_BadgeData.ColorA != null ? 0 : 7) : 11));
+            m_Widths[0] = (m_LeftTextWidth + 10) - ((Text[0] != null) ? 0 : 11);
             m_Widths[1] = m_RightTextWidth + 10;
             ImageWidth = m_Widths[0] + m_Widths[1];
 
             // value in original template: {{=it.escapeXml(it.text[0].length || it.logo && it.colorA ? (it.colorA||"#555") : (it.colorB||"#4c1"))}}
-            var fill1 = Text[0] != null || Logo != null && m_BadgeData.ColorA != null ? (m_BadgeData.ColorA?.SvgName ?? "#555") : (m_BadgeData.ColorB?.SvgName ?? "#4c1");
+            var fill1 = Text[0] != null ? (m_BadgeData.ColorA?.SvgName ?? "#555") : (m_BadgeData.ColorB?.SvgName ?? "#4c1");
 
             // value in original template: {{=it.escapeXml(it.colorB||"#4c1")}}
             var fill2 = m_BadgeData.ColorB?.SvgName ?? "#4c1";
@@ -57,7 +57,7 @@ namespace GhBadgesSharp.ViewModels
 
 
             // value in original template: {{=(((it.widths[0]+it.logoWidth+it.logoPadding)/2)+1)*10}}
-            var x1 = (((Widths[0] + LogoWidth + LogoPadding) / 2) + 1) * 10;
+            var x1 = ((Widths[0] / 2) + 1) * 10;
 
             // value in original template. {{=(it.widths[0]+it.widths[1]/2-(it.text[0].length ? 1 : 0))*10}}
             var x2 = (Widths[0] + (Widths[1] / 2) - (Text[0] != null ? 1 : 0)) * 10;
@@ -65,7 +65,7 @@ namespace GhBadgesSharp.ViewModels
             TextPosition = new[] { new Point(x1, 0), new Point(x2, 0) };
 
             // value in original template: {{=(it.widths[0]-(10+it.logoWidth+it.logoPadding))*10}}
-            var textWidth1 = (Widths[0] - (10 + LogoWidth + LogoPadding)) * 10;
+            var textWidth1 = (Widths[0] - 10) * 10;
 
             // value in original template: {{=(it.widths[1]-10)*10}}
             var textWidth2 = (Widths[1] - 10) * 10;

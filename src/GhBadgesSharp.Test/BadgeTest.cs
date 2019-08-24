@@ -42,7 +42,7 @@ namespace GhBadgesSharp.Test
         {
             var testId = GetTestCaseFileName(style, leftText, rightText, color, labelColor, leftLink, rightLink);
 
-            var badge = Badge.MakeBadge(style, leftText, rightText, color, labelColor, null, null, null, leftLink, rightLink);
+            var badge = Badge.MakeBadge(style, leftText, rightText, color, labelColor, leftLink, rightLink);
             var writer = new ApprovalTextWriter(GetBadgeHtml(badge, style, leftText, rightText, color, labelColor, leftLink, rightLink), "html");
 
             Approvals.Verify(writer, new ApprovalNamer(testId), Approvals.GetReporter());

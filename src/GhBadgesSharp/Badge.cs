@@ -140,13 +140,10 @@ namespace GhBadgesSharp
             string rightText,
             string color = null,
             string labelColor = null,
-            string logo = null,
-            int? logoPosition = null,
-            int? logoWidth = null,
             string leftLink = null,
             string rightLink = null)
         {
-            var badgeData = GetViewModel(style, leftText, rightText, color, labelColor, logo, logoPosition, logoWidth, leftLink, rightLink);
+            var badgeData = GetViewModel(style, leftText, rightText, color, labelColor, leftLink, rightLink);
             return RenderBadge(badgeData);
         }
 
@@ -157,9 +154,6 @@ namespace GhBadgesSharp
                 string rightText,
                 string color = null,
                 string labelColor = null,
-                string logo = null,
-                int? logoPosition = null,
-                int? logoWidth = null,
                 string leftLink = null,
                 string rightLink = null)
         {
@@ -184,27 +178,12 @@ namespace GhBadgesSharp
             //    }
             //}
 
-            logoWidth = logoWidth ?? (logo != null ? 14 : 0);
-
-            int logoPadding;
-            if (leftText.Length == 0)
-            {
-                logoPadding = 0;
-            }
-            else
-            {
-                logoPadding = logo != null ? 3 : 0;
-            }
 
             var badgeData = new BadgeData(
                 leftText: leftText,
                 rightText: rightText,
                 leftLink: leftLink,
                 rightLink: rightLink,
-                logo: logo,
-                logoPosition: logoPosition,
-                logoWidth: logoWidth,
-                logoPadding: logoPadding,
                 colorA: Color.Get(labelColor),
                 colorB: Color.Get(color)
             );
@@ -215,7 +194,7 @@ namespace GhBadgesSharp
 
 
         private static XElement RenderBadge(ViewModelBase viewModel)
-        {           
+        {
             var template = viewModel.GetTemplate();
 
             var context = new TemplateContext();
@@ -237,7 +216,7 @@ namespace GhBadgesSharp
             {
                 case BadgeStyle.Flat:
                     return new FlatViewModel(data);
-                    
+
                 case BadgeStyle.FlatSquare:
                     return new FlatSquareViewModel(data);
 

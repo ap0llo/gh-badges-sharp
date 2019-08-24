@@ -156,9 +156,7 @@ namespace GhBadgesSharp.Test
         [InlineData("", null)]
         [InlineData("not-a-color", null)]
         [InlineData(null, null)]
-        [InlineData("red", "red")]
         [InlineData("green", "green")]
-        [InlineData("blue", "blue")]
         [InlineData("yellow", "yellow")]
         public void Get_returns_expected_result(string color, string expectedResult)
         {
