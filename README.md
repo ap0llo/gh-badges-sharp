@@ -20,7 +20,7 @@ GhBadgesSharp is distributed as NuGet package.
 
 - Prerelease and stable builds are available in the
   [GitHub Package Registry](https://github.com/ap0llo/gh-badges-sharp/packages/13795)
-- Stable build are also available on [NuGet.org]
+- Stable build are also available on [NuGet.org](https://www.nuget.org/packages/Grynwald.GhBadgesSharp)
 
 ## Usage
 
@@ -29,26 +29,7 @@ It will return the badge as an SVG image (as `XElement`).
 
 The following code shows how to render this badge:
 
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="79.652" height="20">
-  <linearGradient id="smooth" x2="0" y2="100%">
-    <stop offset="0" stop-color="#bbb" stop-opacity=".1" />
-    <stop offset="1" stop-opacity=".1" />
-  </linearGradient>
-  <clipPath id="round">
-    <rect width="79.652" height="20" rx="3" fill="#fff" />
-  </clipPath>
-  <g clip-path="url(#round)">
-    <rect width="37.533" height="20" fill="#555" />
-    <rect x="37.533" width="42.119" height="20" fill="#97ca00" />
-    <rect width="79.652" height="20" fill="url(#smooth)" />
-  </g>
-  <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="110">
-    <text x="197.665" y="150" fill="#010101" fill-opacity=".3" transform="scale(0.1)" textLength="275.33" lengthAdjust="spacing">Hello</text>
-    <text x="197.665" y="140" transform="scale(0.1)" textLength="275.33" lengthAdjust="spacing">Hello</text>
-    <text x="575.925" y="150" fill="#010101" fill-opacity=".3" transform="scale(0.1)" textLength="321.19" lengthAdjust="spacing">World</text>
-    <text x="575.925" y="140" transform="scale(0.1)" textLength="321.19" lengthAdjust="spacing">World</text>
-  </g>
-</svg>
+![Example Badge](./docs/img/examplebadge.svg)
 
 ```cs
 using System.IO;
