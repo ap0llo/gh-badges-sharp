@@ -38,7 +38,7 @@ namespace GhBadgesSharp.ViewModels
 
             Text = new[] { EscapeXml(leftText), EscapeXml(rightText) };
 
-            Links = new[] { NullIfEmptyString(badgeData.LeftLink), NullIfEmptyString(badgeData.RightLink) ?? NullIfEmptyString(badgeData.LeftLink) };
+            Links = new[] { NullIfEmptyString(badgeData.LeftLink?.ToString()), NullIfEmptyString(badgeData.RightLink?.ToString()) ?? NullIfEmptyString(badgeData.LeftLink?.ToString()) };
         }
 
 

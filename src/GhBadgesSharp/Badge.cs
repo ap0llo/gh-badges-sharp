@@ -167,8 +167,8 @@ namespace GhBadgesSharp
             string rightText,
             string color = null,
             string labelColor = null,
-            string leftLink = null,
-            string rightLink = null)
+            Uri leftLink = null,
+            Uri rightLink = null)
         {
             if (!Enum.IsDefined(typeof(BadgeStyle), style))
                 throw new ArgumentException("Undefined badge style", nameof(style));
@@ -184,8 +184,8 @@ namespace GhBadgesSharp
                 string rightText,
                 string color = null,
                 string labelColor = null,
-                string leftLink = null,
-                string rightLink = null)
+                Uri leftLink = null,
+                Uri rightLink = null)
         {
 
             leftText = leftText ?? "";

@@ -1,4 +1,6 @@
-﻿namespace GhBadgesSharp
+﻿using System;
+
+namespace GhBadgesSharp
 {
     internal class BadgeData
     {
@@ -6,9 +8,9 @@
 
         public string RightText { get; }
 
-        public string LeftLink { get; }
+        public Uri LeftLink { get; }
 
-        public string RightLink { get; }
+        public Uri RightLink { get; }
 
         public Color ColorA { get; }
 
@@ -17,7 +19,7 @@
 
         public BadgeData(
             string leftText, string rightText,
-            string leftLink, string rightLink,
+            Uri leftLink, Uri rightLink,
             Color colorA, Color colorB)
         {
             LeftText = leftText;
