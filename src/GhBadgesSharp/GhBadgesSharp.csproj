@@ -5,6 +5,7 @@
     <IsPackable>true</IsPackable>
     <AssemblyName>Grynwald.GhBadgesSharp</AssemblyName>
     <RootNamespace>Grynwald.GhBadgesSharp</RootNamespace>
+    <DocumentationFile>$(OutputPath)$(AssemblyName).xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -20,5 +21,17 @@
     <PackageReference Include="Fluid.Core" Version="1.0.0-beta-9571" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
   </ItemGroup>
+
+  <PropertyGroup>
+      <!-- SourceLink (https://github.com/dotnet/sourcelink) settings -->
+      <PublishRepositoryUrl>true</PublishRepositoryUrl>    
+      <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+  </PropertyGroup>
+
+  <!-- Include source link -->
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta-62925-02" PrivateAssets="All" />
+  </ItemGroup>
+
 
 </Project>
