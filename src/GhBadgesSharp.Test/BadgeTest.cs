@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 using System.Xml.Linq;
@@ -26,7 +27,7 @@ namespace Grynwald.GhBadgesSharp.Test
                 m_Id = id;
             }
 
-            public override string GetSubdirectory() => "/testdata";
+            public override string Subdirectory => Path.Combine(base.Subdirectory, "testdata");
         }
 
 
