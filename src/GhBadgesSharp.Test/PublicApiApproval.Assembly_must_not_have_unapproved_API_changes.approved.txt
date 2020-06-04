@@ -1,8 +1,8 @@
-﻿[assembly: System.Runtime.CompilerServices.InternalsVisibleToAttribute("Grynwald.GhBadgesSharp.Test")]
-[assembly: System.Runtime.Versioning.TargetFrameworkAttribute(".NETStandard,Version=v2.0", FrameworkDisplayName="")]
+﻿[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("Grynwald.GhBadgesSharp.Test")]
+[assembly: System.Runtime.Versioning.TargetFramework(".NETStandard,Version=v2.0", FrameworkDisplayName="")]
 namespace Grynwald.GhBadgesSharp
 {
-    public class static Badge
+    public static class Badge
     {
         public static System.Xml.Linq.XElement MakeBadge(Grynwald.GhBadgesSharp.BadgeStyle style, string leftText, string rightText, string color = null, string labelColor = null, System.Uri leftLink = null, System.Uri rightLink = null) { }
     }
@@ -14,7 +14,7 @@ namespace Grynwald.GhBadgesSharp
         ForTheBadge = 3,
         Social = 4,
     }
-    public class static NamedColor
+    public static class NamedColor
     {
         public const string Blue = "blue";
         public const string BrightGreen = "brightgreen";
