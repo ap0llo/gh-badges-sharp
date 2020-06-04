@@ -15,7 +15,7 @@
 	</PropertyGroup>
 	
 	<ItemGroup>
-		<PackageReference Include="Nerdbank.GitVersioning" Version="2.3.38" PrivateAssets="all" />
+		<PackageReference Include="Nerdbank.GitVersioning" Version="3.1.91" PrivateAssets="all" />
 	</ItemGroup>
 
 	<!--NuGet package properties -->
