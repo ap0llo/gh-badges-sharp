@@ -16,7 +16,7 @@ namespace Grynwald.GhBadgesSharp.Test
             var assembly = typeof(Badge).Assembly;
 
             // ACT
-            var publicApi = ApiGenerator.GeneratePublicApi(assembly);
+            var publicApi = ApiGenerator.GeneratePublicApi(assembly, options: null);
 
             // ASSERT
             var writer = new ApprovalTextWriter(publicApi);
