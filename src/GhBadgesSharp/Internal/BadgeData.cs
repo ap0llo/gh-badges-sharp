@@ -8,19 +8,19 @@ namespace Grynwald.GhBadgesSharp.Internal
 
         public string RightText { get; }
 
-        public Uri LeftLink { get; }
+        public Uri? LeftLink { get; }
 
-        public Uri RightLink { get; }
+        public Uri? RightLink { get; }
 
-        public Color ColorA { get; }
+        public Color? ColorA { get; }
 
-        public Color ColorB { get; }
+        public Color? ColorB { get; }
 
 
         public BadgeData(
             string leftText, string rightText,
-            Uri leftLink, Uri rightLink,
-            Color colorA, Color colorB)
+            Uri? leftLink, Uri? rightLink,
+            Color? colorA, Color? colorB)
         {
             LeftText = leftText;
             RightText = rightText;

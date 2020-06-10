@@ -149,7 +149,7 @@ namespace Grynwald.GhBadgesSharp.Internal
         }
 
 
-        public static Color Get(string color)
+        public static Color? Get(string? color)
         {
             if (color == null)
                 return null;

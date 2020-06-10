@@ -21,7 +21,7 @@ namespace Grynwald.GhBadgesSharp.Internal.ViewModels
         /// <summary>
         /// Gets the left/right colors of the badge (to be used as value for the 'fill' attribute in the svg)
         /// </summary>
-        public IReadOnlyCollection<string> Fill { get; }
+        public IReadOnlyCollection<string?> Fill { get; }
 
         /// <summary>
         /// Gets the position of the text elements in the svg (to be used as value for the 'x' and 'y' attributes in the svg)
@@ -43,12 +43,12 @@ namespace Grynwald.GhBadgesSharp.Internal.ViewModels
             // original template:
             //  ImageWidth: { {(it.widths[0] -= it.text[0].length ? 0 : (it.logo ? (it.colorA ? 0 : 7) : 11))+it.widths[1]}}
             //  widths: [leftWidth + 10 + logoWidth + logoPadding, rightWidth + 10]
-            m_Widths[0] = (m_LeftTextWidth + 10 + 0 + 0) - (Text[0].Length > 0 ? 0 : 11);
+            m_Widths[0] = (m_LeftTextWidth + 10 + 0 + 0) - ((Text[0]?.Length ?? 0) > 0 ? 0 : 11);
             m_Widths[1] = m_RightTextWidth + 10;
             ImageWidth = m_Widths[0] + m_Widths[1];
 
             // value in original template: {{=it.escapeXml(it.text[0].length || it.logo && it.colorA ? (it.colorA||"#555") : (it.colorB||"#4c1"))}}
-            var fill1 = Text[0].Length > 0 ? (m_BadgeData.ColorA?.SvgName ?? "#555") : (m_BadgeData.ColorB?.SvgName ?? "#4c1");
+            var fill1 = (Text[0]?.Length ?? 0) > 0 ? (m_BadgeData.ColorA?.SvgName ?? "#555") : (m_BadgeData.ColorB?.SvgName ?? "#4c1");
 
             // value in original template: {{=it.escapeXml(it.colorB||"#4c1")}}
             var fill2 = m_BadgeData.ColorB?.SvgName ?? "#4c1";

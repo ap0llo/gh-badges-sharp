@@ -22,7 +22,7 @@ namespace Grynwald.GhBadgesSharp.Internal.ViewModels
         public IReadOnlyList<double> Widths => m_Widths;
 
 
-        public IReadOnlyList<string> Fill { get; }
+        public IReadOnlyList<string?> Fill { get; }
 
         /// <summary>
         /// Gets the position of the text elements in the svg (to be used as value for the 'x' and 'y' attributes in the svg)

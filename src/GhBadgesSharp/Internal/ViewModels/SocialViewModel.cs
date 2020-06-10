@@ -40,7 +40,7 @@ namespace Grynwald.GhBadgesSharp.Internal.ViewModels
             m_Widths[0] = m_LeftTextWidth + 10;
             m_Widths[1] = m_RightTextWidth + 10;
 
-            ImageWidth = m_Widths[0] + 1 + (Text[1] != null && Text[1].Length > 0 ? m_Widths[1] + 2 : 0);
+            ImageWidth = m_Widths[0] + 1 + (Text[1] != null && Text[1]?.Length > 0 ? m_Widths[1] + 2 : 0);
 
             // As in the original template, decrement widths[1] by four after calculating image width
             // {{it.widths[1]-=4;}}
@@ -70,7 +70,7 @@ namespace Grynwald.GhBadgesSharp.Internal.ViewModels
         internal override FluidTemplate GetTemplate() => Templates.GetTemplate("social");
 
 
-        private static string Capitalize(string value)
+        private static string? Capitalize(string? value)
         {
             if (value == null)
             {

@@ -14,15 +14,15 @@ namespace Grynwald.GhBadgesSharp.Internal.ViewModels
         /// <summary>
         /// Gets the left/right text (xml-escaped)
         /// </summary>
-        public IReadOnlyList<string> Text { get; }
+        public IReadOnlyList<string?> Text { get; }
 
         /// <summary>
         /// Gets the left/right link
         /// </summary>
-        public IReadOnlyList<string> Links { get; }
+        public IReadOnlyList<string?> Links { get; }
 
 
-        protected ViewModelBase(BadgeData badgeData, string leftTextOverride = null, string rightTextOverride = null)
+        protected ViewModelBase(BadgeData badgeData, string? leftTextOverride = null, string? rightTextOverride = null)
         {
             m_BadgeData = badgeData ?? throw new ArgumentNullException(nameof(badgeData));
 
@@ -36,7 +36,7 @@ namespace Grynwald.GhBadgesSharp.Internal.ViewModels
             m_LeftTextWidth = GetTextWidth(leftText);
             m_RightTextWidth = GetTextWidth(rightText);
 
-            Text = new[] { EscapeXml(leftText), EscapeXml(rightText) };
+            Text = new [] { EscapeXml(leftText), EscapeXml(rightText) };
 
             Links = new[] { NullIfEmptyString(badgeData.LeftLink?.ToString()), NullIfEmptyString(badgeData.RightLink?.ToString()) ?? NullIfEmptyString(badgeData.LeftLink?.ToString()) };
         }
@@ -45,7 +45,7 @@ namespace Grynwald.GhBadgesSharp.Internal.ViewModels
         internal abstract FluidTemplate GetTemplate();
 
 
-        protected static string EscapeXml(string value)
+        protected static string? EscapeXml(string? value)
         {
             if (value == null)
             {
@@ -55,9 +55,9 @@ namespace Grynwald.GhBadgesSharp.Internal.ViewModels
             return new XText(value).ToString();
         }
 
-        protected static string NullIfEmptyString(string str) => str == null ? null : (String.IsNullOrEmpty(str) ? null : str);
+        protected static string? NullIfEmptyString(string? str) => str == null ? null : (String.IsNullOrEmpty(str) ? null : str);
 
-        protected static double GetTextWidth(string text)
+        protected static double GetTextWidth(string? text)
         {
             if (text == null)
                 return 0d;

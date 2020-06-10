@@ -166,10 +166,10 @@ namespace Grynwald.GhBadgesSharp
             BadgeStyle style,
             string leftText,
             string rightText,
-            string color = null,
-            string labelColor = null,
-            Uri leftLink = null,
-            Uri rightLink = null)
+            string? color = null,
+            string? labelColor = null,
+            Uri? leftLink = null,
+            Uri? rightLink = null)
         {
             if (!Enum.IsDefined(typeof(BadgeStyle), style))
                 throw new ArgumentException("Undefined badge style", nameof(style));
@@ -183,10 +183,10 @@ namespace Grynwald.GhBadgesSharp
                 BadgeStyle style,
                 string leftText,
                 string rightText,
-                string color = null,
-                string labelColor = null,
-                Uri leftLink = null,
-                Uri rightLink = null)
+                string? color = null,
+                string? labelColor = null,
+                Uri? leftLink = null,
+                Uri? rightLink = null)
         {
 
             leftText = leftText ?? "";

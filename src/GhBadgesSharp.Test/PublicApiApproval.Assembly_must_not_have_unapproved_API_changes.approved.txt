@@ -4,7 +4,7 @@ namespace Grynwald.GhBadgesSharp
 {
     public static class Badge
     {
-        public static System.Xml.Linq.XElement MakeBadge(Grynwald.GhBadgesSharp.BadgeStyle style, string leftText, string rightText, string color = null, string labelColor = null, System.Uri leftLink = null, System.Uri rightLink = null) { }
+        public static System.Xml.Linq.XElement MakeBadge(Grynwald.GhBadgesSharp.BadgeStyle style, string leftText, string rightText, string? color = null, string? labelColor = null, System.Uri? leftLink = null, System.Uri? rightLink = null) { }
     }
     public enum BadgeStyle
     {

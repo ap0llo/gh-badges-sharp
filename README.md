@@ -1,7 +1,6 @@
 # gh-badges-sharp
 
-A C#/.NET port of the [gh-badges](https://github.com/badges/shields/tree/master/gh-badges)
-library that powers [shields.io](https://shields.io)
+A C#/.NET port of the [gh-badges](https://github.com/badges/shields/tree/master/gh-badges) library that powers [shields.io](https://shields.io)
 
 ## Overview
 

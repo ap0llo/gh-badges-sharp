@@ -56,7 +56,7 @@ namespace Grynwald.GhBadgesSharp.Test
 
         private static string GetTestCaseFileName(BadgeStyle style, string leftText, string rightText, string color, string labelColor, string leftLink, string rightLink)
         {
-            string GetSha256Hash(string value)
+            string? GetSha256Hash(string value)
             {
                 if (value == null)
                 {
@@ -100,7 +100,7 @@ namespace Grynwald.GhBadgesSharp.Test
             return nameBuilder.ToString();
         }
 
-        private static string GetBadgeHtml(XElement badge, BadgeStyle style, string leftText, string rightText, string color, string labelColor, string leftLink, string rightLink)
+        private static string GetBadgeHtml(XElement badge, BadgeStyle style, string leftText, string rightText, string color, string labelColor, string? leftLink, string? rightLink)
         {
             return $@"<!DOCTYPE html>
             <html>

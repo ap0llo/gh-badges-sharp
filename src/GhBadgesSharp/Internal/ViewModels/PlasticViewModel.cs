@@ -21,7 +21,7 @@ namespace Grynwald.GhBadgesSharp.Internal.ViewModels
         /// <summary>
         /// Gets the left/right colors of the badge (to be used as value for the 'fill' attribute in the svg)
         /// </summary>
-        public IReadOnlyCollection<string> Fill { get; }
+        public IReadOnlyCollection<string?> Fill { get; }
 
         /// <summary>
         /// Gets the position of the text elements in the svg (to be used as value for the 'x' and 'y' attributes in the svg)
