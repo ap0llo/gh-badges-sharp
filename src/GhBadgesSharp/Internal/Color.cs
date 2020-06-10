@@ -171,7 +171,7 @@ namespace Grynwald.GhBadgesSharp.Internal
             if (NamedColor.Exists(value))
             {
                 return NamedColor.GetColor(value);
-            }           
+            }
             else
             {
                 return value;
