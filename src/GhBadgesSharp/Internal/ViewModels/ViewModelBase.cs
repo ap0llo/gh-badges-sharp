@@ -36,7 +36,7 @@ namespace Grynwald.GhBadgesSharp.Internal.ViewModels
             m_LeftTextWidth = GetTextWidth(leftText);
             m_RightTextWidth = GetTextWidth(rightText);
 
-            Text = new [] { EscapeXml(leftText), EscapeXml(rightText) };
+            Text = new[] { EscapeXml(leftText), EscapeXml(rightText) };
 
             Links = new[] { NullIfEmptyString(badgeData.LeftLink?.ToString()), NullIfEmptyString(badgeData.RightLink?.ToString()) ?? NullIfEmptyString(badgeData.LeftLink?.ToString()) };
         }
