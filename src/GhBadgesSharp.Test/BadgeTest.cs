@@ -35,18 +35,18 @@ namespace Grynwald.GhBadgesSharp.Test
         [PairwiseData]
         public void MakeBadge_returns_expected_svg(
             BadgeStyle style,
-            [CombinatorialValues("Hello")]string leftText,
-            [CombinatorialValues("World")]string rightText,
-            [CombinatorialValues("yellow", "red")]string color,
-            [CombinatorialValues(null, "", "blue")]string labelColor,
-            [CombinatorialValues(null, "http://example.com")]string leftLink,
-            [CombinatorialValues(null, "http://github.com")]string rightLink)
+            [CombinatorialValues("Hello")] string leftText,
+            [CombinatorialValues("World")] string rightText,
+            [CombinatorialValues("yellow", "red")] string color,
+            [CombinatorialValues(null, "", "blue")] string labelColor,
+            [CombinatorialValues(null, "http://example.com")] string leftLink,
+            [CombinatorialValues(null, "http://github.com")] string rightLink)
         {
             var testId = GetTestCaseFileName(style, leftText, rightText, color, labelColor, leftLink, rightLink);
 
             var leftUri = leftLink != null ? new Uri(leftLink) : null;
             var rightUri = rightLink != null ? new Uri(rightLink) : null;
-            
+
             var badge = Badge.MakeBadge(style, leftText, rightText, color, labelColor, leftUri, rightUri);
             var writer = new ApprovalTextWriter(GetBadgeHtml(badge, style, leftText, rightText, color, labelColor, leftLink, rightLink), "html");
 

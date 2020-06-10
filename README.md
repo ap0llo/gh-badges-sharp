@@ -10,9 +10,9 @@ library that powers [shields.io](https://shields.io)
 [![Renovate](https://img.shields.io/badge/Renovate-enabled-brightgreen)](https://renovatebot.com/)
 
 [![NuGet](https://img.shields.io/nuget/v/Grynwald.GhBadgesSharp.svg)](https://www.nuget.org/packages/Grynwald.GhBadgesSharp)
+[![MyGet](https://img.shields.io/myget/ap0llo-gh-badges-sharp/vpre/Grynwald.GhBadgesSharp.svg?label=myget)](https://www.myget.org/feed/ap0llo-gh-badges-sharp/package/nuget/Grynwald.GhBadgesSharp)
 
-GhBadgesSharp is a C#/.NET port of the [gh-badges](https://github.com/badges/shields/tree/master/gh-badges)
-library that powers [shields.io](https://shields.io).
+GhBadgesSharp is a C#/.NET port of the [gh-badges](https://github.com/badges/shields/tree/master/gh-badges) library that powers [shields.io](https://shields.io).
 
 See [Acknowledgments](#acknowledgments) for license info.
 
@@ -20,9 +20,8 @@ See [Acknowledgments](#acknowledgments) for license info.
 
 GhBadgesSharp is distributed as NuGet package.
 
-- Prerelease and stable builds are available in the
-  [GitHub Package Registry](https://github.com/ap0llo/gh-badges-sharp/packages/13795)
-- Stable build are also available on [NuGet.org](https://www.nuget.org/packages/Grynwald.GhBadgesSharp)
+- Prerelease and stable builds are available on [MyGet](https://www.myget.org/feed/Packages/ap0llo-gh-badges-sharp)
+- Stable builds are also available on [NuGet.org](https://www.nuget.org/packages/Grynwald.GhBadgesSharp)
 
 ## Usage
 
@@ -114,8 +113,6 @@ nbgv prepare-release
 
 ## CI Builds
 
-- Continuous integration builds using [Azure Pipelines](https://dev.azure.com/ap0llo/OSS/_build?definitionId=13) run for every
-  commit on the `master` branch as well as release- (`release/*`) and feature- (`features/*`) branches.
-- Builds of the `master` branch and release branches are published to the [GitHub package registry](https://github.com/ap0llo/gh-badges-sharp/packages/13795).
-- Builds of any release branch are also published to NuGet.org (no packages has been published there yet).
-- To prevent a commit from triggering a CI build, include `[Skip CI]` in the commit message.
+- Continuous integration builds using [Azure Pipelines](https://dev.azure.com/ap0llo/OSS/_build?definitionId=13) run for every commit on the `master` branch as well as release- (`release/*`) branches.
+- Builds of the `master` branch and release branches are published to [MyGet](https://www.myget.org/feed/Packages/ap0llo-gh-badges-sharp).
+- Builds of any release branch are also published to NuGet.org.

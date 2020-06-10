@@ -30,7 +30,7 @@ namespace Grynwald.GhBadgesSharp.Internal
                 s_Templates.Add(templateName, new Lazy<FluidTemplate>(() =>
                 {
                     var templateSource = EmbeddedResource.Load(resourceName);
-                    return FluidTemplate.Parse(templateSource);                        
+                    return FluidTemplate.Parse(templateSource);
                 }));
 
             }
