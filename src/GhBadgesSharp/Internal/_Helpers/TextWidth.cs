@@ -46,7 +46,7 @@ namespace Grynwald.GhBadgesSharp.Internal
 
         static TextWidth()
         {
-            s_Widths = JsonConvert.DeserializeObject<object[][]>(EmbeddedResource.Load(s_ResourceName));
+            s_Widths = JsonConvert.DeserializeObject<object[][]>(EmbeddedResource.Load(s_ResourceName))!;
             s_DefaultWidth = Get("m");
         }
 
