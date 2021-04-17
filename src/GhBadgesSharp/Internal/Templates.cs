@@ -10,7 +10,7 @@ namespace Grynwald.GhBadgesSharp.Internal
     {
         private const string s_TemplateResourcePrefix = "Grynwald.GhBadgesSharp.Resources.Templates.";
         private const string s_TemplateResourceSuffix = "-template.liquid";
-        private static readonly Dictionary<string, Lazy<FluidTemplate>> s_Templates = new Dictionary<string, Lazy<FluidTemplate>>();
+        private static readonly Dictionary<string, Lazy<IFluidTemplate>> s_Templates = new Dictionary<string, Lazy<IFluidTemplate>>();
 
         static Templates()
         {
@@ -27,16 +27,17 @@ namespace Grynwald.GhBadgesSharp.Internal
                     .Replace(s_TemplateResourceSuffix, "");
 
 
-                s_Templates.Add(templateName, new Lazy<FluidTemplate>(() =>
+                s_Templates.Add(templateName, new Lazy<IFluidTemplate>(() =>
                 {
                     var templateSource = EmbeddedResource.Load(resourceName);
-                    return FluidTemplate.Parse(templateSource);
+                    var parser = new FluidParser();
+                    return parser.Parse(templateSource);
                 }));
 
             }
         }
 
-        public static FluidTemplate GetTemplate(string name)
+        public static IFluidTemplate GetTemplate(string name)
         {
             if (name == null)
                 throw new ArgumentNullException(nameof(name));

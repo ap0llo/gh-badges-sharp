@@ -73,6 +73,6 @@ namespace Grynwald.GhBadgesSharp.Internal.ViewModels
             TextWidth = new[] { textWidth1, textWidth2 };
         }
 
-        internal override FluidTemplate GetTemplate() => Templates.GetTemplate("for-the-badge");
+        internal override IFluidTemplate GetTemplate() => Templates.GetTemplate("for-the-badge");
     }
 }
