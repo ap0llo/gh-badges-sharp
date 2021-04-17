@@ -42,7 +42,7 @@ namespace Grynwald.GhBadgesSharp.Internal.ViewModels
         }
 
 
-        internal abstract FluidTemplate GetTemplate();
+        internal abstract IFluidTemplate GetTemplate();
 
 
         protected static string? EscapeXml(string? value)

@@ -67,7 +67,7 @@ namespace Grynwald.GhBadgesSharp.Internal.ViewModels
         }
 
 
-        internal override FluidTemplate GetTemplate() => Templates.GetTemplate("social");
+        internal override IFluidTemplate GetTemplate() => Templates.GetTemplate("social");
 
 
         private static string? Capitalize(string? value)

@@ -11,6 +11,6 @@ namespace Grynwald.GhBadgesSharp.Internal.ViewModels
         { }
 
 
-        internal override FluidTemplate GetTemplate() => Templates.GetTemplate("flat-square");
+        internal override IFluidTemplate GetTemplate() => Templates.GetTemplate("flat-square");
     }
 }

@@ -213,10 +213,12 @@ namespace Grynwald.GhBadgesSharp
         {
             var template = viewModel.GetTemplate();
 
-            var context = new TemplateContext();
-            context.MemberAccessStrategy.Register(viewModel.GetType());
-            context.MemberAccessStrategy.Register(typeof(Point));
-            context.MemberAccessStrategy.Register(typeof(Color));
+            var options = new TemplateOptions();
+            options.MemberAccessStrategy.Register(viewModel.GetType());
+            options.MemberAccessStrategy.Register<Point>();
+            options.MemberAccessStrategy.Register<Color>();
+
+            var context = new TemplateContext(options);
             context.SetValue("it", viewModel);
 
             var rendered = template.Render(context).Trim();
