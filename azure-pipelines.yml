@@ -1,16 +1,16 @@
 # Pipeline consists of 4 jobs
-# - Build_an_Test: 
+# - Build_an_Test:
 #   - Checks formatting
 #   - Builds the project
 #   - Runs all the tests
 #   - Creates a NuGet package
-# - Publish_to_MyGet: 
+# - Publish_to_MyGet:
 #   - Pushes the NuGet package to MyGet
 #   - Assumes a Service Connection for MyGet was set up in the Team project running the pipeline
 #   - The name of the service connection is stored in the variable myget_ServiceConnectionName (defined below)
-#   - Only runs when building a release branch or the master branch
+#   - Only runs when building a release branch or the 'master' branch
 # - Publish_to_NuGet_org
-#   - Pushes the NuGet package to NuGet.org 
+#   - Pushes the NuGet package to NuGet.org
 #   - Assumes a Service Connection for NuGet was set up in the Team project running the pipeline
 #   - The name of the service connection is stored in the variable nuget_org_ServiceConnectionName (defined below)
 #   - The variable nuget_org_PackageName defines which package is produced by the pipeline
@@ -48,20 +48,24 @@ variables:
   github_ServiceConnectionName: 'GitHub: ap0llo'                           # the name of the Azure DevOps service connection to use for creating GitHub releases
   github_repositoryName: 'ap0llo/gh-badges-sharp'                          # the name of the github repo to create the release in
 
+  # Azure DevOps agent settings
+  azuredevops_vmimage: windows-latest
+
 jobs:
 
 # Main Build and test job: Builds the projects and runs all tests
 - job: Build_and_Test
   displayName: Build and Test
-  pool: Hosted VS2017
+  pool:
+    vmImage: $(azuredevops_vmimage)
   steps:
 
   # Check out git submodules
   - checkout: self
     clean: all
     submodules: 'true'
-
-  # Install .NET Core SDK and runtime (version specified in the variables section)
+    
+  # Install .NET Core SDK and runtime (version specified in global.json)
   - task: UseDotNet@2
     displayName: 'Install .NET Core SDK'
     inputs:
@@ -138,7 +142,8 @@ jobs:
 # Job to push package to MyGet.org after build
 - job: Publish_to_MyGet
   displayName: Publish to MyGet
-  pool: Hosted VS2017
+  pool:
+    vmImage: $(azuredevops_vmimage)
   # Only run after main build job and only if the current branch is master or a release branch
   dependsOn: Build_and_Test
   condition: and(succeeded('Build_and_Test'), or(eq(variables['build.sourceBranch'], 'refs/heads/master'), startsWith(variables['Build.SourceBranch'], 'refs/heads/release/') ))
@@ -162,7 +167,8 @@ jobs:
 # Job to push package to NuGet.org after build (only for builds of release branches)
 - job: Publish_to_NuGet_org
   displayName: Publish to NuGet.org
-  pool: Hosted VS2017
+  pool:
+    vmImage: $(azuredevops_vmimage)
   # Only run after main build job and only if the current branch is a release branch
   dependsOn: Build_and_Test
   condition: |
@@ -187,11 +193,12 @@ jobs:
   # Get artifacts
   - task: DownloadBuildArtifacts@0
     displayName: 'Download Artifacts: $(artifactsName_Binaries)'
-    inputs: 
+    inputs:
       buildType: current
       downloadType: single
       artifactName: $(artifactsName_Binaries)
       downloadPath: $(Build.ArtifactStagingDirectory)
+
   # Upload to NuGet.org
   - task: NuGetCommand@2
     displayName: 'Upload package to NuGet.org'
@@ -203,9 +210,10 @@ jobs:
 # Job to create a GitHub release (only if a package was uploaded to NuGet.org)
 - job: Create_GitHub_Release
   displayName: Create GitHub Release
-  pool: Hosted VS2017
+  pool:
+    vmImage: $(azuredevops_vmimage)
   # Only run if build was successful and a package was uploaded to nuget.org
-  dependsOn: 
+  dependsOn:
   - Build_and_Test
   - Publish_to_NuGet_org
   condition: succeeded('Publish_to_NuGet_org')
@@ -233,14 +241,14 @@ jobs:
   # Get artifacts 
   - task: DownloadBuildArtifacts@0
     displayName: 'Download Artifacts: $(artifactsName_Binaries)'
-    inputs: 
+    inputs:
       buildType: current
       downloadType: single
       artifactName: $(artifactsName_Binaries)
       downloadPath: $(Build.ArtifactStagingDirectory)
   - task: DownloadBuildArtifacts@0
     displayName: 'Download Artifacts: $(artifactsName_ChangeLog)'
-    inputs: 
+    inputs:
       buildType: current
       downloadType: single
       artifactName: $(artifactsName_ChangeLog)
@@ -248,6 +256,7 @@ jobs:
 
   # Create GitHub release
   - task: GithubRelease@0
+    displayName: Create GitHub Release
     inputs:
       gitHubConnection: $(github_ServiceConnectionName)
       repositoryName: $(github_repositoryName)
