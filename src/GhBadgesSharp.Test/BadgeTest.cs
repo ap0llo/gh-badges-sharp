@@ -63,7 +63,7 @@ namespace Grynwald.GhBadgesSharp.Test
                     return null;
                 }
 
-                var crypt = new SHA256Managed();
+                var crypt = SHA256.Create();
                 var hash = crypt.ComputeHash(Encoding.UTF8.GetBytes(value));
 
                 var result = new StringBuilder();

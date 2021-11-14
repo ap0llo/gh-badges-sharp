@@ -33,6 +33,7 @@
 	<!-- SourceLink  (https://github.com/dotnet/sourcelink) -->
 	<PropertyGroup>
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>    
+		<GenerateRepositoryUrlAttribute>false</GenerateRepositoryUrlAttribute>
 		<AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
 		<EmbedUntrackedSources>true</EmbedUntrackedSources>
 	</PropertyGroup>
