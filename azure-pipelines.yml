@@ -85,7 +85,7 @@ jobs:
     displayName: Set Version
 
   # Check the formatting using dotnet-format
-  - script: dotnet format ./src --folder --check
+  - script: dotnet format $(solutionPath) --verify-no-changes
     displayName: Check code formatting
   
   # Restore, Build, Test
