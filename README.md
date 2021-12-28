@@ -58,11 +58,11 @@ public class Program
 **Note:** This repository uses git submodules, clone using `git clone --recursive`
 
 ```bat
-  dotnet restore .\src\GhBadgesSharp.sln
+  dotnet restore .\GhBadgesSharp.sln
 
-  dotnet build .\src\GhBadgesSharp.sln
+  dotnet build .\GhBadgesSharp.sln
 
-  dotnet pack .\src\GhBadgesSharp.sln
+  dotnet pack .\GhBadgesSharp.sln
 ```
 
 ## Acknowledgments

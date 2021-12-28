@@ -11,7 +11,7 @@
 Push-Location (Get-RepositoryRoot)
 try {
     log "Running dotnet format"
-    exec "dotnet format src/GhBadgesSharp.sln"
+    exec "dotnet format GhBadgesSharp.sln"
 }
 finally {
     Pop-Location
