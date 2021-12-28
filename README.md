@@ -57,14 +57,15 @@ public class Program
 
 **Note:** This repository uses git submodules, clone using `git clone --recursive`
 
-```bat
-  dotnet restore .\GhBadgesSharp.sln
+Building GhBadgesSharp from source requires the .NET 6 SDK (version 6.0.101 as specified in [global.json](./global.json)) and uses [Cake](https://cakebuild.net/) for the build.
 
-  dotnet build .\GhBadgesSharp.sln
+To execute the default task, run
 
-  dotnet pack .\GhBadgesSharp.sln
+```ps1
+.\build.ps1
 ```
 
+This will build the project, run all tests and pack the NuGet package.
 ## Acknowledgments
 
 This library is a C# port of the [gh-badges](https://github.com/badges/shields/tree/master/gh-badges)
@@ -83,16 +84,16 @@ Libraries used (aside from .NET Core and .NET Standard):
 - [Fluid](https://github.com/sebastienros/fluid)
 - [Nerdbank.GitVersioning](https://github.com/AArnott/Nerdbank.GitVersioning/)
 - [SourceLink](https://github.com/dotnet/sourcelink)
-
-Addititional dependencies used for testing:
-
+- [ReportGenerator](https://github.com/danielpalme/ReportGenerator)
+- [Cake](https://cakebuild.net/)
+- [Cake.BuildSystems.Module](https://github.com/cake-contrib/Cake.BuildSystems.Module)
 - [xUnit](http://xunit.github.io/)
 - [ApprovalTests](https://github.com/approvals/ApprovalTests.Net)
 - [PublicApiGenerator](https://github.com/JakeGinnivan/ApiApprover)
 
 ## Versioning and Branching
 
-The version of this library is automatically derived from git and the information
+The version of this project is automatically derived from git and the information
 in `version.json` using [Nerdbank.GitVersioning](https://github.com/AArnott/Nerdbank.GitVersioning):
 
 - The master branch  always contains the latest version. Packages produced from
@@ -102,16 +103,9 @@ in `version.json` using [Nerdbank.GitVersioning](https://github.com/AArnott/Nerd
 - Builds from any other branch will have both the `-pre` prerelease tag and the git
   commit hash included in the version string
 
-To create a new release branch use the [`nbgv` tool](https://www.nuget.org/packages/nbgv/)
-(at least version `3.0.4-beta`):
+To create a new release branch use the [`nbgv` tool](https://www.nuget.org/packages/nbgv/):
 
 ```ps1
-dotnet tool install --global nbgv --version 3.0.4-beta
-nbgv prepare-release
+dotnet tool restore
+dotnet tool run nbgv -- prepare-release
 ```
-
-## CI Builds
-
-- Continuous integration builds using [Azure Pipelines](https://dev.azure.com/ap0llo/OSS/_build?definitionId=13) run for every commit on the `master` branch as well as release- (`release/*`) branches.
-- Builds of the `master` branch and release branches are published to [MyGet](https://www.myget.org/feed/Packages/ap0llo-gh-badges-sharp).
-- Builds of any release branch are also published to NuGet.org.

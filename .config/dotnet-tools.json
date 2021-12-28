@@ -3,15 +3,21 @@
   "isRoot": true,
   "tools": {
     "nbgv": {
-      "version": "3.4.244",
+      "version": "3.5.54-alpha",
       "commands": [
         "nbgv"
       ]
     },
     "grynwald.changelog": {
-      "version": "0.5.69-pre",
+      "version": "0.5.82-pre",
       "commands": [
         "changelog"
+      ]
+    },
+    "dotnet-reportgenerator-globaltool": {
+      "version": "5.0.0",
+      "commands": [
+        "reportgenerator"
       ]
     }
   }
