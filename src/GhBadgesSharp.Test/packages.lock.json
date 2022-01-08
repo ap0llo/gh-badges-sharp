@@ -109,11 +109,11 @@
       },
       "Fluid.Core": {
         "type": "Transitive",
-        "resolved": "2.2.9",
-        "contentHash": "co08cGFlEWtNyN8gEGAdmDhCwNXJeMsX0UPHUwRW2HS7hgI4ZDp4PfdaK38mqniKlYVCZvZN4ajK6t3V+JlIvg==",
+        "resolved": "2.2.13",
+        "contentHash": "X/nBbDDV3vwkZNqXS2tgk4pw59O4CL2DmPufweAxPO43aSbV6dXT4qJP3703C4x5HkZc6s1kgE145goacQao+g==",
         "dependencies": {
           "Microsoft.Extensions.FileProviders.Abstractions": "1.1.1",
-          "Parlot": "0.0.19",
+          "Parlot": "0.0.23",
           "TimeZoneConverter": "3.5.0"
         }
       },
@@ -338,8 +338,8 @@
       },
       "Parlot": {
         "type": "Transitive",
-        "resolved": "0.0.19",
-        "contentHash": "gelCmlRgIQKjAfd+wzkAqwExlD/qSGzBttYSmJyhco86xBZrucMCRRFbZEpadxD8hImgBLaiCRUm7ItuMzG94g=="
+        "resolved": "0.0.23",
+        "contentHash": "+Ts7GN++fLX5OOJfmnhzkKWBAovfykfnoZKT844Lnu3a/aNIvQFqdlZ8/b/SY9vE0+ho02/XnzbzWoXddceeDA=="
       },
       "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl": {
         "type": "Transitive",
@@ -1614,7 +1614,7 @@
       "Grynwald.GhBadgesSharp": {
         "type": "Project",
         "dependencies": {
-          "Fluid.Core": "2.2.9",
+          "Fluid.Core": "2.2.13",
           "Newtonsoft.Json": "13.0.1"
         }
       }
