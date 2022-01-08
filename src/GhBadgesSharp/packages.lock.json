@@ -4,13 +4,13 @@
     ".NETFramework,Version=v4.6.1": {
       "Fluid.Core": {
         "type": "Direct",
-        "requested": "[2.2.9, )",
-        "resolved": "2.2.9",
-        "contentHash": "co08cGFlEWtNyN8gEGAdmDhCwNXJeMsX0UPHUwRW2HS7hgI4ZDp4PfdaK38mqniKlYVCZvZN4ajK6t3V+JlIvg==",
+        "requested": "[2.2.13, )",
+        "resolved": "2.2.13",
+        "contentHash": "X/nBbDDV3vwkZNqXS2tgk4pw59O4CL2DmPufweAxPO43aSbV6dXT4qJP3703C4x5HkZc6s1kgE145goacQao+g==",
         "dependencies": {
           "Microsoft.CSharp": "4.7.0",
           "Microsoft.Extensions.FileProviders.Abstractions": "1.1.1",
-          "Parlot": "0.0.19",
+          "Parlot": "0.0.23",
           "System.Text.Json": "5.0.2",
           "TimeZoneConverter": "3.5.0"
         }
@@ -155,8 +155,8 @@
       },
       "Parlot": {
         "type": "Transitive",
-        "resolved": "0.0.19",
-        "contentHash": "gelCmlRgIQKjAfd+wzkAqwExlD/qSGzBttYSmJyhco86xBZrucMCRRFbZEpadxD8hImgBLaiCRUm7ItuMzG94g==",
+        "resolved": "0.0.23",
+        "contentHash": "+Ts7GN++fLX5OOJfmnhzkKWBAovfykfnoZKT844Lnu3a/aNIvQFqdlZ8/b/SY9vE0+ho02/XnzbzWoXddceeDA==",
         "dependencies": {
           "System.Memory": "4.5.4"
         }
@@ -461,13 +461,13 @@
     ".NETStandard,Version=v2.0": {
       "Fluid.Core": {
         "type": "Direct",
-        "requested": "[2.2.9, )",
-        "resolved": "2.2.9",
-        "contentHash": "co08cGFlEWtNyN8gEGAdmDhCwNXJeMsX0UPHUwRW2HS7hgI4ZDp4PfdaK38mqniKlYVCZvZN4ajK6t3V+JlIvg==",
+        "requested": "[2.2.13, )",
+        "resolved": "2.2.13",
+        "contentHash": "X/nBbDDV3vwkZNqXS2tgk4pw59O4CL2DmPufweAxPO43aSbV6dXT4qJP3703C4x5HkZc6s1kgE145goacQao+g==",
         "dependencies": {
           "Microsoft.CSharp": "4.7.0",
           "Microsoft.Extensions.FileProviders.Abstractions": "1.1.1",
-          "Parlot": "0.0.19",
+          "Parlot": "0.0.23",
           "System.Text.Json": "5.0.2",
           "TimeZoneConverter": "3.5.0"
         }
@@ -551,8 +551,8 @@
       },
       "Parlot": {
         "type": "Transitive",
-        "resolved": "0.0.19",
-        "contentHash": "gelCmlRgIQKjAfd+wzkAqwExlD/qSGzBttYSmJyhco86xBZrucMCRRFbZEpadxD8hImgBLaiCRUm7ItuMzG94g==",
+        "resolved": "0.0.23",
+        "contentHash": "+Ts7GN++fLX5OOJfmnhzkKWBAovfykfnoZKT844Lnu3a/aNIvQFqdlZ8/b/SY9vE0+ho02/XnzbzWoXddceeDA==",
         "dependencies": {
           "System.Memory": "4.5.4"
         }
