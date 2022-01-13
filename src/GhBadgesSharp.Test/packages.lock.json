@@ -109,8 +109,8 @@
       },
       "Fluid.Core": {
         "type": "Transitive",
-        "resolved": "2.2.13",
-        "contentHash": "X/nBbDDV3vwkZNqXS2tgk4pw59O4CL2DmPufweAxPO43aSbV6dXT4qJP3703C4x5HkZc6s1kgE145goacQao+g==",
+        "resolved": "2.2.14",
+        "contentHash": "2RR+B9hXQfjHaN5pxke7NZ7So7C+ivQ8hmON8zPy5f83y6TAe6u4kOtNWmpruU/u8XQFwM3Ru060qAVBDJpRbw==",
         "dependencies": {
           "Microsoft.Extensions.FileProviders.Abstractions": "1.1.1",
           "Parlot": "0.0.23",
@@ -1614,7 +1614,7 @@
       "Grynwald.GhBadgesSharp": {
         "type": "Project",
         "dependencies": {
-          "Fluid.Core": "2.2.13",
+          "Fluid.Core": "2.2.14",
           "Newtonsoft.Json": "13.0.1"
         }
       }
