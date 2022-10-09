@@ -4,9 +4,9 @@
     ".NETFramework,Version=v4.6.1": {
       "Fluid.Core": {
         "type": "Direct",
-        "requested": "[2.2.15, )",
-        "resolved": "2.2.15",
-        "contentHash": "qQdMyknluaQ4+e/TuedqdXK1NBVBAQJs8mru6aaeS1Q57IxMNCX4CaZcfT2MpKB6FJgz08n6XrM43K7iMCCwFg==",
+        "requested": "[2.2.16, )",
+        "resolved": "2.2.16",
+        "contentHash": "HvfFKnVDpeMiPRXC43GXGChqAD/aPDwaQWkZFdjl2x7U5ibaKFNhLPDIiaE+XggUwALyR6Yrojwk9V6//Tv/Fg==",
         "dependencies": {
           "Microsoft.CSharp": "4.7.0",
           "Microsoft.Extensions.FileProviders.Abstractions": "1.1.1",
@@ -461,9 +461,9 @@
     ".NETStandard,Version=v2.0": {
       "Fluid.Core": {
         "type": "Direct",
-        "requested": "[2.2.15, )",
-        "resolved": "2.2.15",
-        "contentHash": "qQdMyknluaQ4+e/TuedqdXK1NBVBAQJs8mru6aaeS1Q57IxMNCX4CaZcfT2MpKB6FJgz08n6XrM43K7iMCCwFg==",
+        "requested": "[2.2.16, )",
+        "resolved": "2.2.16",
+        "contentHash": "HvfFKnVDpeMiPRXC43GXGChqAD/aPDwaQWkZFdjl2x7U5ibaKFNhLPDIiaE+XggUwALyR6Yrojwk9V6//Tv/Fg==",
         "dependencies": {
           "Microsoft.CSharp": "4.7.0",
           "Microsoft.Extensions.FileProviders.Abstractions": "1.1.1",
