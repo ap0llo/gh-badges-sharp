@@ -4,15 +4,15 @@
     ".NETFramework,Version=v4.6.1": {
       "Fluid.Core": {
         "type": "Direct",
-        "requested": "[2.2.16, )",
-        "resolved": "2.2.16",
-        "contentHash": "HvfFKnVDpeMiPRXC43GXGChqAD/aPDwaQWkZFdjl2x7U5ibaKFNhLPDIiaE+XggUwALyR6Yrojwk9V6//Tv/Fg==",
+        "requested": "[2.3.0, )",
+        "resolved": "2.3.0",
+        "contentHash": "s3L2tIuhXVeU3Ue27RgPaGm8Q1h7fm2zKRdHSqTCHYvsYjhV9odYXNUQNoC/EKxeGzB3UBBY5JT1vzfYrUN7NA==",
         "dependencies": {
           "Microsoft.CSharp": "4.7.0",
           "Microsoft.Extensions.FileProviders.Abstractions": "1.1.1",
           "Parlot": "0.0.23",
           "System.Text.Json": "5.0.2",
-          "TimeZoneConverter": "3.5.0"
+          "TimeZoneConverter": "6.0.1"
         }
       },
       "Microsoft.NETFramework.ReferenceAssemblies": {
@@ -454,22 +454,22 @@
       },
       "TimeZoneConverter": {
         "type": "Transitive",
-        "resolved": "3.5.0",
-        "contentHash": "ziTcQ5rVxRdtWJEnEqhKBukZGuUQregbf5G7QRrFKj6CwBLss5tSz0dlSHy9gzi5M5ES0PNQ0K2ACP/0XVT5Ow=="
+        "resolved": "6.0.1",
+        "contentHash": "vvhLOgRSOvfq5fBv0/Dd1S3N7K2ibO5wp06B5AkuxUpXkgv2aDHw9jB5ZvPg83y9sy+jF9qE7qWybMK46BXBuw=="
       }
     },
     ".NETStandard,Version=v2.0": {
       "Fluid.Core": {
         "type": "Direct",
-        "requested": "[2.2.16, )",
-        "resolved": "2.2.16",
-        "contentHash": "HvfFKnVDpeMiPRXC43GXGChqAD/aPDwaQWkZFdjl2x7U5ibaKFNhLPDIiaE+XggUwALyR6Yrojwk9V6//Tv/Fg==",
+        "requested": "[2.3.0, )",
+        "resolved": "2.3.0",
+        "contentHash": "s3L2tIuhXVeU3Ue27RgPaGm8Q1h7fm2zKRdHSqTCHYvsYjhV9odYXNUQNoC/EKxeGzB3UBBY5JT1vzfYrUN7NA==",
         "dependencies": {
           "Microsoft.CSharp": "4.7.0",
           "Microsoft.Extensions.FileProviders.Abstractions": "1.1.1",
           "Parlot": "0.0.23",
           "System.Text.Json": "5.0.2",
-          "TimeZoneConverter": "3.5.0"
+          "TimeZoneConverter": "6.0.1"
         }
       },
       "Microsoft.SourceLink.GitHub": {
@@ -615,8 +615,8 @@
       },
       "TimeZoneConverter": {
         "type": "Transitive",
-        "resolved": "3.5.0",
-        "contentHash": "ziTcQ5rVxRdtWJEnEqhKBukZGuUQregbf5G7QRrFKj6CwBLss5tSz0dlSHy9gzi5M5ES0PNQ0K2ACP/0XVT5Ow=="
+        "resolved": "6.0.1",
+        "contentHash": "vvhLOgRSOvfq5fBv0/Dd1S3N7K2ibO5wp06B5AkuxUpXkgv2aDHw9jB5ZvPg83y9sy+jF9qE7qWybMK46BXBuw=="
       }
     }
   }
