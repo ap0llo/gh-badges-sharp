@@ -49,12 +49,12 @@
       },
       "PublicApiGenerator": {
         "type": "Direct",
-        "requested": "[10.3.0, )",
-        "resolved": "10.3.0",
-        "contentHash": "JUsbiQxsOWoQqayp3Ye/okdftKMPsynhDA/tGEWHWSi1HtgCqh3dRtXaVCGnTnAcqMHPel6/Lhj4tQD1hCDSlw==",
+        "requested": "[11.0.0, )",
+        "resolved": "11.0.0",
+        "contentHash": "Iu9CU7ryElZJNALWEAJUfN45FkfrjLJibOEBwrdNJG46CmwLp8b2U3SUObC1YkXfTfPVREXEOuTzaOQFCsmK9Q==",
         "dependencies": {
           "Mono.Cecil": "0.11.4",
-          "System.CodeDom": "6.0.0"
+          "System.CodeDom": "7.0.0"
         }
       },
       "xunit": {
